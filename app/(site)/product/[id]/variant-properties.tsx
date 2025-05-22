@@ -7,6 +7,7 @@ export default function VariantProperties({ currVariant }: {
 }) {
   const variantProps: string[] = [];
   if (currVariant.color) variantProps.push(currVariant.color);
+  if (variantProps.length === 0) return null;
 
   const variantColors = useMemo(() => {
     const colorMap: Record<string, string> = {};
@@ -19,23 +20,19 @@ export default function VariantProperties({ currVariant }: {
   }, [currVariant]);
 
   return (
-    <>
-      {variantProps.length > 0 && (
-        <div className={"mb-4"}>
-          {variantProps.map((prop: string, index) => {
-            return (
-              <div key={index}
-                   style={{ backgroundColor: variantColors[prop] }}
-                   className={"rounded-full w-fit text-sm py-0.5 px-4"}
-              >
-                <p>
-                  {prop}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </>
+    <div className={"mb-4"}>
+      {variantProps.map((prop: string, index) => {
+        return (
+          <div key={index}
+               style={{ backgroundColor: variantColors[prop] }}
+               className={"rounded-full w-fit py-0.5 px-4"}
+          >
+            <p>
+              {prop}
+            </p>
+          </div>
+        );
+      })}
+    </div>
   );
 }

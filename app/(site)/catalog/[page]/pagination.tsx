@@ -5,6 +5,8 @@ export default function Pagination({ page, pageAmount }: {
   page: number,
   pageAmount: number,
 }) {
+  if(pageAmount < 2) return null;
+
   return (
     <div className={"text-base md:text-lg lg:text-xl flex justify-around items-center w-full my-8"}>
       {page > 1 && (

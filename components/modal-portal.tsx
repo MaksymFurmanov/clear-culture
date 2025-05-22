@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactElement, useEffect, useLayoutEffect, useState } from "react";
+import { ReactElement, useLayoutEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 const createWrapper = (wrapperId: string) => {
@@ -36,15 +36,20 @@ export default function ModalPortal({
     };
   }, [wrapperId]);
 
-  useEffect(() => {
-    if (!document.body.classList.contains("noScroll")) {
-      document.body.classList.add("noScroll");
+  useLayoutEffect(() => {
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.classList.add("noScroll");
+
+    if (scrollBarWidth > 0) {
+      document.body.style.paddingRight = `${scrollBarWidth}px`;
     }
 
     return () => {
       document.body.classList.remove("noScroll");
+      document.body.style.paddingRight = "";
     };
-  }, [wrapperId]);
+  }, []);
 
   if (!wrapper) return null;
 

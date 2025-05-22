@@ -32,8 +32,23 @@ body {
   --animate-moveFull20: moveFull 20s linear infinite;
 
   @keyframes moveFull {
-    0% { transform: translate(0); }
-    100% { transform: translate(-100%); }
+    0% { transform: translate(-100%); }
+    100% { transform: translate(0); }
+  }
+}
+
+@theme {
+  --animate-openMenu: openMenu 0.3s linear;
+  --animate-closeMenu: closeMenu 0.3s linear;
+
+  @keyframes openMenu {
+    0% { transform: translateX(100%) }
+    100% { transform: translateX(0) }
+  }
+
+  @keyframes closeMenu {
+    0% { transform: translateX(0) }
+    100% { transform: translateX(100%) }
   }
 }
 
@@ -52,14 +67,28 @@ body {
 }
 
 .products-description p {
-  padding: 1em 0;
+  padding: 0.75em 0;
+  max-width: 64em;
 }
 
 .products-description h3 {
   font-weight: bold;
   font-size: 1.1rem;
+  padding: 1.5em 0;
 }
 
 .products-description img {
-  padding: 1.5em 0;
+  border-radius: 35px;
+  max-width: 50em;
+  padding: 1.5em;
+}
+
+@media (min-width: 768px) {
+  .products-description p {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+
 }

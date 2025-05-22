@@ -24,7 +24,7 @@ export default function CartButton() {
     <button
       onClick={() => router.replace("/cart")}
       className={
-        "fixed bottom-[5%] right-[5%] z-60 p-2 bg-green rounded-full cursor-pointer inline-flex items-center overflow-hidden" +
+        "fixed bottom-[5%] right-[5%] z-40 p-2 bg-green rounded-full cursor-pointer inline-flex items-center overflow-hidden" +
         "transition-[width] duration-500 ease-in-out"
       }
     >

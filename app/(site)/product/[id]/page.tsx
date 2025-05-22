@@ -12,7 +12,7 @@ export default async function ProductPage(props: { params: Promise<{ id: string 
   if (!product) throw new Error("Product does not exist");
 
   return (
-    <main>
+    <main className={"mx-auto max-w-200"}>
       <Configurator product={product} />
       <Details product={product}/>
     </main>

@@ -8,9 +8,10 @@ export default function Variants() {
   const {currVariant} = useProductVariants();
 
   return (
-    <div>
-      <div className={"bg-light-green rounded max-w-fit p-2 mb-3"}>
-        <Image src={currVariant.photo_url}
+    <div className={"w-1/3 md:w-1/4"}>
+      <div className={"bg-light-green rounded w-full aspect-square p-2 mb-3"}>
+        <Image className={"w-full"}
+          src={currVariant.photo_url}
                alt={currVariant.name}
                width={100}
                height={100}

@@ -1,3 +1,5 @@
+'use client';
+
 import { ProductGroup } from "@/types/database";
 import ScalingUnderlineLink from "@/components/scaling-underline-link";
 import ReactMarkdown from "react-markdown";
@@ -16,7 +18,7 @@ export default function Details({ product }: {
       </div>
       {product?.page_url && (
         <ScalingUnderlineLink href={product.page_url}
-                              className={"text-lg mt-2 mb-4"}
+                              className={"text-lg md:text-xl mt-2 mb-4"}
         >
           More about {product.name.toLowerCase()} →
         </ScalingUnderlineLink>

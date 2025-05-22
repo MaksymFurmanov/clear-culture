@@ -32,7 +32,7 @@ const products: ProductGroup[] = [
       "Perfect for **travel**, **meditation**, or **daily rest**, this mask is **washable** and **long-lasting**, offering an **eco-friendly alternative** to disposable options.\n" +
       "\n" +
       "Whether you're at home or on the go, enjoy a **restful, rejuvenating experience** while **reducing waste** and supporting a **greener lifestyle**.\n" +
-      "![Reusable Eco Eye Mask](/img/eye-masks/mask-usage.webp)",
+      "![Reusable Eco Eye Mask](/img/eye-masks/mask-usage.jpg)",
     page_url: "/eye-masks"
   },
   {
