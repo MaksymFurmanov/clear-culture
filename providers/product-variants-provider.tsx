@@ -8,7 +8,7 @@ import {
   useContext,
   useState
 } from "react";
-import { ProductVariant } from "@/types";
+import { ProductVariant } from "@/types/database";
 
 const ProductVariantsContext = createContext<{
   currVariant: ProductVariant,

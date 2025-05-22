@@ -1,4 +1,4 @@
-import { FavoriteProduct } from "@/types";
+import { FavoriteProduct } from "@/types/database";
 
 const favorites: FavoriteProduct[] = [
   {

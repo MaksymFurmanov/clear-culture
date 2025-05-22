@@ -1,7 +1,7 @@
 'use client';
 
 import Circle from "@/public/img/circle.svg";
-import { Order } from "@/types";
+import { Order } from "@/types/database";
 
 const actualCircleStyles = {fill: "#C3CCC0", stroke: "#2A2C35"};
 

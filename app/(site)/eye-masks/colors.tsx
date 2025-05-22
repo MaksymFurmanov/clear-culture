@@ -1,6 +1,6 @@
 'use client';
 
-import Circle from "../../public/img/circle.svg";
+import Circle from "@/public/img/circle.svg";
 
 export default function Colors() {
   return (

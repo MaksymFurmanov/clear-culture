@@ -42,8 +42,8 @@ export default function CertificatesGallery() {
                         src={certificate.src}
                         alt={certificate.alt}
                         width={certificate.width}
-                        height={200}
-                        className="object-contain w-auto h-3/5"
+                        height={certificate.height}
+                        className="object-contain w-auto"
                       />
                     </div>
                   )}

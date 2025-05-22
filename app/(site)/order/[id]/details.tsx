@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Order } from "@/types";
+import { Order } from "@/types/database";
 import CopyIcon from "@/public/img/copy.svg";
 
 export default function Details({ order }: {
