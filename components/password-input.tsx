@@ -19,7 +19,7 @@ export default function PasswordInput({ children, name = "" }:
              name={name}
       />
 
-      <button className={"h-0 relative self-end -translate-y-8 -translate-x-4"}
+      <button className={"h-0 relative self-end -translate-y-8 -translate-x-4 cursor-pointer"}
               onClick={(e) => {
                 e.preventDefault();
                 setShowPassword(!showPassword);

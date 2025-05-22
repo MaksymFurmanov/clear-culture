@@ -15,8 +15,8 @@ export default async function HomePage() {
       <HeroSection />
       <AdvantagesBubbles />
       <RunningQuote />
-      <NotebookArticlePreview />
       <EyeMasksArticlePreview />
+      <NotebookArticlePreview />
       <CertificatesGallery />
       <RunningNumbers />
       <BrandPageButton/>

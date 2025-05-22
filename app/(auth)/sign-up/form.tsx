@@ -1,8 +1,20 @@
+'use client';
+
 import PasswordInput from "@/components/password-input";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function Form() {
+  const router = useRouter();
+  const signUp = () => {
+    const userId = "user";
+    Cookies.set("session", userId);
+    router.replace("/");
+  };
+
   return (
-    <form className={"flex flex-col w-2/3 mt-4 mx-auto"}>
+    <form className={"flex flex-col w-2/3 mt-4 mx-auto"}
+          action={signUp}>
       <label className="block">
         Phone number:
       </label>
@@ -18,7 +30,7 @@ export default function Form() {
         Reset password
       </PasswordInput>
 
-      <button className={"block mt-8 py-3 px-16 bg-black rounded-full text-white"}>
+      <button className={"block mt-8 py-3 px-16 bg-black rounded-full text-white cursor-pointer"}>
         Log In
       </button>
     </form>

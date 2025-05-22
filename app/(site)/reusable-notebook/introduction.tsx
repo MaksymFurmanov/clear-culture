@@ -3,7 +3,7 @@ import ScalingUnderlineLink from "@/components/scaling-underline-link";
 
 export default function Introduction() {
   return (
-    <section className={"flex justify-evenly gap-4 md:justify-between max-w-150 mx-auto md:mx-0 mt-6 mb-10"}>
+    <section className={"flex justify-evenly gap-4 md:justify-between max-w-150 mx-4 md:mx-auto md:mx-0 mt-6 mb-10"}>
       <div className={"py-8 mt-2"}>
         <h1 className={"text-3xl mb-4"}>
           Reusable <br />
@@ -15,7 +15,7 @@ export default function Introduction() {
         </ScalingUnderlineLink>
       </div>
 
-      <Image className={"w-1/2 md:w-4/5"}
+      <Image className={"w-1/2 md:w-4/5 object-contain"}
              src={"/img/reusable-notebook/notebook-main.png"}
              alt={"Notebook black"}
              width={300}

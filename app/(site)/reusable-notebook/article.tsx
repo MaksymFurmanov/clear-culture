@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Article() {
   return (
-    <article className={"md:text-lg lg:text-2xl"}>
+    <article>
       <div>
-        <Image className={"w-full mx-auto max-w-250"}
+        <Image className={"w-full mx-auto max-w-250 md:rounded"}
                src={"/img/reusable-notebook/notebook-2.jpg"}
                alt={"reusable-reusable-notebook"}
                width={500}
@@ -22,13 +22,13 @@ export default function Article() {
 
       <div>
         <div className={"flex"}>
-          <Image className={"w-1/2"}
+          <Image className={"w-1/2 md:rounded-l"}
                  src={"/img/reusable-notebook/notebook-3.jpg"}
                  alt={"reusable-reusable-notebook"}
                  width={250}
                  height={300}
           />
-          <Image className={"w-1/2"}
+          <Image className={"w-1/2 md:rounded-r"}
                  src={"/img/reusable-notebook/notebook-4.jpg"}
                  alt={"reusable-reusable-notebook"}
                  width={250}

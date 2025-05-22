@@ -13,12 +13,18 @@ export default function Cart() {
     sum += cartItem.productVariant.price * cartItem.count;
   });
 
-  const routeAdress = () => {
-    router.replace("/new-adress");
-  }
-
-  return (
-    <div className={"text-base md:text-lg lg:text-xl"}>
+  return cartItems.length === 0 ? (
+    <div className={"flex flex-col gap-2 items-center justify-center h-[50dvh]"}>
+      <p className={"text-xl md:text-2xl text-gray-500"}>
+        The cart is empty
+      </p>
+      <button className={"block bg-dark-blue text-white md:text-lg cursor-pointer rounded-full py-1 px-12 mt-3 mx-auto mb-8"}
+      onClick={() => {router.replace("/catalog/1")}}>
+        Shop now
+      </button>
+    </div>
+  ) : (
+    <div className={"text-base md:text-lg"}>
       {cartItems.map((cartItem, index) => (
         <ItemCard key={index}
                   product={cartItem}
@@ -34,7 +40,7 @@ export default function Cart() {
         </p>
       </div>
       <button className={"block bg-dark-blue text-white cursor-pointer rounded-full py-1 px-12 mt-3 mx-auto mb-8"}
-              onClick={routeAdress}
+              onClick={() => {router.replace("/new-adress")}}
       >
         Confirm
       </button>

@@ -14,7 +14,7 @@ export default function ResetPasswordPage() {
       <Form />
 
       <button className={
-        "flex items-center justify-center w-2/3 mx-auto mt-6 px-10 py-3 font-bold border border-black rounded-full"
+        "flex items-center justify-center w-2/3 mx-auto mt-6 px-10 py-3 font-bold border border-black rounded-full cursor-pointer"
       }
               onClick={(e) => {
                 e.preventDefault();

@@ -7,7 +7,7 @@ export default function Form() {
       <input className={"mt-2 px-4 py-3 bg-gray-200 rounded-xl"}
              placeholder={"Phone"}
       />
-      <button className={"block mt-6 px-10 py-3 bg-black text-white rounded-full"}>
+      <button className={"block mt-6 px-10 py-3 bg-black text-white rounded-full cursor-pointer"}>
         Recover Password
       </button>
     </form>

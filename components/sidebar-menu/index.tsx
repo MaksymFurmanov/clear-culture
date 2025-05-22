@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import ModalPortal from "@/components/modal-portal";
 import { IconLink } from "@/types";
@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { logout } from "@/lib/actions";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 const links: IconLink[] = [
   {
@@ -42,6 +43,11 @@ export default function SidebarMenu({ toggleSidebar }: {
     }, 300);
   };
 
+  const logOut = () => {
+    Cookies.remove("session");
+    window.location.href = "/";
+  }
+
   return (
     <ModalPortal wrapperId={"sidebar-menu"}>
       <>
@@ -72,7 +78,7 @@ export default function SidebarMenu({ toggleSidebar }: {
 
             <button
               className={"flex justify-start items-center gap-4 w-full cursor-pointer rounded px-4 py-2 my-3 hover:bg-gray-200"}
-              onClick={logout}
+              onClick={logOut}
             >
               <Image src={"/img/sidebar/logout.svg"}
                      alt={""}

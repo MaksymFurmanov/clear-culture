@@ -2,9 +2,9 @@ import Image from "next/image";
 
 export default function Article() {
   return (
-    <section className={"md:text-lg lg:text-2xl"}>
+    <section className={"text-base md:text-lg lg:text-2xl"}>
       <div className={"flex justify-evenly items-center w-full max-w-250 mx-auto mb-18 2xl:justify-between"}>
-        <p className={"md:w-2/5"}>
+        <p className={"max-w-90 md:w-2/5 mx-4"}>
           Clear culture’s reusable eye masks offer a self-care experience with hypoallergenic materials, making them
           gentle.
         </p>
@@ -16,8 +16,8 @@ export default function Article() {
         />
       </div>
 
-      <div className={"w-full md:w-3/5 max-w-250 mb-12 mx-auto"}>
-        <Image className={"w-full"}
+      <div className={"w-full md:w-3/5 mb-12 mx-auto"}>
+        <Image className={"w-full md:rounded"}
                src={"/img/eye-masks/eye-masks-2.jpg"}
                alt={""}
                width={600}
@@ -32,7 +32,7 @@ export default function Article() {
                width={300}
                height={300}
         />
-        <p className={"md:w-2/5"}>
+        <p className={"max-w-90 md:w-2/5 mx-4"}>
           These cruelty-free masks are perfect for reducing fine lines, hydrating tired eyes, and can be reused up to
           100 times.
         </p>

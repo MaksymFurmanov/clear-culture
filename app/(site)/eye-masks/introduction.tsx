@@ -22,7 +22,7 @@ export default function Introduction() {
         <ShoppingLink />
       </div>
 
-      <div className={"md:translate-y-1/6 lg:translate-y-1/12"}>
+      <div className={"md:translate-y-1/6 lg:translate-y-8"}>
         <MasksTypes />
       </div>
 
@@ -30,9 +30,10 @@ export default function Introduction() {
         className="
           relative
           -translate-x-1/4
+          lg:-translate-x-1/3
           float-right
           -translate-y-1/2
-          lg:-translate-y-[130%]
+          lg:-translate-y-[235%]
           z-10
         "
       >

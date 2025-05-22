@@ -6,7 +6,7 @@ export type Achievement = {
 
 const achievements: Achievement[] = [
   {
-    src: "/img/about-us/ocean.jpg",
+    src: "/img/about-us/ocean.webp",
     alt: "",
     width: 1060,
     height: 562,

@@ -7,14 +7,16 @@ import DopeProblemArticle from "@/app/(site)/reusable-notebook/dope-problem-arti
 export default function NotebookPage() {
 
   return (
-    <main className={"mx-auto md:text-lg lg:text-2xl md:w-3/5"}>
-      <div className={"md:flex justify-around items-center"}>
+    <main className={"text-base md:text-lg lg:text-2xl"}>
+      <div className={"md:flex justify-around items-center max-w-200 mx-auto"}>
         <Introduction />
         <Advantages />
       </div>
-      <Article />
-      <IntegratesWith />
-      <DopeProblemArticle />
+      <div className={"max-w-150 mx-auto"}>
+        <Article />
+        <IntegratesWith />
+        <DopeProblemArticle />
+      </div>
     </main>
   );
 }

@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function AboutTeam() {
   return (
     <section className={"mx-auto md:w-3/5 mb-10 md:mb-16"}>
-      <Image className={"w-full mx-auto max-w-150 md:rounded md:border border-gray-300"}
+      <Image className={"w-full mx-auto max-w-120 md:rounded md:border border-gray-300"}
         src={"/img/about-us/activities.webp"}
              alt={""}
              width={400}

@@ -7,7 +7,7 @@ export default function ListOfFavorites() {
   const favoritesArray = favorites;
 
   return (
-    <div className={"flex flex-col items-center"}>
+    <div className={""}>
       {favoritesArray.map((favorite, index) => {
           const productVariant = productsVariants.find((variant) =>
             variant.id === favorite.product_variant_id);

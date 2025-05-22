@@ -9,7 +9,7 @@ export default async function CatalogPage({ params }: {
   const pageParams = await params;
   const page = Number(pageParams.page);
   const pageAmount = Math.ceil(products.length / 6);
-  if (page > pageAmount) throw new PageNotFoundError("Page in catalog not found");
+  if (page > pageAmount || page < 1) throw new PageNotFoundError("Page in catalog not found");
 
   const productGroups = products.slice((page - 1) * 6, (page - 1) * 6 + 6);
 

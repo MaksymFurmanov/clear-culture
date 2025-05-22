@@ -21,7 +21,7 @@ export default function AchievementsGallery() {
 
   return (
     <section className={"mb-10 md:mb-12 mx-auto lg:w-3/5"}>
-      <div className={"relative w-full aspect-[3/2] overflow-hidden"}>
+      <div className={"relative w-full md:w-3/5 lg:w-4/5 mx-auto aspect-[3/2] overflow-hidden md:rounded"}>
         <div
           className={"flex h-full transition-transform duration-500 ease-in-out"}
           style={{ transform: `translateX(-${currImg * 100}%)` }}

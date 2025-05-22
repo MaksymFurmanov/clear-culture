@@ -3,11 +3,19 @@
 import GoogleIcon from "@/public/img/login-module/google.svg";
 import AppleIcon from "@/public/img/login-module/apple.svg";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function OtherOptions({type}: {type: "signIn" | "signUp"}) {
   const { push } = useRouter();
 
   const buttonString = type === "signIn" ? "Log In" : "Sign In";
+
+  //Front-end hosting placeholder
+  const logIn = () => {
+    const userId = "user";
+    Cookies.set('session', userId);
+    window.location.href = "/";
+  }
 
   return (
     <div className={"mt-2 mx-auto w-2/3"}>
@@ -20,8 +28,9 @@ export default function OtherOptions({type}: {type: "signIn" | "signUp"}) {
 
       <button
         className={
-          "block w-full mt-4 px-10 py-3 font-bold border border-black rounded-full"
+          "block w-full mt-4 px-10 py-3 font-bold border border-black rounded-full cursor-pointer"
         }
+        onClick={logIn}
       >
         <GoogleIcon className={"mr-2 inline-block h-6 w-6"} />
         {buttonString} with Google
@@ -29,8 +38,9 @@ export default function OtherOptions({type}: {type: "signIn" | "signUp"}) {
 
       <button
         className={
-          "block w-full mt-4 px-10 py-3 font-bold border border-black rounded-full"
+          "block w-full mt-4 px-10 py-3 font-bold border border-black rounded-full cursor-pointer"
         }
+        onClick={logIn}
       >
         <AppleIcon className={"inline-block h-6 w-6 mr-2"} />
         {buttonString} with Apple

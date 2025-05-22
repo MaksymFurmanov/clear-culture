@@ -14,7 +14,7 @@ export default function ItemCard({ product, index }: {
 
   return (
     <div className={"flex justify-between gap-4 bg-green rounded-xl p-4 mb-8 mx-6"}>
-      <Link className={"bg-light-green rounded aspect-square w-2/5 p-3"}
+      <Link className={"bg-light-green rounded aspect-square min-w-17 max-h-fit w-2/5 md:w-1/3 p-3"}
             href={`/product/${product.productVariant.product_id}`}>
         <Image className={"w-full h-full object-contain"}
                src={product.productVariant.photo_url}

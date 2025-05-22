@@ -2,13 +2,13 @@ import Image from "next/image";
 
 export default function BrandHistory() {
   return (
-    <section className={"mx-auto max-w-4/5 md:w-3/5 mb-12"}>
+    <section className={"mx-auto max-w-200 w-full md:w-3/5 mb-12"}>
       <p className={"text-center mx-4 mb-8"}>
         Our core values include transparency, innovation, and a commitment to reducing our environmental footprint. At
         the heart of our company is the belief that businesses can be a force for good, contributing to a healthier
         planet for future generations.
       </p>
-      <Image className={"mb-8"}
+      <Image className={"w-full mb-8"}
              src={"/img/about-us/history.svg"}
              alt={"Brand history"}
              width={1000}
