@@ -11,8 +11,6 @@ export default async function middleware(req: NextRequest) {
 
   const cookieStore = await cookies();
   const session = cookieStore.get("session")?.value;
-
-  console.log(session);
   const hasSession = Boolean(session /*await decrypt(cookie)*/);
 
   if (isProtectedRoute && !hasSession) {
