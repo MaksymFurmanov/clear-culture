@@ -15,7 +15,8 @@ export default function ProductCard({ product }: {
 
   return (
     <div className={"grid grid-rows-[auto_1fr_0.5fr] justify-items-center items-center h-full max-w-45"}>
-      <div className={"bg-light-green flex justify-center items-center rounded aspect-square w-30 md:w-35 lg:w-40 p-4 mb-3"}>
+      <div className={"bg-light-green cursor-pointer flex justify-center items-center rounded aspect-square w-30 md:w-35 lg:w-40 p-4 mb-3"}
+           onClick={buyRoute}>
         <Image className={"w-full h-full object-contain"}
                src={product.photo_url}
                alt={product.name}
@@ -24,7 +25,8 @@ export default function ProductCard({ product }: {
         />
       </div>
 
-      <p className={"text-center md:text-base lg:text-lg px-2"}>
+      <p className={"text-center cursor-pointer md:text-base lg:text-lg px-2"}
+         onClick={buyRoute}>
         {product.name}
       </p>
 

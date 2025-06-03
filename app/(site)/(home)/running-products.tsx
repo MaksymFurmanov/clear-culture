@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function RunningGallery() {
   return (
     <div className="overflow-hidden">
-      <div className="flex gap-4 animate-moveFull20">
+      <div className="flex gap-4 animate-moveFull">
         {Array.from({ length: 2 }).map((_, i) =>
           heroSectionProducts.map((img, index) => (
             <Link key={`${i}/${index}`} href={img.href}>

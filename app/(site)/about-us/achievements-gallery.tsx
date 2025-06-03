@@ -9,7 +9,6 @@ import { useEffect } from "react";
 
 export default function AchievementsGallery() {
   const { currImg, setImg } = useGallery(achievements.length);
-  const changeImg = (i: number) => setImg(i);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -18,6 +17,8 @@ export default function AchievementsGallery() {
 
     return () => clearInterval(interval);
   }, [setImg]);
+
+  const changeImg = (i: number) => setImg(i);
 
   return (
     <section className={"mb-10 md:mb-12 mx-auto lg:w-3/5"}>
