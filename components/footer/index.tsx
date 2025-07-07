@@ -25,7 +25,7 @@ const links: TextLink[] = [
 
 export default function Footer() {
   return (
-    <footer className={"relative overflow-hidden"}>
+    <footer className={"relative overflow-hidden bottom-0"}>
       <Bubbles />
 
       <div className={"mx-auto px-6 max-w-200"}>

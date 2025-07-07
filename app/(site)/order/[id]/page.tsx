@@ -5,6 +5,7 @@ import Receipt from "@/components/receipt";
 import CancelButton from "@/app/(site)/order/[id]/cancel-button";
 import { PageNotFoundError } from "next/dist/shared/lib/utils";
 import orders from "@/data/placeholders/orders";
+import BackButton from "@/app/(site)/order/back-button";
 
 export default async function Order({ params }: { params: Promise<{ id: string }> }) {
   const pageParams = await params;
@@ -16,6 +17,7 @@ export default async function Order({ params }: { params: Promise<{ id: string }
 
   return (
     <main className={"mx-auto max-w-170"}>
+      <BackButton/>
       <StatusBreadcrumbs order={order} />
       <Details order={order} />
       <ItemsList id={order.id} />
