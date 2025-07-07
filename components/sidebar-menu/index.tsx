@@ -1,10 +1,9 @@
-'use client';
+"use client";
 
 import ModalPortal from "@/components/modal-portal";
 import { IconLink } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
-import { logout } from "@/lib/actions";
 import { useState } from "react";
 import Cookies from "js-cookie";
 
@@ -43,11 +42,6 @@ export default function SidebarMenu({ toggleSidebar }: {
     }, 300);
   };
 
-  const logOut = () => {
-    Cookies.remove("session");
-    window.location.href = "/";
-  }
-
   return (
     <ModalPortal wrapperId={"sidebar-menu"}>
       <>
@@ -57,7 +51,7 @@ export default function SidebarMenu({ toggleSidebar }: {
         <div className={`fixed bg-white right-0 top-0 w-1/2 h-screen md:max-w-80 z-50 ${
           closing ? "animate-closeMenu" : "animate-openMenu"
         }`}>
-          <div className={"h-full flex flex-col justify-between py-4 mx-2"}>
+          <div className={"h-[100dvh] flex flex-col justify-between py-4 mx-2"}>
             <div>
               {links.map((link, index) => (
                 <Link key={index}
@@ -76,22 +70,33 @@ export default function SidebarMenu({ toggleSidebar }: {
               ))}
             </div>
 
-            <button
-              className={"flex justify-start items-center gap-4 w-full cursor-pointer rounded px-4 py-2 my-3 hover:bg-gray-200"}
-              onClick={logOut}
-            >
-              <Image src={"/img/sidebar/logout.svg"}
-                     alt={""}
-                     width={30}
-                     height={30}
-              />
-              <p className={"text-lg"}>
-                Log out
-              </p>
-            </button>
+            <LogOut />
           </div>
         </div>
       </>
     </ModalPortal>
   );
 }
+
+const LogOut = () => {
+  const logOut = () => {
+    Cookies.remove("session");
+    window.location.href = "/";
+  };
+
+  return (
+    <button
+      className={"flex justify-start items-center gap-4 w-full cursor-pointer rounded px-4 py-2 my-3 hover:bg-gray-200"}
+      onClick={logOut}
+    >
+      <Image src={"/img/sidebar/logout.svg"}
+             alt={""}
+             width={30}
+             height={30}
+      />
+      <p className={"text-lg"}>
+        Log out
+      </p>
+    </button>
+  );
+};
