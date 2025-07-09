@@ -67,18 +67,7 @@ body {
   padding: 1.5em 1em;
 }
 
-.products-description p {
-  padding: 0.75em 0;
-  max-width: 50em;
-}
-
-.products-description h3 {
-  font-weight: bold;
-  font-size: 1.1rem;
-  padding: 1.5em 0;
-}
-
-.products-description img {
+.MDXImage {
   margin: 1.5em auto;
   border-radius: 10px;
   width: calc(100vw - 2em);

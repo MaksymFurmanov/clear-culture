@@ -2,20 +2,27 @@
 
 import { ProductGroup } from "@/types/database";
 import ScalingUnderlineLink from "@/components/scaling-underline-link";
-import ReactMarkdown from "react-markdown";
+import { useMDXComponents } from "@/mdx-components";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 
-export default function Details({ product }: {
+export default function Details({ product, descriptionMDX }: {
   product: ProductGroup,
+  descriptionMDX?: MDXRemoteSerializeResult
 }) {
+  const components = useMDXComponents({});
+
   return (
     <section className={"flex flex-col items-center"}>
-      <div className={"products-description"}>
-        {product?.description && (
-          <ReactMarkdown>
-            {product.description}
-          </ReactMarkdown>
-        )}
-      </div>
+      {product?.description && (
+        <div className={"products-description"}>
+          {descriptionMDX && (
+            <div className="products-description">
+              <MDXRemote {...descriptionMDX} components={components} />
+            </div>
+          )}
+        </div>
+      )}
+
       {product?.page_url && (
         <ScalingUnderlineLink href={product.page_url}
                               className={"text-lg md:text-xl mt-2 mb-4"}
