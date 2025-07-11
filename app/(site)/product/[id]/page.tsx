@@ -17,10 +17,11 @@ export default async function ProductPage(props: { params: Promise<{ id: string 
 
   let descriptionMDX: MDXRemoteSerializeResult | undefined = undefined;
   if (product.description) {
-    const filePath = path.join(
+    /*const filePath = path.join(
       process.cwd(),
       product.description
-    );
+    );*/
+    const filePath = product.description;
     const source = await fs.readFile(filePath, "utf8");
 
     descriptionMDX = await serialize(source);
