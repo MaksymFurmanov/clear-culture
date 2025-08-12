@@ -1,4 +1,4 @@
-import { ProductVariant } from "@/types/database";
+import { ClientProduct } from "@/types/database";
 
 export type ImgListItem = {
   src: string,
@@ -22,7 +22,7 @@ export type ImgLink = {
 } & ImgListItem;
 
 export type CartItem = {
-  productVariant: ProductVariant,
-  count: number,
+  product: ClientProduct,
+  amount: number,
   discountInPercentage?: number
 }

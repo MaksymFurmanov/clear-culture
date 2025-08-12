@@ -1,12 +1,17 @@
-'use client';
-
 import Circle from "@/public/img/circle.svg";
-import { Order } from "@/types/database";
 
 const actualCircleStyles = {fill: "#C3CCC0", stroke: "#2A2C35"};
 
-export default function StatusBreadcrumbs({ order }: {
-  order: Order
+export default function StatusBreadcrumbs({
+                                             status,
+                                             processedDate,
+                                             shippedDate,
+                                             arrivingDate,
+                                           }: {
+  status: string,
+  processedDate: string | null,
+  shippedDate: string | null,
+  arrivingDate: string | null,
 }) {
 
   return (
@@ -14,13 +19,13 @@ export default function StatusBreadcrumbs({ order }: {
       <div className={"bg-dark-blue h-1 w-full"} />
       <div className={"flex relative mb-4"}>
         <Circle className={"w-6 fill-dark-blue absolute -left-3 -bottom-3"}
-            style={order.status === "Processed" ? actualCircleStyles : {}}
+            style={status === "Processed" ? actualCircleStyles : {}}
         />
         <Circle className={"w-6 fill-dark-blue absolute left-[calc(50%-0.75em)] -bottom-3"}
-                style={order.status === "Shipped" ? actualCircleStyles : {}}
+                style={status === "Shipped" ? actualCircleStyles : {}}
         />
         <Circle className={"w-6 fill-dark-blue absolute -right-3 -bottom-3"}
-                style={order.status === "Arrived" ? actualCircleStyles : {}}
+                style={status === "Arrived" ? actualCircleStyles : {}}
         />
       </div>
 
@@ -28,21 +33,21 @@ export default function StatusBreadcrumbs({ order }: {
         <div className={"absolute -left-9"}>
           <p className={"text-center text-base"}>
             Processed <br/>
-            {order?.processed_date && order.processed_date}
+            {processedDate}
           </p>
         </div>
 
         <div className={"absolute left-[calc(50%-2.5em)]"}>
           <p className={"text-center text-base"}>
             Shipped <br />
-            {order?.shipped_date && order.shipped_date}
+            {shippedDate}
           </p>
         </div>
 
         <div className={"absolute -right-5"}>
           <p className={"text-center text-base"}>
             Arrived <br />
-            {order?.arriving_date && order.arriving_date}
+            {arrivingDate}
           </p>
         </div>
       </div>

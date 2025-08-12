@@ -1,13 +1,17 @@
 import ScalingUnderlineLink from "@/components/scaling-underline-link";
 import Link from "next/link";
+import { getProductGroupsCount } from "@/lib/db-actions/productGroup";
+import { PageNotFoundError } from "next/dist/shared/lib/utils";
 
-export default function Pagination({ page, pageAmount }: {
-  page: number,
-  pageAmount: number,
+export default async function Pagination({ page }: {
+  page: number
 }) {
-  if(pageAmount < 2) return null;
+  const groupsNum = await getProductGroupsCount();
+  const pageAmount = Math.ceil(groupsNum / 6);
 
-  return (
+  if (page > pageAmount || page < 1) throw new PageNotFoundError("Page in catalog not found");
+
+  return pageAmount > 2 && (
     <div className={"text-base md:text-lg lg:text-xl flex justify-around items-center w-full my-8"}>
       {page > 1 && (
         <ScalingUnderlineLink href={`/catalog/${page - 1}`}>

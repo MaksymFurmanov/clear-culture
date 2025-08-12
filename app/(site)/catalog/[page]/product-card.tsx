@@ -1,40 +1,40 @@
-'use client';
-
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { ProductVariant } from "@/types/database";
+import Link from "next/link";
+import { getProductById } from "@/lib/db-actions/product";
 
-export default function ProductCard({ product }: {
-  product: ProductVariant
+export default async function ProductCard({ groupId, defaultProductId }: {
+  groupId: number,
+  defaultProductId: number
 }) {
-  const router = useRouter();
-
-  const buyRoute = () => {
-    router.push(`/product/${product.product_id}`);
-  };
+  const defaultProduct = await getProductById(defaultProductId);
+  if(!defaultProduct) throw new Error(`No default product with id ${defaultProductId} found`);
 
   return (
     <div className={"grid grid-rows-[auto_1fr_0.5fr] justify-items-center items-center h-full max-w-45"}>
-      <div className={"bg-light-green cursor-pointer flex justify-center items-center rounded aspect-square w-30 md:w-35 lg:w-40 p-4 mb-3"}
-           onClick={buyRoute}>
-        <Image className={"w-full h-full object-contain"}
-               src={product.photo_url}
-               alt={product.name}
-               width={80}
-               height={80}
-        />
-      </div>
+      <Link href={`/product/${groupId.toString()}`}>
+        <div
+          className={"bg-light-green cursor-pointer flex justify-center items-center rounded aspect-square w-30 md:w-35 lg:w-40 p-4 mb-3"}
+        >
+          <Image className={"w-full h-full object-contain"}
+                 src={defaultProduct.photoUrl}
+                 alt={defaultProduct.name}
+                 width={80}
+                 height={80}
+          />
+        </div>
+      </Link>
 
-      <p className={"text-center cursor-pointer md:text-base lg:text-lg px-2"}
-         onClick={buyRoute}>
-        {product.name}
+      <Link href={`/product/${groupId.toString()}`}>
+      <p className={"text-center cursor-pointer md:text-base lg:text-lg px-2"}>
+        {defaultProduct.name}
       </p>
+      </Link>
 
-      <button className={"bg-dark-blue text-white cursor-pointer rounded-md w-30 py-1 px-5 mt-3"}
-              onClick={buyRoute}
+      <Link href={`/product/${groupId.toString()}`}
+        className={"bg-dark-blue text-white cursor-pointer rounded-md py-1 px-8 mt-3"}
       >
         Buy now
-      </button>
+      </Link>
     </div>
   );
 }

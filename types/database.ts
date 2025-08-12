@@ -1,64 +1,75 @@
+import { Decimal } from "@prisma/client/runtime/library"
+
 export type User = {
-  id: string,
+  id: number,
   name: string,
-  phone_number: string,
+  email: string,
   password: string
 }
 
 export interface ProductGroup {
-  id: string,
+  id: number,
   name: string,
-  classic_variant_id: string,
-  description?: string,
-  page_url?: string,
+  defaultProductId: number | null,
+  descriptionUrl: string | null,
+  pageUrl: string | null
 }
 
-export type ProductVariant = {
-  id: string,
-  product_id: string,
+export type Product = {
+  id: number,
+  groupId: number,
   name: string,
-  price: number,
-  photo_url: string,
-  color?: string,
-  colorHEX?: string,
-  size?: number,
-  volume?: string,
-  amount_for_one?: number
+  price: Decimal,
+  photoUrl: string,
+  color: string | null,
+  colorHEX: string | null,
+  size: string | null,
+  volume: string | null,
+  amountForOne: number | null
+}
+
+export type ClientProduct = Omit<Product, "price"> & {
+  price: string
 }
 
 export type FavoriteProduct = {
-  id: string,
-  user_id: string,
-  product_variant_id: string
+  id: number,
+  userId: number,
+  productId: number
 }
 
 export type Order = {
-  id: string,
-  user_id: string,
-  created_date: string,
-  processed_date?: string,
-  shipped_date?: string,
-  arriving_date?: string,
-  price: number,
-  delivery: number,
-  status: "Processing" | "Processed" | "Shipped" | "Arrived" | "Canceled"
+  id: number,
+  userId: number,
+  createdDate: string,
+  processedDate: string | null,
+  shippedDate: string | null,
+  arrivingDate: string | null,
+  price: Decimal,
+  delivery: Decimal,
+  status: string
+}
+
+export type ClientOrder = Omit<Order, "price" | "delivery"> & {
+  price: string,
+  delivery: string
 }
 
 export type OrderItem = {
-  order_id: string,
-  product_variant_id: string,
+  orderId: number,
+  productId: number,
   amount: number
 }
 
 export type Adress = {
-  id: string,
-  user_id: string,
+  id: number,
+  userId: number,
   name: string,
   surname: string,
   email: string,
-  phone_number: string,
+  phoneNumber: string,
   country: string,
   city: string,
-  street_adress: string,
-  postal_code: string
+  streetAdress: string,
+  postalCode: string
 }

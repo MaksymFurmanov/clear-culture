@@ -4,7 +4,7 @@ import { z } from "zod";
 import { createSession, deleteSession } from "@/lib/session";
 import { redirect } from "next/navigation";
 import validator from "validator";
-import testUser from "@/data/placeholders/user";
+import { getUserByLoginData } from "@/lib/db-actions/user";
 
 const loginSchema = z.object({
   phoneNumber: z
@@ -29,8 +29,9 @@ export async function login(prevState: unknown, formData: FormData) {
   }
 
   const { phoneNumber, password } = result.data;
+  const user = await getUserByLoginData(phoneNumber, password);
 
-  if (phoneNumber !== testUser.phone_number || password !== testUser.password) {
+  if (!user) {
     return {
       errors: {
         phoneNumber: ["Invalid phone number or password"]
@@ -38,7 +39,7 @@ export async function login(prevState: unknown, formData: FormData) {
     };
   }
 
-  await createSession(testUser.id);
+  await createSession(user.id);
   redirect("/");
 }
 

@@ -3,10 +3,11 @@
 import PlusIcon from "@/public/img/plus-button.svg";
 import MinusIcon from "@/public/img/minus-button.svg";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import Decimal from "decimal.js";
 
 export default function AmountAndPrice({ amount, price, changeAmount }: {
   amount: number,
-  price: number,
+  price: string,
   changeAmount: Dispatch<SetStateAction<number>>
 }) {
   const increaseAmount = () => {
@@ -44,7 +45,7 @@ export default function AmountAndPrice({ amount, price, changeAmount }: {
         </button>
       </div>
       <p>
-        {`${price * amount} €`}
+        {`${new Decimal(price).mul(amount)} €`}
       </p>
     </div>
   );

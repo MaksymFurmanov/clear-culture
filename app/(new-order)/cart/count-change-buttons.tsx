@@ -15,7 +15,7 @@ export default function CountChangeButtons({ index, count }: {
         if (index === i) {
           return {
             ...cartItem,
-            count: cartItem.count + 1
+            amount: cartItem.amount + 1
           };
         }
         return cartItem;
@@ -31,7 +31,7 @@ export default function CountChangeButtons({ index, count }: {
         if (index === i) {
           return {
             ...cartItem,
-            count: cartItem.count - 1
+            amount: cartItem.amount - 1
           };
         }
         return cartItem;
@@ -47,7 +47,7 @@ export default function CountChangeButtons({ index, count }: {
           if (index === i) {
             return {
               ...cartItem,
-              count: newAmount
+              amount: newAmount
             };
           }
           return cartItem;

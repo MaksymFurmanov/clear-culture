@@ -6,11 +6,11 @@ const secretKey = process.env.SESSION_SECRET;
 const encodedKey = new TextEncoder().encode(secretKey);
 
 type SessionPayload = {
-  userId: string;
+  userId: number;
   expires: Date;
 }
 
-export async function createSession(userId: string) {
+export async function createSession(userId: number) {
   const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
   const session = await encrypt({userId, expires});
   const cookieStore = await cookies();

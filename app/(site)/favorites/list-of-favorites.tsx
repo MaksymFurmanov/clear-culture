@@ -1,24 +1,30 @@
-import favorites from "@/data/placeholders/favorites";
-import productsVariants from "@/data/placeholders/productsVariants";
+import { getProducts } from "@/lib/db-actions/product";
 import { Fragment } from "react";
-import FavoriteProduct from "@/app/(site)/favorites/favorite-product";
+import CardItem from "@/app/(site)/favorites/card-item";
+import { Product } from "@/types/database";
+import { getFavoriteProducts } from "@/lib/db-actions/favoriteProduct";
+import { FavoriteProduct } from "@prisma/client";
 
-export default function ListOfFavorites() {
-  const favoritesArray = favorites;
+export default async function ListOfFavorites() {
+  const favorites: FavoriteProduct[] = await getFavoriteProducts();
+  const products: Product[] = await getProducts();
 
   return (
-    <div className={""}>
-      {favoritesArray.map((favorite, index) => {
-          const productVariant = productsVariants.find((variant) =>
-            variant.id === favorite.product_variant_id);
+    <div>
+      {favorites.map((favorite: FavoriteProduct, index) => {
+          const product = products.find(
+            (product: Product) => product.id === favorite.productId
+          );
 
-          if(!productVariant) {
-            return <Fragment key={index} />
+          if (!product) {
+            return <Fragment key={index} />;
           }
 
           return (
-            <FavoriteProduct key={index}
-                             productVariant={productVariant}
+            <CardItem key={index}
+                      photoUrl={product.photoUrl}
+                      name={product.name}
+                      productId={product.id}
             />
           );
         }

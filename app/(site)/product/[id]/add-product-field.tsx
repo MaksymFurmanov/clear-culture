@@ -4,25 +4,25 @@ import AmountAndPrice from "./amount-and-price";
 import { useState } from "react";
 import Heart from "@/public/img/heart.svg";
 import HeartRed from "@/public/img/heart-red.svg";
-import { useProductVariants } from "@/providers/product-variants-provider";
-import VariantProperties from "@/app/(site)/product/[id]/variant-properties";
+import { useProducts } from "@/providers/products-provider";
+import ProductProperties from "@/app/(site)/product/[id]/product-properties";
 import { useCart } from "@/providers/products-in-cart-provider";
 
 export default function AddProductField() {
-  const { currVariant } = useProductVariants();
+  const { curr } = useProducts();
   const [amount, setAmount] = useState<number>(1);
 
   return (
     <div className={"w-1/2"}>
       <div className={"mb-4"}>
         <h2 className={"text-lg mt-2 mb-2"}>
-          {currVariant.name}
+          {curr.name}
         </h2>
-        <VariantProperties currVariant={currVariant} />
+        <ProductProperties color={curr.color} />
       </div>
 
       <AmountAndPrice amount={amount}
-                      price={currVariant.price}
+                      price={curr.price}
                       changeAmount={setAmount}
       />
 
@@ -36,20 +36,20 @@ export default function AddProductField() {
 function AddToCartButton ({amount}: {
   amount: number
 }) {
-  const { currVariant } = useProductVariants();
+  const { curr } = useProducts();
   const { setCartItems, signalAdd } = useCart();
 
   const addToCart = () => {
     setCartItems((prevState) => {
       const isInCart = prevState.find((cartItem) =>
-        cartItem.productVariant.id === currVariant.id);
+        cartItem.product.id === curr.id);
 
       if(isInCart) {
         return [...prevState.map(cartItem => {
-          if(cartItem.productVariant.id === currVariant.id) {
+          if(cartItem.product.id === curr.id) {
             return {
               ...cartItem,
-              count: cartItem.count + amount
+              amount: cartItem.amount + amount
             }
           }
 
@@ -58,8 +58,8 @@ function AddToCartButton ({amount}: {
       }
 
       return [...prevState, {
-        productVariant: currVariant,
-        count: amount
+        product: curr,
+        amount: amount
       }];
     });
 

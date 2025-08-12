@@ -1,21 +1,21 @@
 import { ProductGroup } from "@/types/database";
 import ProductCard from "./product-card";
-import productsVariants from "@/data/placeholders/productsVariants";
 import { Fragment } from "react";
+import { getProductGroups } from "@/lib/db-actions/productGroup";
 
-export default function ProductCardsList({ productGroups }: {
-  productGroups: ProductGroup[]
+export default async function ProductCardsList({ page }: {
+  page: number
 }) {
+  const groupsInPage = await getProductGroups((page - 1) * 6, (page - 1) * 6 + 6);
+
   return (
     <section className={"grid grid-cols-2 align-start justify-items-center gap-y-10 gap-x-6 mb-6"}>
-      {productGroups.map((product: ProductGroup, index: number) => {
-        const classicProductVariant = productsVariants.find(variant =>
-          variant.id === product.classic_variant_id);
-        if (!classicProductVariant) return <Fragment key={index} />;
-
+      {groupsInPage.map((productGroup: ProductGroup, index: number) => {
+        if (!productGroup.defaultProductId) return <Fragment key={index} />;
         return (
           <ProductCard key={index}
-                       product={classicProductVariant}
+                       groupId={productGroup.id}
+                       defaultProductId={productGroup.defaultProductId}
           />
         );
       })}

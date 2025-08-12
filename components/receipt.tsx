@@ -1,10 +1,13 @@
+import Decimal from "decimal.js";
+
 export default function Receipt({
-                                  price, delivery
+                                  price,
+                                  delivery
                                 }: {
-  price: number,
-  delivery: number
+  price: Decimal,
+  delivery: Decimal
 }) {
-  const total = price + delivery;
+  const total = price.add(delivery);
 
   return (
     <div className={"bg-light-green rounded-lg px-6 py-4 mx-4 mb-8"}>
@@ -14,7 +17,7 @@ export default function Receipt({
             Price
           </p>
           <p>
-            {price} €
+            {price.toString()} €
           </p>
         </div>
 
@@ -23,7 +26,7 @@ export default function Receipt({
             Delivery
           </p>
           <p>
-            {delivery} €
+            {delivery.toString()} €
           </p>
         </div>
       </div>
@@ -33,7 +36,7 @@ export default function Receipt({
           Total
         </p>
         <p className={"text-base"}>
-          {total} €
+          {total.toString()} €
         </p>
       </div>
     </div>

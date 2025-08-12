@@ -1,27 +1,25 @@
-'use state';
+"use client";
 
-import { useRouter } from "next/navigation";
+import { Suspense } from "react";
 import { useCart } from "@/providers/products-in-cart-provider";
 import ItemCard from "@/app/(new-order)/cart/item-card";
+import Link from "next/link";
 
 export default function Cart() {
-  const { cartItems } = useCart();
-  const router = useRouter();
-
-  let sum = 0;
-  cartItems.map((cartItem) => {
-    sum += cartItem.productVariant.price * cartItem.count;
-  });
+  const { cartItems, totalPrice } = useCart();
 
   return cartItems.length === 0 ? (
     <div className={"flex flex-col gap-2 items-center justify-center h-[50dvh]"}>
       <p className={"text-xl md:text-2xl text-gray-500"}>
         The cart is empty
       </p>
-      <button className={"block bg-dark-blue text-white md:text-lg cursor-pointer rounded-full py-1 px-12 mt-3 mx-auto mb-8"}
-      onClick={() => {router.replace("/catalog/1")}}>
-        Shop now
-      </button>
+      <Link href={"/catalog/1"}>
+        <button
+          className={"block bg-dark-blue text-white md:text-lg cursor-pointer rounded-full py-1 px-12 mt-3 mx-auto mb-8"}
+        >
+          Shop now
+        </button>
+      </Link>
     </div>
   ) : (
     <div className={"text-base md:text-lg"}>
@@ -35,15 +33,17 @@ export default function Cart() {
         <p>
           Sum:
         </p>
-        <p>
-          {sum} €
-        </p>
+        <Suspense fallback={<p>Loading sum...</p>}>
+          <p>
+            {totalPrice.toString()} €
+          </p>
+        </Suspense>
       </div>
-      <button className={"block bg-dark-blue text-white cursor-pointer rounded-full py-1 px-12 mt-3 mx-auto mb-8"}
-              onClick={() => {router.replace("/new-adress")}}
-      >
-        Confirm
-      </button>
+      <Link href={"/new-address"}>
+        <button className={"block bg-dark-blue text-white cursor-pointer rounded-full py-1 px-12 mt-3 mx-auto mb-8"}>
+          Confirm
+        </button>
+      </Link>
     </div>
   );
 }

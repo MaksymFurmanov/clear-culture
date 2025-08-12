@@ -1,32 +1,30 @@
-'use client';
-
-import Image from "next/image";
 import Circle from "@/public/img/circle.svg";
-import { Order, OrderItem } from "@/types/database";
-import orderItems from "@/data/placeholders/orderItems";
-import productsVariants from "@/data/placeholders/productsVariants";
-import { Fragment } from "react";
-import { useRouter } from "next/navigation";
+import { Order } from "@/types/database";
+import OrderItemCard from "@/app/(site)/orders/order-item-card";
+import Link from "next/link";
+import { getOrderItems } from "@/lib/db-actions/orderItem";
 
-const statusColor = {
-  "Processing": "#3BDDEF",
-  "Processed": "#1e499e",
-  "Shipped": "#e899ff",
-  "Arrived": "#3dfd17",
-  "Canceled": "#ff2d6a"
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case "Processing":
+      return "#3BDDEF";
+    case "Processed":
+      return "#1e499e";
+    case "Shipped":
+      return "#e899ff";
+    case "Arrived":
+      return "#3dfd17";
+    case "Canceled":
+      return "#ff2d6a";
+    default:
+      return "#000000";
+  }
 };
 
-export default function OrderBox({ order }: {
+export default async function OrderBox({ order }: {
   order: Order
 }) {
-  const router = useRouter();
-
-  const toOrder = () => {
-    router.replace(`/order/${order.id}`);
-  }
-
-  const items = orderItems.filter((item) =>
-    item.order_id === order.id);
+  const items = await getOrderItems(order.id);
 
   return (
     <div className={"bg-green rounded-xl border border-gray-400 max-w-80 py-2"}>
@@ -35,7 +33,7 @@ export default function OrderBox({ order }: {
           Order: {order.id}
         </p>
         <p>
-          {order.created_date}
+          {order.createdDate}
         </p>
       </div>
 
@@ -45,7 +43,8 @@ export default function OrderBox({ order }: {
         .slice(0, items.length > 1 ? 2 : 1)
         .map((item, index) => (
           <OrderItemCard key={index}
-                         item={item}
+                         productId={item.productId}
+                         amount={item.amount}
           />
         ))
       }
@@ -61,57 +60,19 @@ export default function OrderBox({ order }: {
 
         <div className={"flex gap-2 text-base"}>
           <Circle className={"w-3"}
-                  style={{ fill: statusColor[order.status] }}
+                  style={{ fill: getStatusColor(order.status) }}
           />
           {order.status}
         </div>
       </div>
 
-      <button className={"block bg-dark-blue text-base text-white cursor-pointer rounded-full py-1 px-12 mb-3 mx-auto"}
-              onClick={toOrder}>
-        Details
-      </button>
+      <Link href={`/order/${order.id}`}>
+        <button
+          className={"block bg-dark-blue text-base text-white cursor-pointer rounded-full py-1 px-12 mb-3 mx-auto"}
+        >
+          Details
+        </button>
+      </Link>
     </div>
   );
 }
-
-const OrderItemCard = ({ item }: {
-  item: OrderItem
-}) => {
-  const router = useRouter();
-
-  const product = productsVariants.find((product) =>
-    product.id === item.product_variant_id);
-
-  if (!product) {
-    console.error(`Product with id ${item.product_variant_id} not found`);
-    return <Fragment />;
-  }
-
-  const toProduct = () => {
-    router.push(`/product/${item.product_variant_id}`);
-  };
-
-  return (
-    <div className={"grid grid-cols-[1fr_3fr_auto] gap-4 py-3 px-4"}>
-      <div className={"flex justify-center bg-light-green h-20 w-20 p-2 rounded cursor-pointer"}
-           onClick={toProduct}
-      >
-        <Image className={"w-fit cursor-pointer"}
-               src={product.photo_url}
-               alt={product.name}
-               width={300}
-               height={300}
-        />
-      </div>
-      <p className={"cursor-pointer"}
-         onClick={toProduct}
-      >
-        {product.name}
-      </p>
-      <p className={"mt-auto"}>
-        {item.amount}X
-      </p>
-    </div>
-  );
-};

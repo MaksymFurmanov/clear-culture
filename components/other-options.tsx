@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 import GoogleIcon from "@/public/img/login-module/google.svg";
 import AppleIcon from "@/public/img/login-module/apple.svg";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
-export default function OtherOptions({type}: {type: "signIn" | "signUp"}) {
+export default function OtherOptions({ type }: { type: "signIn" | "signUp" }) {
   const { push } = useRouter();
 
   const buttonString = type === "signIn" ? "Log In" : "Sign In";
@@ -13,14 +13,14 @@ export default function OtherOptions({type}: {type: "signIn" | "signUp"}) {
   //Front-end hosting placeholder
   const logIn = () => {
     const userId = "user";
-    Cookies.set('session', userId);
+    Cookies.set("session", userId);
     window.location.href = "/";
-  }
+  };
 
   return (
     <div className={"mt-2 mx-auto w-2/3"}>
       <div className={"mt-8"}>
-        <hr/>
+        <hr />
         <div className={"w-24 mx-auto bg-white relative z-10 -translate-y-3"}>
           <p className={"m-0 p-0 text-center text-sm"}>or</p>
         </div>
@@ -53,7 +53,7 @@ export default function OtherOptions({type}: {type: "signIn" | "signUp"}) {
                 e.preventDefault();
                 push(type === "signIn" ? "/sign-up" : "/log-in");
               }}>
-          {type === "signIn" ? "Sign Up" :  "Sign In"}
+          {type === "signIn" ? "Sign Up" : "Sign In"}
         </span>
       </p>
     </div>

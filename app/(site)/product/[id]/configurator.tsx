@@ -1,27 +1,27 @@
-'use client';
-
 import AddProductField from "./add-product-field";
 import Variants from "./variants";
-import { ProductGroup } from "@/types/database";
-import productsVariants from "@/data/placeholders/productsVariants";
-import ProductVariantsProvider from "@/providers/product-variants-provider";
+import ProductsProvider from "@/providers/products-provider";
+import { getDefaultProduct, getProductsByGroupId } from "@/lib/db-actions/product";
+import productsToClientProducts from "@/lib/client-converters/productsToClientProducts";
 
-export default function Configurator({ product }: {
-  product: ProductGroup,
+export default async function Configurator({ groupId }: {
+  groupId: number,
 }) {
-  const allVariants = productsVariants.filter((productVariant) =>
-    productVariant.product_id === product.id);
+  const allProducts = await getProductsByGroupId(groupId);
+  if(!allProducts) throw new Error("Error in loading the page");
+  const allProductsClient = productsToClientProducts(allProducts);
 
-  const classicVariant = allVariants.find(variant =>
-    variant.id === product.classic_variant_id);
-  if (!classicVariant) throw new Error("Error in loading the page");
+  const defaultProduct = await getDefaultProduct(groupId);
+  if (!defaultProduct) throw new Error("Error in loading the page");
+  const defaultProductClient = productsToClientProducts([defaultProduct])[0];
 
   return (
     <section className={"flex justify-around gap-3 mt-8 mb-4 mx-4"}>
-      <ProductVariantsProvider variants={allVariants} classicVariant={classicVariant}>
+      <ProductsProvider products={allProductsClient}
+                        defaultProduct={defaultProductClient}>
         <Variants />
         <AddProductField />
-      </ProductVariantsProvider>
+      </ProductsProvider>
     </section>
   );
 }
