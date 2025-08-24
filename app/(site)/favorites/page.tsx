@@ -1,4 +1,4 @@
-import ListOfFavorites from "@/app/(site)/favorites/list-of-favorites";
+import ListOfFavorites from "@/containers/pages/favorites/list-of-favorites";
 
 export default function FavoritesPage() {
   return (

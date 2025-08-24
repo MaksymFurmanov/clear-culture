@@ -1,5 +1,5 @@
-import ProductCardsList from "./product-cards-list";
-import Pagination from "@/app/(site)/catalog/[page]/pagination";
+import ProductCardsList from "../../../../containers/pages/catalog/product-cards-list";
+import Pagination from "@/containers/pages/catalog/pagination";
 import { Suspense } from "react";
 
 export default async function CatalogPage({ params }: {

@@ -1,27 +1,19 @@
-import HeroSection from "@/app/(site)/(home)/hero-section";
-import NotebookArticlePreview from "@/app/(site)/(home)/notebook-article-preview";
-import EyeMasksArticlePreview from "@/app/(site)/(home)/eye-masks-article-preview";
-import RunningQuote from "@/app/(site)/(home)/running-quote";
-import AdvantagesBubbles from "@/app/(site)/(home)/advantages-bubbles";
-import CertificatesGallery from "@/app/(site)/(home)/certificates-gallery";
-import RunningNumbers from "@/app/(site)/(home)/running-numbers";
-import ReviewsGallery from "@/app/(site)/(home)/reviews-gallery";
-import CatalogButton from "@/app/(site)/(home)/catalog-button";
-import BrandPageButton from "@/app/(site)/(home)/brand-page-button";
+import HeroSection from "@/containers/pages/home/hero-section";
+import CertificatesGallery from "@/containers/pages/home/certificates-gallery";
+import ReviewsGallery from "@/containers/pages/home/reviews-gallery";
+import BrandAdvantages from "@/containers/pages/home/brand-advantages";
+import ProductsPreviews from "@/containers/pages/home/products-previews";
+import RunningNumbers from "@/containers/pages/home/running-numbers";
 
 export default async function HomePage() {
   return (
     <main>
       <HeroSection />
-      <AdvantagesBubbles />
-      <RunningQuote />
-      <EyeMasksArticlePreview />
-      <NotebookArticlePreview />
+      <BrandAdvantages />
+      <ProductsPreviews />
       <CertificatesGallery />
       <RunningNumbers />
-      <BrandPageButton/>
       <ReviewsGallery />
-      <CatalogButton />
     </main>
   );
 }

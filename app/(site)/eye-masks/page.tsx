@@ -1,6 +1,6 @@
-import Introduction from "@/app/(site)/eye-masks/introduction";
-import Article from "@/app/(site)/eye-masks/article";
-import Advantages from "@/app/(site)/eye-masks/advantages";
+import Introduction from "@/containers/pages/eye-masks/introduction";
+import Article from "@/containers/pages/eye-masks/article";
+import Advantages from "@/containers/pages/eye-masks/advantages";
 
 
 export default function EyeMasksPage() {

@@ -1,7 +1,6 @@
-
-import BrandHistory from "./brand-history";
-import AchievementsGallery from "@/app/(site)/about-us/achievements-gallery";
-import AboutTeam from "@/app/(site)/about-us/about-team";
+import BrandHistory from "../../../containers/pages/about-us/brand-history";
+import AchievementsGallery from "@/containers/pages/about-us/achievements-gallery";
+import AboutTeam from "@/containers/pages/about-us/about-team";
 
 export default function AboutUsPage() {
   return (

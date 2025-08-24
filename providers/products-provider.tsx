@@ -8,13 +8,13 @@ import {
   useContext,
   useState
 } from "react";
-import { ClientProduct } from "@/types/database";
+import { Product } from "@prisma/client";
 
 
 const ProductContext = createContext<{
-  curr: ClientProduct,
-  setCurr: Dispatch<SetStateAction<ClientProduct>>,
-  products: ClientProduct[]
+  curr: Product,
+  setCurr: Dispatch<SetStateAction<Product>>,
+  products: Product[]
 } | undefined>(undefined);
 
 export default function ProductsProvider({
@@ -23,10 +23,10 @@ export default function ProductsProvider({
                                                   defaultProduct
                                                 }: {
   children: ReactNode,
-  products: ClientProduct[],
-  defaultProduct: ClientProduct
+  products: Product[],
+  defaultProduct: Product
 }) {
-  const [curr, setCurr] = useState<ClientProduct>(defaultProduct);
+  const [curr, setCurr] = useState<Product>(defaultProduct);
 
   return (
     <ProductContext.Provider value={{ curr, setCurr, products: products }}>

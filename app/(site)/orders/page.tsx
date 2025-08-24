@@ -1,4 +1,4 @@
-import OrdersList from "@/app/(site)/orders/orders-list";
+import OrdersList from "@/containers/pages/orders/orders-list";
 
 export default function OrdersPage() {
   return (

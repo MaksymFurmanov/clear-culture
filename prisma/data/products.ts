@@ -1,6 +1,6 @@
 import { ProductGroup } from "@prisma/client";
 
-export function getProducts(productGroups: ProductGroup[]){
+export function getProductsSeedData(productGroups: ProductGroup[]){
   return [
     {
       name: "Bottle, black",

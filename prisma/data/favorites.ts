@@ -1,6 +1,6 @@
 import { Product, User } from "@prisma/client";
 
-export function getFavorites(
+export function getFavoriteProductsSeedData(
   users: User[],
   products: Product[]
 ) {

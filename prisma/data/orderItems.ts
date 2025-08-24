@@ -1,6 +1,6 @@
 import { Order, Product } from "@prisma/client";
 
-export function getOrderItems(
+export function getOrderItemsSeedData(
   orders: Order[],
   products: Product[]
 ) {
@@ -33,4 +33,4 @@ export function getOrderItems(
   ];
 }
 
-export default getOrderItems;
+export default getOrderItemsSeedData;

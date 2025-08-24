@@ -1,4 +1,4 @@
-import { ClientProduct } from "@/types/database";
+import { Product } from "@prisma/client";
 
 export type ImgListItem = {
   src: string,
@@ -22,7 +22,7 @@ export type ImgLink = {
 } & ImgListItem;
 
 export type CartItem = {
-  product: ClientProduct,
+  product: Product,
   amount: number,
   discountInPercentage?: number
 }

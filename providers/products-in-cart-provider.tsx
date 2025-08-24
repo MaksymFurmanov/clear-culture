@@ -2,7 +2,6 @@
 
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 import { CartItem } from "@/types";
-import sumAllDecimal from "@/lib/utils/sumAllDecimal";
 import Decimal from "decimal.js";
 
 const CartContext = createContext<{
@@ -23,7 +22,7 @@ export default function CartProvider({
 
   /*
   * Get products cart from local storage if there is
-  * */
+  */
   useEffect(() => {
     const stored = localStorage.getItem("cart");
     if (stored) {
@@ -42,12 +41,21 @@ export default function CartProvider({
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
+  /*
+  * Function for tracking time when the last item added
+  * for the cart button animation
+  * */
   const signalAdd = () => {
     setLastItemAddedAt(Date.now());
   };
 
-  const totalPrice = sumAllDecimal(cartItems.map((cartItem) =>
-    [cartItem.product.price, cartItem.amount]));
+  /*
+  * Counting the total cart price for the totalPrice variable
+  * */
+  let totalPrice = new Decimal(0);
+  cartItems.forEach((cartItem) => {
+    totalPrice = totalPrice.add(cartItem.product.price.mul(cartItem.amount));
+  });
 
   return (
     <CartContext.Provider value={{ cartItems, setCartItems, signalAdd, lastItemAddedAt, totalPrice }}>

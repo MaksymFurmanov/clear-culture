@@ -1,5 +1,5 @@
-import OtherOptions from "@/components/other-options";
-import Form from "@/app/(auth)/sign-up/form";
+import OtherLogInOptions from "@/components/other-log-in-options";
+import Form from "@/containers/pages/sign-up/form";
 
 export default function SignUpPage() {
   return (
@@ -10,7 +10,7 @@ export default function SignUpPage() {
 
       <Form />
 
-      <OtherOptions type={"signUp"}/>
+      <OtherLogInOptions type={"signUp"}/>
     </main>
   );
 }

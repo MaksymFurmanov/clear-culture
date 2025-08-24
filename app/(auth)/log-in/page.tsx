@@ -1,8 +1,7 @@
-import OtherOptions from "@/components/other-options";
-import LogInForm from "@/app/(auth)/log-in/login-form";
+import OtherLogInOptions from "@/components/other-log-in-options";
+import LogInForm from "@/containers/pages/log-in/login-form";
 
 export default function LoginPage() {
-
   return (
     <main className={"max-w-2xl mx-auto"}>
       <h1 className={"pt-8 text-center text-2xl font-bold"}>
@@ -11,7 +10,7 @@ export default function LoginPage() {
 
       <LogInForm />
 
-      <OtherOptions type={"signIn"}/>
+      <OtherLogInOptions type={"signIn"}/>
     </main>
   );
 }
