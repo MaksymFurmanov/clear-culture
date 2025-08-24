@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
 import { useCart } from "@/providers/products-in-cart-provider";
 import Decimal from "decimal.js";
-import { createOrder } from "@/lib/actions/order";
 
 export default function CardForm() {
   const router = useRouter();
