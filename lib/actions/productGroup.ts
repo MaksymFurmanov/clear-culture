@@ -23,7 +23,7 @@ export async function getProductGroups(
   });
 }
 
-export async function getProductGroupById(id: number): Promise<ProductGroup | null> {
+export async function getProductGroupById(id: string): Promise<ProductGroup | null> {
   return prisma.productGroup.findUnique({
     where: {id: id}
   });

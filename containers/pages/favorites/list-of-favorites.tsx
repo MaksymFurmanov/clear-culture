@@ -1,33 +1,26 @@
-import { getProducts } from "@/lib/actions/product";
-import { Fragment } from "react";
 import CardItem from "@/containers/pages/favorites/card-item";
-import { getFavoriteProducts } from "@/lib/actions/favoriteProduct";
-import { FavoriteProduct, Product } from "@prisma/client";
+import { getFavoriteProductsByUserId } from "@/lib/actions/favoriteProduct";
+import { Product, User } from "@prisma/client";
+import { cookies } from "next/headers";
 
 export default async function ListOfFavorites() {
-  const favorites: FavoriteProduct[] = await getFavoriteProducts();
-  const products: Product[] = await getProducts();
+  const user = await cookies().then(value => {
+    return value.get("session")?.value;
+  }) as User;
+  if(!user) throw new Error("Internal server error");
+  const products: Product[] = await getFavoriteProductsByUserId(user.id);
 
   return (
     <div>
-      {favorites.map((favorite: FavoriteProduct, index) => {
-          const product = products.find(
-            (product: Product) => product.id === favorite.productId
-          );
-
-          if (!product) {
-            return <Fragment key={index} />;
-          }
-
-          return (
-            <CardItem key={index}
-                      photoUrl={product.photoUrl}
-                      name={product.name}
-                      productId={product.id}
-            />
-          );
-        }
-      )}
+      {products.map((product, index) => {
+        return (
+          <CardItem key={index}
+                    photoUrl={product.photoUrl}
+                    name={product.name}
+                    productId={product.id}
+          />
+        );
+      })}
     </div>
   );
 }

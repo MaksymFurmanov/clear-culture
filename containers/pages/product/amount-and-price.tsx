@@ -7,7 +7,7 @@ import Decimal from "decimal.js";
 
 export default function AmountAndPrice({ amount, price, changeAmount }: {
   amount: number,
-  price: string,
+  price: Decimal,
   changeAmount: Dispatch<SetStateAction<number>>
 }) {
   const increaseAmount = () => {

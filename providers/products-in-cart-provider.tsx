@@ -3,6 +3,7 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 import { CartItem } from "@/types";
 import Decimal from "decimal.js";
+import { deserialize, serialize } from "@/lib/utils/superjson";
 
 const CartContext = createContext<{
   cartItems: CartItem[],
@@ -27,7 +28,7 @@ export default function CartProvider({
     const stored = localStorage.getItem("cart");
     if (stored) {
       try {
-        setCartItems(JSON.parse(stored));
+        setCartItems(deserialize<CartItem[]>(stored));
       } catch (err) {
         console.error("Failed to parse cart from localStorage", err);
       }
@@ -38,7 +39,7 @@ export default function CartProvider({
   * Save products cart to local storage
   * */
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    localStorage.setItem("cart", serialize<CartItem[]>(cartItems));
   }, [cartItems]);
 
   /*
@@ -53,6 +54,7 @@ export default function CartProvider({
   * Counting the total cart price for the totalPrice variable
   * */
   let totalPrice = new Decimal(0);
+  console.log(cartItems)
   cartItems.forEach((cartItem) => {
     totalPrice = totalPrice.add(cartItem.product.price.mul(cartItem.amount));
   });

@@ -4,7 +4,6 @@ import Trash from "@/public/img/trash.svg";
 import { useCart } from "@/providers/products-in-cart-provider";
 import Link from "next/link";
 import CountChangeButtons from "@/containers/pages/cart/count-change-buttons";
-import Decimal from "decimal.js";
 
 export default function ItemCard({ product, index }: {
   product: CartItem,
@@ -36,7 +35,7 @@ export default function ItemCard({ product, index }: {
             count={product.amount}
           />
           <p>
-            {new Decimal(product.product.price).mul(product.amount).toString()} €
+            {product.product.price.mul(product.amount).toString()} €
           </p>
         </div>
       </div>

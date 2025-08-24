@@ -39,6 +39,7 @@
     "react-dom": "^19.1.0",
     "react-markdown": "^10.1.0",
     "string-to-color": "^2.2.2",
+    "superjson": "^2.2.2",
     "validator": "^13.15.0",
     "zod": "^3.25.76",
     "zod-prisma-types": "^3.2.4"

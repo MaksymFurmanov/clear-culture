@@ -26,7 +26,22 @@ async function main() {
   await prisma.product.createMany({
     data: productsRaw
   });
-  const createdProducts = await prisma.product.findMany();
+  const createdProducts = await prisma.product.findMany({
+    orderBy: { id: "asc" },
+  });
+
+  // Set defaultProductId to the first product in each group
+  for (const group of createdGroups) {
+    const firstProduct = createdProducts.find(
+      (product) => product.groupId === group.id
+    );
+    if (firstProduct) {
+      await prisma.productGroup.update({
+        where: { id: group.id },
+        data: { defaultProductId: firstProduct.id },
+      });
+    }
+  }
 
   //Seeding favorite products
   const favoriteProductsRaw = getFavoriteProductsSeedData(createdUsers, createdProducts);

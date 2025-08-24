@@ -9,7 +9,7 @@ import {
   useState
 } from "react";
 import { Product } from "@prisma/client";
-
+import { deserialize } from "@/lib/utils/superjson";
 
 const ProductContext = createContext<{
   curr: Product,
@@ -19,13 +19,16 @@ const ProductContext = createContext<{
 
 export default function ProductsProvider({
                                                   children,
-                                                  products,
-                                                  defaultProduct
+                                                  productsJSON,
+                                                  defaultProductJSON
                                                 }: {
   children: ReactNode,
-  products: Product[],
-  defaultProduct: Product
+  productsJSON: string,
+  defaultProductJSON: string
 }) {
+  const products = deserialize<Product[]>(productsJSON);
+  const defaultProduct = deserialize<Product>(defaultProductJSON);
+
   const [curr, setCurr] = useState<Product>(defaultProduct);
 
   return (

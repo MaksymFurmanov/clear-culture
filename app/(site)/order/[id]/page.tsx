@@ -9,10 +9,11 @@ import { getOrderById } from "@/lib/actions/order";
 
 export default async function Order({ params }: { params: Promise<{ id: string }> }) {
   const pageParams = await params;
-  const orderId = Number(pageParams.id);
+  const orderId = pageParams.id;
   if (!orderId) throw new PageNotFoundError("");
 
   const order = await getOrderById(orderId);
+  if(!order) throw new PageNotFoundError("Page not found");
 
   return (
     <main className={"mx-auto max-w-170"}>

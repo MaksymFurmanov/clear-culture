@@ -23,8 +23,8 @@ export async function getOrders(
   });
 }
 
-export async function getOrderById(orderId: string): Promise<Order> {
-  return prisma.order.findFirstOrThrow({
+export async function getOrderById(orderId: string): Promise<Order | null> {
+  return prisma.order.findFirst({
     where: {
       id: orderId
     }

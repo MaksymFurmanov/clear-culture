@@ -3,8 +3,8 @@ import Link from "next/link";
 import { getProductById } from "@/lib/actions/product";
 
 export default async function ProductCard({ groupId, defaultProductId }: {
-  groupId: number,
-  defaultProductId: number
+  groupId: string,
+  defaultProductId: string
 }) {
   const defaultProduct = await getProductById(defaultProductId);
   if(!defaultProduct) throw new Error(`No default product with id ${defaultProductId} found`);

@@ -4,7 +4,7 @@ import { PageNotFoundError } from "next/dist/shared/lib/utils";
 
 export default async function ProductPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
-  const groupId = Number(params.id);
+  const groupId = params.id;
   if (!groupId) throw new PageNotFoundError("");
 
   return (

@@ -8,27 +8,27 @@ export function getOrderItemsSeedData(
     {
       orderId: orders[0].id,
       productId: products[3].id,
-      amount: 1
+      quantity: 1
     },
     {
       orderId: orders[0].id,
       productId: products[1].id,
-      amount: 2
+      quantity: 2
     },
     {
       orderId: orders[1].id,
       productId: products[1].id,
-      amount: 3
+      quantity: 3
     },
     {
       orderId: orders[1].id,
       productId: products[2].id,
-      amount: 1
+      quantity: 1
     },
     {
       orderId: orders[1].id,
       productId: products[3].id,
-      amount: 1
+      quantity: 1
     }
   ];
 }
