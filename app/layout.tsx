@@ -34,9 +34,9 @@ export default function RootLayout({
   return (
     <html lang="en">
     <body className={`${abel.className} text-sm antialiased md:text-base`}>
-    <ProductsInCartProvider>
-      {children}
-    </ProductsInCartProvider>
+      <ProductsInCartProvider>
+        {children}
+      </ProductsInCartProvider>
     </body>
     </html>
   );

@@ -1,18 +1,10 @@
-'use client';
-
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function ForgetPasswordBtn() {
-  const { push } = useRouter();
-
   return (
-    <button className={"mt-2 text-right text-sm text-gray-400 cursor-pointer"}
-            onClick={(e) => {
-              e.preventDefault();
-              push("/reset-password");
-            }}
-    >
+    <Link className={"mt-2 text-right text-sm text-gray-400 cursor-pointer"}
+          href={"/reset-password"}>
       Forgot password?
-    </button>
+    </Link>
   );
 }
