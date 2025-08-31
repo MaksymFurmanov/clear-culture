@@ -1,5 +1,5 @@
 import { useProducts } from "@/providers/products-by-group-provider";
-import { useCart } from "@/providers/products-in-cart-provider";
+import { useCart } from "@/providers/cart-provider";
 
 export default function AddToCartButton ({amount}: {
   amount: number

@@ -3,8 +3,8 @@
 import Image from "next/image";
 import Circle from "@/public/img/circle.svg";
 import { useRouter } from "next/navigation";
-import { useCart } from "@/providers/products-in-cart-provider";
 import { useEffect, useState } from "react";
+import { useCart } from "@/providers/cart-provider";
 
 export default function CartButton() {
   const router = useRouter();

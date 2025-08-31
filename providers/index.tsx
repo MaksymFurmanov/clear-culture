@@ -1,14 +1,14 @@
 "use client";
 
-import ProductsInCartProvider from "./products-in-cart-provider";
 import { ReactNode } from "react";
+import CartProvider from "@/providers/cart-provider";
 
 export default function Providers({children}: {
   children: ReactNode
 }) {
   return (
-    <ProductsInCartProvider>
+    <CartProvider>
       {children}
-    </ProductsInCartProvider>
+    </CartProvider>
   );
 }

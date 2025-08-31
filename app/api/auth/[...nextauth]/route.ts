@@ -4,14 +4,14 @@ import GitHub from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
-import { session } from "@/lib/session";
+import { jwtCallback, sessionCallback } from "@/lib/session";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt"
   },
@@ -38,11 +38,12 @@ const authOptions: NextAuthOptions = {
         const user = await prisma.user.findUnique({
           where: { email: credentials.email }
         });
-
         if (!user) return null;
 
-        const isValid = await bcrypt.compare(credentials.password,
-          user?.password || "");
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user?.password || ""
+        );
         if (!isValid) return null;
 
         return {
@@ -54,11 +55,8 @@ const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    session,
-    async jwt({ token, user }) {
-      if (user) token.id = user.id;
-      return token;
-    },
+    jwt: jwtCallback,
+    session: sessionCallback
   }
 };
 

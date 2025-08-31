@@ -47,7 +47,7 @@ export default function OtherLogInOptions({ type }: { type: "signIn" | "signUp" 
         {buttonString} with GitHub
       </button>
 
-      <p className={"mt-4 mb-8 text-center"}>
+      <p className={"my-4 text-center"}>
         {type === "signIn" ? "Don't" : "Already"} have an account?&nbsp;
         <span className={"font-bold cursor-pointer"}
               onClick={(e) => {

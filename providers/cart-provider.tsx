@@ -54,7 +54,6 @@ export default function CartProvider({
   * Counting the total cart price for the totalPrice variable
   * */
   let totalPrice = new Decimal(0);
-  console.log(cartItems)
   cartItems.forEach((cartItem) => {
     totalPrice = totalPrice.add(cartItem.product.price.mul(cartItem.amount));
   });
