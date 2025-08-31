@@ -1,49 +1,44 @@
 'use server';
 
 import { z } from "zod";
-import { createSession, deleteSession } from "@/lib/session";
-import { redirect } from "next/navigation";
 import validator from "validator";
-import { getUserByLoginData } from "@/lib/actions/user";
+import { compare, hash } from "bcryptjs";
+import { prisma } from "@/lib/prisma";
 
 const loginSchema = z.object({
-  phoneNumber: z
+  email: z
     .string()
     .trim()
-    .refine(validator.isMobilePhone, { message: "Invalid phone number" }),
+    .refine(validator.isEmail, { message: "Invalid email" }),
   password: z
     .string()
     .trim()
     .min(8, { message: "Invalid password" })
 });
 
-export async function login(prevState: unknown, formData: FormData) {
-  const result = loginSchema.safeParse(Object.fromEntries(formData));
+export async function logInAction(email: string, password: string) {
+  const parsed = loginSchema.parse({ email, password });
 
-  if (!result.success) {
-    return {
-      errors: {
-        phoneNumber: ["Invalid phone number or password"]
-      }
-    };
-  }
+  const user = await prisma.user.findUnique({ where: { email: parsed.email } });
+  if (!user) throw new Error("Invalid email or password");
 
-  const { phoneNumber, password } = result.data;
-  const user = await getUserByLoginData(phoneNumber, password);
+  const isValid = await compare(parsed.password, user?.password || "");
+  if (!isValid) throw new Error("Invalid email or password");
 
-  if (!user) {
-    return {
-      errors: {
-        phoneNumber: ["Invalid phone number or password"]
-      }
-    };
-  }
-
-  await createSession(user.id);
-  redirect("/");
+  return { id: user.id, email: user.email, name: user.name };
 }
 
-export async function logout() {
-  await deleteSession();
-  redirect("/login");
+export async function signUpAction(email: string,
+                                   password: string,
+                                   name: string) {
+  const existing = await prisma.user.findUnique({ where: { email } });
+  if (existing) {
+    throw new Error("User already exists");
+  }
+
+  const hashedPassword = await hash(password, 10);
+
+  return prisma.user.create({
+    data: { email, name, password: hashedPassword },
+  });
 }

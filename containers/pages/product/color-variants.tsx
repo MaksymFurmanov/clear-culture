@@ -1,6 +1,6 @@
 'use client';
 
-import { useProducts } from "@/providers/products-provider";
+import { useProducts } from "@/providers/products-by-group-provider";
 import Circle from "@/public/img/circle.svg";
 import clsx from "clsx";
 

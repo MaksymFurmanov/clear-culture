@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import BurgerMenu from "@/containers/header/burger-menu";
-import { cookies } from "next/headers";
+import { getUserSession } from "@/lib/session";
 
 export default async function Header() {
-  const session = (await cookies()).get("session")?.value;
-  const isAuth = Boolean(session);
+  const user = await getUserSession();
 
   return (
     <header
@@ -21,7 +20,7 @@ export default async function Header() {
         </Link>
       </div>
 
-      <BurgerMenu isAuth={isAuth}/>
+      <BurgerMenu isAuth={!!user}/>
     </header>
   );
 }

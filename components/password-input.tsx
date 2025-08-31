@@ -1,11 +1,13 @@
-'use client';
+"use client";
 
 import Eye from "@/public/img/login-module/eye.svg";
 import ClosedEye from "@/public/img/login-module/closed-eye.svg";
 import { useState } from "react";
 
-export default function PasswordInput({ children, name = "" }:
-                                        { children: string, name?: string}) {
+export default function PasswordInput({ children, name = "" }: {
+  children: string,
+  name?: string
+}) {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
@@ -14,12 +16,12 @@ export default function PasswordInput({ children, name = "" }:
         {children}:
       </label>
 
-      <input className={"mt-2 py-3 px-4 bg-gray-200 rounded-xl"}
+      <input className={"mt-2 py-2 px-4 bg-gray-200 rounded-xl"}
              placeholder={children}
              name={name}
       />
 
-      <button className={"h-0 relative self-end -translate-y-8 -translate-x-4 cursor-pointer"}
+      <button className={"h-0 relative self-end -translate-y-7 -translate-x-4 cursor-pointer"}
               onClick={(e) => {
                 e.preventDefault();
                 setShowPassword(!showPassword);

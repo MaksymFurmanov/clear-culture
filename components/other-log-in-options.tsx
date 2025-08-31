@@ -1,20 +1,21 @@
 "use client";
 
-import GoogleIcon from "@/public/img/login-module/google.svg";
-import AppleIcon from "@/public/img/login-module/apple.svg";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
+import { signIn } from "next-auth/react";
 
 export default function OtherLogInOptions({ type }: { type: "signIn" | "signUp" }) {
   const { push } = useRouter();
 
   const buttonString = type === "signIn" ? "Log In" : "Sign In";
 
-  //Front-end hosting placeholder
-  const logIn = () => {
-    const userId = "user";
-    Cookies.set("session", userId);
-    window.location.href = "/";
+  const logInWithGitHub = async () => {
+    await signIn("github", { callbackUrl: "/" })
+  }
+
+  const logInWithGoogle = async () => {
+    await signIn("google", { callbackUrl: "/" });
   };
 
   return (
@@ -28,22 +29,22 @@ export default function OtherLogInOptions({ type }: { type: "signIn" | "signUp" 
 
       <button
         className={
-          "block w-full mt-4 px-10 py-3 font-bold border border-black rounded-full cursor-pointer"
+          "flex items-center justify-center w-full mt-4 px-10 py-2 font-bold border border-black rounded-full cursor-pointer"
         }
-        onClick={logIn}
+        onClick={logInWithGoogle}
       >
-        <GoogleIcon className={"mr-2 inline-block h-6 w-6"} />
+        <FcGoogle className={"mr-2 inline-block h-6 w-6"} />
         {buttonString} with Google
       </button>
 
       <button
         className={
-          "block w-full mt-4 px-10 py-3 font-bold border border-black rounded-full cursor-pointer"
+          "flex items-center justify-center w-full mt-4 px-10 py-2 font-bold border border-black rounded-full cursor-pointer"
         }
-        onClick={logIn}
+        onClick={logInWithGitHub}
       >
-        <AppleIcon className={"inline-block h-6 w-6 mr-2"} />
-        {buttonString} with Apple
+        <FaGithub className={"inline-block h-6 w-6 mr-2"} />
+        {buttonString} with GitHub
       </button>
 
       <p className={"mt-4 mb-8 text-center"}>

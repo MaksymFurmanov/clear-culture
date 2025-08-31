@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ReactNode } from "react";
-import ProductsInCartProvider from "@/providers/products-in-cart-provider";
+import Providers from "@/providers";
 
 /*const railway = localFont({
   src: "/fonts/Raleway-VariableFont_wght.ttf",
@@ -34,9 +34,9 @@ export default function RootLayout({
   return (
     <html lang="en">
     <body className={`${abel.className} text-sm antialiased md:text-base`}>
-      <ProductsInCartProvider>
+      <Providers>
         {children}
-      </ProductsInCartProvider>
+      </Providers>
     </body>
     </html>
   );

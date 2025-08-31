@@ -17,7 +17,7 @@ const ProductContext = createContext<{
   products: Product[]
 } | undefined>(undefined);
 
-export default function ProductsProvider({
+export default function ProductsByGroupProvider({
                                                   children,
                                                   productsJSON,
                                                   defaultProductJSON

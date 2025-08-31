@@ -3,7 +3,7 @@ import LogInForm from "@/containers/pages/log-in/login-form";
 
 export default function LoginPage() {
   return (
-    <main className={"max-w-2xl mx-auto"}>
+    <main className={"max-w-xl mx-auto"}>
       <h1 className={"pt-8 text-center text-2xl font-bold"}>
         Log in
       </h1>

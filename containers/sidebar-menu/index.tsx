@@ -1,34 +1,11 @@
 "use client";
 
 import ModalPortal from "@/components/modal-portal";
-import { IconLink } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import Cookies from "js-cookie";
-
-const links: IconLink[] = [
-  {
-    label: "Cart",
-    href: "/cart",
-    iconHref: "/img/sidebar/cart.svg"
-  },
-  {
-    label: "Product catalog",
-    href: "/catalog/1",
-    iconHref: "/img/sidebar/product-catalog.svg"
-  },
-  {
-    label: "Favorites",
-    href: "/favorites",
-    iconHref: "/img/sidebar/favorites.svg"
-  },
-  {
-    label: "Orders",
-    href: "/orders",
-    iconHref: "/img/sidebar/orders.svg"
-  }
-];
+import LogOutButton from "@/containers/sidebar-menu/log-out-button";
+import links from "@/containers/sidebar-menu/links";
 
 export default function SidebarMenu({ toggleSidebar }: {
   toggleSidebar: () => void
@@ -70,33 +47,10 @@ export default function SidebarMenu({ toggleSidebar }: {
               ))}
             </div>
 
-            <LogOut />
+            <LogOutButton />
           </div>
         </div>
       </>
     </ModalPortal>
   );
 }
-
-const LogOut = () => {
-  const logOut = () => {
-    Cookies.remove("session");
-    window.location.href = "/";
-  };
-
-  return (
-    <button
-      className={"flex justify-start items-center gap-4 w-full cursor-pointer rounded px-4 py-2 my-3 hover:bg-gray-200"}
-      onClick={logOut}
-    >
-      <Image src={"/img/sidebar/logout.svg"}
-             alt={""}
-             width={30}
-             height={30}
-      />
-      <p className={"text-lg"}>
-        Log out
-      </p>
-    </button>
-  );
-};

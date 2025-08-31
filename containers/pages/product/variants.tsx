@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import ColorVariants from "./color-variants";
-import { useProducts } from "@/providers/products-provider";
+import { useProducts } from "@/providers/products-by-group-provider";
 
 export default function Variants() {
   const {curr} = useProducts();

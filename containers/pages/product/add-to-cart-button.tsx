@@ -1,4 +1,4 @@
-import { useProducts } from "@/providers/products-provider";
+import { useProducts } from "@/providers/products-by-group-provider";
 import { useCart } from "@/providers/products-in-cart-provider";
 
 export default function AddToCartButton ({amount}: {
