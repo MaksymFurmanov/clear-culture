@@ -13,9 +13,7 @@ const CartContext = createContext<{
   totalPrice: Decimal
 } | undefined>(undefined);
 
-export default function CartProvider({
-                                       children
-                                     }: {
+export default function CartProvider({ children }: {
   children: ReactNode
 }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -55,7 +53,7 @@ export default function CartProvider({
   * */
   let totalPrice = new Decimal(0);
   cartItems.forEach((cartItem) => {
-    totalPrice = totalPrice.add(cartItem.product.price.mul(cartItem.amount));
+    totalPrice = totalPrice.add((new Decimal(cartItem.product.price).mul(cartItem.amount)));
   });
 
   return (

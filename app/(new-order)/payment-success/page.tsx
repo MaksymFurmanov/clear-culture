@@ -1,4 +1,4 @@
-import SuccessContainer from "@/containers/pages/payment-success/success-container";
+import SuccessContainer from "@/containers/order-pages/payment-success/success-container";
 
 export default function PaymentSuccessPage() {
   return (

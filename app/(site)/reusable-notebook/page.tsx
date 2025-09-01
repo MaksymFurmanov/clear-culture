@@ -1,8 +1,8 @@
-import Introduction from "@/containers/pages/reusable-notebook/introduction";
-import Advantages from "@/containers/pages/reusable-notebook/advantages";
-import Article from "@/containers/pages/reusable-notebook/article";
-import IntegratesWith from "@/containers/pages/reusable-notebook/integrates-with";
-import DopeProblemArticle from "@/containers/pages/reusable-notebook/dope-problem-article";
+import Introduction from "@/containers/site-pages/reusable-notebook/introduction";
+import Advantages from "@/containers/site-pages/reusable-notebook/advantages";
+import Article from "@/containers/site-pages/reusable-notebook/article";
+import IntegratesWith from "@/containers/site-pages/reusable-notebook/integrates-with";
+import DopeProblemArticle from "@/containers/site-pages/reusable-notebook/dope-problem-article";
 
 export default function NotebookPage() {
   return (

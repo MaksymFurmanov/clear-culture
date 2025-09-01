@@ -1,5 +1,5 @@
 import ArrowLeft from "@/public/img/login-module/arrow-left.svg";
-import Form from "@/containers/pages/reset-password/form";
+import Form from "@/containers/auth-pages/reset-password/form";
 import Link from "next/link";
 
 export default function ResetPasswordPage() {

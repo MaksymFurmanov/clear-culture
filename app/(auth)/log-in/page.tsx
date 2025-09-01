@@ -1,5 +1,5 @@
 import OtherLogInOptions from "@/components/other-log-in-options";
-import LogInForm from "@/containers/pages/log-in/form";
+import LogInForm from "@/containers/auth-pages/log-in/form";
 
 export default function LoginPage() {
   return (

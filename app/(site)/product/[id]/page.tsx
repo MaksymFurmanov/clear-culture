@@ -1,6 +1,6 @@
-import Configurator from "@/containers/pages/product/configurator";
-import Details from "@/containers/pages/product/details";
 import { PageNotFoundError } from "next/dist/shared/lib/utils";
+import Configurator from "@/containers/site-pages/product/configurator";
+import Details from "@/containers/site-pages/product/details";
 
 export default async function ProductPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;

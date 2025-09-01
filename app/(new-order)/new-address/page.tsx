@@ -1,4 +1,4 @@
-import Form from "@/containers/pages/new-address/form";
+import Form from "@/containers/order-pages/new-address/form";
 
 export default function NewAdressPage() {
   return (
