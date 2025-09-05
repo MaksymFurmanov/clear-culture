@@ -1,8 +1,6 @@
-"use client";
-
 import Image from "next/image";
-import TrashIcon from "@/public/img/trash.svg";
 import Link from "next/link";
+import RemoveButton from "@/containers/user-pages/favorites/remove-button";
 
 export default function CardItem({ photoUrl, name, productId }: {
   photoUrl: string,
@@ -35,20 +33,7 @@ export default function CardItem({ photoUrl, name, productId }: {
       </div>
     </div>
 
-      <RemoveButton />
+      <RemoveButton productId={productId}/>
     </div>
-  );
-}
-
-function RemoveButton() {
-  const handleRemove = () => {
-
-  };
-
-  return (
-    <button className={"mr-2 w-4 cursor-pointer"}
-            onClick={handleRemove}>
-      <TrashIcon className={"w-3 md:w-4"} />
-    </button>
   );
 }
