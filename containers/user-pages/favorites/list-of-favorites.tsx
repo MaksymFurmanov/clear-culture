@@ -1,5 +1,5 @@
-import CardItem from "@/containers/pages/favorites/card-item";
 import { Product } from "@prisma/client";
+import CardItem from "@/containers/user-pages/favorites/card-item";
 
 export default function ListOfFavorites({products}: {
   products: Product[]

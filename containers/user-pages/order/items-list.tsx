@@ -1,5 +1,5 @@
 import Item from "@/containers/user-pages/order/item";
-import { getOrderItems } from "@/lib/actions/orderItem";
+import { getOrderItems } from "@/lib/actions/order-item";
 
 export default async function ItemsList({ orderId }: {
   orderId: string

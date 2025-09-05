@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useProducts } from "@/providers/products-by-group-provider";
+import { useProductGroup } from "@/providers/products-by-group-provider";
 import Circle from "@/public/img/circle.svg";
 import clsx from "clsx";
 
 export default function ColorVariants() {
-  const { curr, setCurr, products } = useProducts();
+  const { curr, setCurr, products } = useProductGroup();
   if(products.length < 2) return null;
 
   return (

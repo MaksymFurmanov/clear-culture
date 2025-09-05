@@ -1,7 +1,7 @@
 import ProductCard from "./product-card";
 import { Fragment } from "react";
-import { getProductGroups } from "@/lib/actions/productGroup";
 import { ProductGroup } from "@prisma/client";
+import { getProductGroups } from "@/lib/actions/product-group";
 
 export default async function ProductCardsList({ page }: {
   page: number

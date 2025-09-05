@@ -1,8 +1,8 @@
 'use client';
 
-import ShoppingLink from "@/containers/pages/eye-masks/shopping-link";
-import MasksTypes from "@/containers/pages/eye-masks/masks-types";
-import Colors from "@/containers/pages/eye-masks/colors";
+import ShoppingLink from "@/containers/site-pages/eye-masks/shopping-link";
+import MasksTypes from "@/containers/site-pages/eye-masks/masks-types";
+import Colors from "@/containers/site-pages/eye-masks/colors";
 
 export default function Introduction() {
   return (

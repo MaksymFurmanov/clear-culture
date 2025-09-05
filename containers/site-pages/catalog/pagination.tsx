@@ -1,7 +1,7 @@
 import ScalingUnderlineLink from "@/components/buttons/scaling-underline-link";
 import Link from "next/link";
-import { getProductGroupsCount } from "@/lib/actions/productGroup";
 import { PageNotFoundError } from "next/dist/shared/lib/utils";
+import { getProductGroupsCount } from "@/lib/actions/product-group";
 
 export default async function Pagination({ page }: {
   page: number

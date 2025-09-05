@@ -3,9 +3,9 @@ import { Fragment } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function OrderItemCard({ productId, amount }: {
-  productId: number,
-  amount: number
+export default async function OrderItemCard({ productId, quantity }: {
+  productId: string,
+  quantity: number
 }) {
   const product = await getProductById(productId);
 
@@ -32,7 +32,7 @@ export default async function OrderItemCard({ productId, amount }: {
         </p>
       </Link>
       <p className={"mt-auto"}>
-        {amount}X
+        {quantity}X
       </p>
     </div>
   );

@@ -1,10 +1,12 @@
-import { useProducts } from "@/providers/products-by-group-provider";
+"use client";
+
+import { useProductGroup } from "@/providers/products-by-group-provider";
 import { useCart } from "@/providers/cart-provider";
 
 export default function AddToCartButton ({amount}: {
   amount: number
 }) {
-  const { curr } = useProducts();
+  const { curr } = useProductGroup();
   const { setCartItems, signalAdd } = useCart();
 
   const addToCart = () => {
@@ -32,7 +34,8 @@ export default function AddToCartButton ({amount}: {
     });
 
     signalAdd();
-  };
+  }
+
   return (
     <button className={"bg-dark-blue text-white cursor-pointer rounded-md py-1 px-5 mb-2"}
             onClick={addToCart}

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useMemo } from "react";
 import randomColor from "randomcolor";
@@ -8,11 +8,11 @@ export default function ProductProperties({ color }: {
 }) {
   const productProps: string[] = [];
   if (color) productProps.push(color);
-  if (productProps.length === 0) return null;
 
   const productColors = useMemo(() => {
     const colorMap: Record<string, string> = {};
 
+    if (productProps.length === 0) return null;
     productProps.forEach(prop => {
       colorMap[prop] = randomColor({ luminosity: "light" });
     });
@@ -20,7 +20,7 @@ export default function ProductProperties({ color }: {
     return colorMap;
   }, [color]);
 
-  return (
+  return (productColors &&
     <div className={"mb-4"}>
       {productProps.map((prop: string, index) => {
         return (

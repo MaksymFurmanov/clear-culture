@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   createContext,
@@ -32,16 +32,16 @@ export default function ProductsByGroupProvider({
   const [curr, setCurr] = useState<Product>(defaultProduct);
 
   return (
-    <ProductContext.Provider value={{ curr, setCurr, products: products }}>
+    <ProductContext.Provider value={{ curr, setCurr, products }}>
       {children}
     </ProductContext.Provider>
   );
 }
 
-export const useProducts = () => {
+export const useProductGroup = () => {
   const context = useContext(ProductContext);
   if (!context) {
     throw new Error("Error providing the products");
   }
   return context;
-};
+}

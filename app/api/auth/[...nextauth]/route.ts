@@ -1,15 +1,26 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { DefaultUser, NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHub from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
-import { jwtCallback, sessionCallback } from "@/lib/session";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID!;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
+
+declare module "next-auth" {
+  interface Session {
+    user?: DefaultUser & { id: string; };
+  }
+}
+
+declare module "next-auth/jwt/types" {
+  interface JWT {
+    uid: string;
+  }
+}
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -55,8 +66,30 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    jwt: jwtCallback,
-    session: sessionCallback
+    async jwt({ token, user, account }) {
+      if (account && user) {
+        const dbUser = await prisma.user.upsert({
+          where: { email: user.email! },
+          update: {},
+          create: {
+            email: user.email!,
+            name: user.name ?? "",
+            password: null
+          }
+        });
+
+        token.uid = dbUser.id;
+      }
+
+      return token;
+    },
+
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.uid;
+      }
+      return session;
+    }
   }
 };
 

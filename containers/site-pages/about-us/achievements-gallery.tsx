@@ -1,11 +1,11 @@
 'use client';
 
 import Image from "next/image";
-import achievements from "@/containers/pages/about-us/achievements";
 import useGallery from "@/hooks/useGallery";
 import Circle from "@/public/img/circle.svg";
 import clsx from "clsx";
 import { useEffect } from "react";
+import achievements from "@/containers/site-pages/about-us/achievements";
 
 export default function AchievementsGallery() {
   const { currImg, setImg } = useGallery(achievements.length);

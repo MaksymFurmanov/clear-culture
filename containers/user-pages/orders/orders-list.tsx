@@ -1,5 +1,5 @@
-import OrderBox from "@/containers/pages/orders/order-box";
 import { getOrders } from "@/lib/actions/order";
+import OrderBox from "@/containers/user-pages/orders/order-box";
 
 export default async function OrdersList() {
   const orders = await getOrders();

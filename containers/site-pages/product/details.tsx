@@ -1,8 +1,8 @@
 import ScalingUnderlineLink from "@/components/buttons/scaling-underline-link";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
-import Description from "@/containers/pages/product/description";
-import { getProductGroupById } from "@/lib/actions/productGroup";
 import { serialize } from "next-mdx-remote/serialize";
+import { getProductGroupById } from "@/lib/actions/product-group";
+import Description from "./description";
 
 export default async function Details({ groupId }: {
   groupId: string,

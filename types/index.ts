@@ -1,4 +1,4 @@
-import { Product } from "@prisma/client";
+import { Prisma, Product } from "@prisma/client";
 
 export type ImgListItem = {
   src: string,
@@ -26,3 +26,9 @@ export type CartItem = {
   amount: number,
   discountInPercentage?: number
 }
+
+export type CartItemWithProduct = Prisma.CartItemGetPayload<{
+  include: {
+    product: true
+  }
+}>;

@@ -1,8 +1,8 @@
 import Circle from "@/public/img/circle.svg";
-import OrderItemCard from "@/containers/pages/orders/order-item-card";
 import Link from "next/link";
-import { getOrderItems } from "@/lib/actions/orderItem";
 import { Order } from "@prisma/client";
+import OrderItemCard from "@/containers/user-pages/orders/order-item-card";
+import { getOrderItems } from "@/lib/actions/order-item";
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -44,7 +44,7 @@ export default async function OrderBox({ order }: {
         .map((item, index) => (
           <OrderItemCard key={index}
                          productId={item.productId}
-                         amount={item.amount}
+                         quantity={item.quantity}
           />
         ))
       }

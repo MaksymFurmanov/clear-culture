@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import ColorVariants from "./color-variants";
-import { useProducts } from "@/providers/products-by-group-provider";
+import { useProductGroup } from "@/providers/products-by-group-provider";
 
 export default function Variants() {
-  const {curr} = useProducts();
+  const {curr} = useProductGroup();
 
   return (
     <div className={"w-1/3 md:w-1/4"}>

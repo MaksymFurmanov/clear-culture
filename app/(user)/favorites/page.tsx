@@ -1,12 +1,10 @@
-import ListOfFavorites from "@/containers/pages/favorites/list-of-favorites";
-import { Product, User } from "@prisma/client";
-import { getFavoriteProductsByUserId } from "@/lib/actions/favoriteProduct";
-import { cookies } from "next/headers";
+import { Product } from "@prisma/client";
+import ListOfFavorites from "@/containers/user-pages/favorites/list-of-favorites";
+import { getFavoriteProductsByUserId } from "@/lib/actions/favorite-product";
+import { getUserSession } from "@/lib/session";
 
 export default async function FavoritesPage() {
-  const user = await cookies().then(value => {
-    return value.get("session")?.value;
-  }) as User;
+  const user = await getUserSession();
   if(!user) throw new Error("Internal server error");
 
   const products: Product[] = await getFavoriteProductsByUserId(user.id);

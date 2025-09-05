@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
 import AmountAndPrice from "./amount-and-price";
 import { useState } from "react";
-import { useProducts } from "@/providers/products-by-group-provider";
-import ProductProperties from "@/containers/pages/product/product-properties";
-import AddToCartButton from "@/containers/pages/product/add-to-cart-button";
-import AddToFavoritesButton from "@/containers/pages/product/add-to-favorites-button";
+import { useProductGroup } from "@/providers/products-by-group-provider";
+import ProductProperties from "@/containers/site-pages/product/product-properties";
+import AddToCartButton from "@/containers/site-pages/product/add-to-cart-button";
+import AddToFavoritesButton from "@/containers/site-pages/product/add-to-favorites-button";
 
 export default function AddProductField() {
-  const { curr } = useProducts();
+  const { curr } = useProductGroup();
   const [amount, setAmount] = useState<number>(1);
 
   return (
