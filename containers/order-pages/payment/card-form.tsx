@@ -3,7 +3,7 @@
 import Receipt from "@/components/receipt";
 import { useRouter } from "next/navigation";
 import { FormEvent } from "react";
-import { useCart } from "@/providers/cart-provider";
+import { useCart } from "@/app/providers/cart-provider";
 import Decimal from "decimal.js";
 
 export default function CardForm() {

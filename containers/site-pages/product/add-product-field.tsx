@@ -2,7 +2,7 @@
 
 import AmountAndPrice from "./amount-and-price";
 import { useState } from "react";
-import { useProductGroup } from "@/providers/products-by-group-provider";
+import { useProductGroup } from "@/app/providers/products-by-group-provider";
 import ProductProperties from "@/containers/site-pages/product/product-properties";
 import AddToCartButton from "@/containers/site-pages/product/add-to-cart-button";
 import AddToFavoritesButton from "@/containers/site-pages/product/add-to-favorites-button";

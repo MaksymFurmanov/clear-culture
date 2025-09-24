@@ -1,6 +1,6 @@
 "use client";
 
-import CartProvider from "@/providers/cart-provider";
+import CartProvider from "@/app/providers/cart-provider";
 import { ReactNode } from "react";
 import { SessionProvider } from "next-auth/react";
 import { deserialize } from "@/lib/utils/superjson";

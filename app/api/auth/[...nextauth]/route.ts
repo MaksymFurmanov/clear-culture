@@ -4,9 +4,6 @@ import GitHub from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
-import { superCreateOrUpdateCartItems } from "@/lib/actions/cart-items";
-import { deserialize } from "@/lib/utils/superjson";
-import { CartItemWithProduct } from "@/types";
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!;

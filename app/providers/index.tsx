@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import ClientProviders from "@/providers/client-providers";
+import ClientProviders from "@/app/providers/client-providers";
 import { superGetCartItems } from "@/lib/actions/cart-items";
 
 export default async function Providers({ children }: {

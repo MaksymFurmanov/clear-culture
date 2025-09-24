@@ -4,7 +4,7 @@ import Image from "next/image";
 import Circle from "@/public/img/circle.svg";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useCart } from "@/providers/cart-provider";
+import { useCart } from "@/app/providers/cart-provider";
 
 export default function CartButton() {
   const router = useRouter();
@@ -13,6 +13,7 @@ export default function CartButton() {
 
   useEffect(() => {
     if (!lastItemAddedAt) return;
+
     setAlertToggle(true);
     const t = setTimeout(() => setAlertToggle(false), 3000);
     return () => clearTimeout(t);

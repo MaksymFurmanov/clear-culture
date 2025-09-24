@@ -1,6 +1,6 @@
 import AddProductField from "./add-product-field";
 import Variants from "./variants";
-import ProductsByGroupProvider from "@/providers/products-by-group-provider";
+import ProductsByGroupProvider from "@/app/providers/products-by-group-provider";
 import { superGetDefaultProduct, superGetProductsByGroupId } from "@/lib/actions/product";
 
 export default async function Configurator({ groupId }: {

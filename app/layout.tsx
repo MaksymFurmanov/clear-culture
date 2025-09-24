@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ReactNode } from "react";
-import Providers from "@/providers";
+import Providers from "@/app/providers";
 
 /*const railway = localFont({
   src: "/fonts/Raleway-VariableFont_wght.ttf",

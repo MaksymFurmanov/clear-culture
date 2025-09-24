@@ -10,7 +10,7 @@ import {
 } from "@/lib/actions/favorite-product";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useProductGroup } from "@/providers/products-by-group-provider";
+import { useProductGroup } from "@/app/providers/products-by-group-provider";
 
 export default function AddToFavoritesButton() {
   const { data: session } = useSession();

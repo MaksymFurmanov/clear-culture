@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import { useCart } from "@/providers/cart-provider";
+import { useCart } from "@/app/providers/cart-provider";
 import ItemCard from "@/containers/order-pages/cart/item-card";
 import Link from "next/link";
 
@@ -32,7 +32,7 @@ export default function Cart() {
         <p>
           Sum:
         </p>
-        <Suspense fallback={<p>Loading sum...</p>}>
+        <Suspense fallback={<p>...</p>}>
           <p>
             {totalPrice.toString()} €
           </p>

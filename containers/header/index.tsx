@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import BurgerMenu from "@/containers/header/burger-menu";
-import { getUserSession } from "@/lib/session";
+import { getUserId } from "@/lib/actions/user";
 
 export default async function Header() {
-  const user = await getUserSession();
+  const user = await getUserId();
 
   return (
     <header

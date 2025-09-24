@@ -3,6 +3,14 @@
 import { hash } from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { RegisterInput, registerSchema } from "@/lib/validators/auth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+export async function getUserId(): Promise<string | null> {
+  const authUserSession = await getServerSession(authOptions);
+  if (!authUserSession?.user?.id) return null;
+  return authUserSession.user.id;
+}
 
 export async function registerUser(data: RegisterInput) {
   const parsed = registerSchema.parse(data);

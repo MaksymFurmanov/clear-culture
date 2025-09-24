@@ -1,17 +1,16 @@
 "use client";
 
-import { useProductGroup } from "@/providers/products-by-group-provider";
-import { useCart } from "@/providers/cart-provider";
+import { useProductGroup } from "@/app/providers/products-by-group-provider";
+import { useCart } from "@/app/providers/cart-provider";
 
 export default function AddToCartButton({ quantity }: {
   quantity: number
 }) {
   const { curr } = useProductGroup();
-  const { addToCartOrUpdate, signalAdd } = useCart();
+  const { addToCartOrUpdate } = useCart();
 
   const buttonHandler = async () => {
-    await addToCartOrUpdate(curr.id, quantity);
-    signalAdd();
+    await addToCartOrUpdate(curr.id, quantity, true);
   }
 
   return (

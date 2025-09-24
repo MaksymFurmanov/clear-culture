@@ -3,7 +3,7 @@
 import { ChangeEvent, useState } from "react";
 import MinusIcon from "@/public/img/minus-button.svg";
 import PlusIcon from "@/public/img/plus-button.svg";
-import { useCart } from "@/providers/cart-provider";
+import { useCart } from "@/app/providers/cart-provider";
 
 export default function CountChangeButtons({ productId, count }: {
   productId: string,

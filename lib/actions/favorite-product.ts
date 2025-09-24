@@ -3,12 +3,11 @@
 import { prisma } from "@/lib/prisma";
 import { Product } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { getUserSession } from "@/lib/session";
+import { getUserId } from "@/lib/actions/user";
 
 export async function getFavoriteProducts(): Promise<Product[]> {
-  const user = await getUserSession();
-  if (!user) throw new Error("Authorization error");
-  const userId = user.id;
+  const userId = await getUserId();
+  if(!userId) throw new Error("Authorization error");
 
   const favorites = await prisma.favoriteProduct.findMany({
     where: {
@@ -23,9 +22,8 @@ export async function getFavoriteProducts(): Promise<Product[]> {
 }
 
 export async function getFavoriteProductId(productId: string): Promise<string | undefined> {
-  const user = await getUserSession();
-  if (!user) throw new Error("Authorization error");
-  const userId = user.id;
+  const userId = await getUserId();
+  if(!userId) throw new Error("Authorization error");
 
   const favorite = await prisma.favoriteProduct.findUnique({
     where: {
@@ -41,9 +39,8 @@ export async function isFavoriteProduct(productId: string): Promise<boolean> {
 }
 
 export async function addFavoriteProductToUser(productId: string): Promise<void> {
-  const user = await getUserSession();
-  if (!user) throw new Error("Authorization error");
-  const userId = user.id;
+  const userId = await getUserId();
+  if(!userId) throw new Error("Authorization error");
 
   const isFavorite = await isFavoriteProduct(productId);
   if(isFavorite) return;

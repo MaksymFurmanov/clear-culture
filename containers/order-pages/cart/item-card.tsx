@@ -1,10 +1,9 @@
 import { CartItemWithProduct } from "@/types";
 import Image from "next/image";
-import Trash from "@/public/img/trash.svg";
-import { useCart } from "@/providers/cart-provider";
 import Link from "next/link";
 import CountChangeButtons from "@/containers/order-pages/cart/count-change-buttons";
 import Decimal from "decimal.js";
+import DeleteButton from "@/containers/order-pages/cart/delete-button";
 
 export default function ItemCard({ cartItem }: {
   cartItem: CartItemWithProduct
@@ -41,22 +40,5 @@ export default function ItemCard({ cartItem }: {
         </div>
       </div>
     </div>
-  );
-}
-
-function DeleteButton({ productId }: {
-  productId: string
-}) {
-  const { removeFromCart } = useCart();
-
-  const deleteHandler = async () => {
-    await removeFromCart(productId);
-  };
-
-  return (
-    <button className={"cursor-pointer h-fit m-1"}
-            onClick={deleteHandler}>
-      <Trash className={"w-3 lg:w-4"} />
-    </button>
   );
 }

@@ -11,7 +11,7 @@ export default function OtherLogInOptions({ type }: { type: "signIn" | "signUp" 
   const buttonString = type === "signIn" ? "Log In" : "Sign In";
 
   const logInWithGitHub = async () => {
-    await signIn("github", { callbackUrl: "/" })
+    await signIn("github", { callbackUrl: "/" });
   }
 
   const logInWithGoogle = async () => {
