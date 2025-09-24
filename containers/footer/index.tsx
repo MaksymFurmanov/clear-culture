@@ -2,26 +2,7 @@ import Link from "next/link";
 import JoinForm from "@/containers/footer/join-form";
 import Contacts from "@/containers/footer/contacts";
 import Bubbles from "./bubbles";
-import { TextLink } from "@/types";
-
-const links: TextLink[] = [
-  {
-    label: "About us",
-    href: "/about-us"
-  },
-  {
-    label: "Terms of service",
-    href: ""
-  },
-  {
-    label: "Privacy policy",
-    href: ""
-  },
-  {
-    label: "Shipping",
-    href: ""
-  }
-];
+import links from "@/containers/footer/links";
 
 export default function Footer() {
   return (

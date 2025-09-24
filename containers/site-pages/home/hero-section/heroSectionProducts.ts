@@ -1,6 +1,6 @@
-import { ImgLink } from "@/types";
+import { ImgLinkWithMetrics } from "@/types";
 
-const heroSectionProducts: ImgLink[] = [
+const heroSectionProducts: ImgLinkWithMetrics[] = [
   {
     src: "/img/home-gallery/containers.png",
     alt: "Containers",

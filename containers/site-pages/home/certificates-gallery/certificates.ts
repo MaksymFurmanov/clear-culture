@@ -1,6 +1,6 @@
-import { ImgListItem } from "@/types";
+import { ImgHTMLAttributes } from "react";
 
-const certificatesList: ImgListItem[] = [
+const certificatesList: ImgHTMLAttributes<HTMLElement>[] = [
   {
     src: "/img/certificates/certificate-1.svg",
     alt: "RTE Independently Audited",

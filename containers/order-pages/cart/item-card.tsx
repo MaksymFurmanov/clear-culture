@@ -1,4 +1,4 @@
-import { CartItem } from "@/types";
+import { CartItemWithProduct } from "@/types";
 import Image from "next/image";
 import Trash from "@/public/img/trash.svg";
 import { useCart } from "@/providers/cart-provider";
@@ -6,37 +6,37 @@ import Link from "next/link";
 import CountChangeButtons from "@/containers/order-pages/cart/count-change-buttons";
 import Decimal from "decimal.js";
 
-export default function ItemCard({ product, index }: {
-  product: CartItem,
-  index: number
+export default function ItemCard({ cartItem }: {
+  cartItem: CartItemWithProduct
 }) {
   return (
     <div className={"flex justify-between gap-4 bg-green rounded-xl p-4 mb-8 mx-6"}>
       <Link className={"bg-light-green rounded aspect-square min-w-17 max-h-fit w-2/5 md:w-1/3 p-3"}
-            href={`/product/${product.product.groupId}`}>
+            href={`/product/${cartItem.product.groupId}`}>
         <Image className={"w-full h-full object-contain"}
-               src={product.product.photoUrl}
-               alt={product.product.name}
+               src={cartItem.product.photoUrl}
+               alt={cartItem.product.name}
                width={100}
                height={100}
         />
       </Link>
       <div className={"flex flex-col justify-between gap-4 w-full"}>
         <div className={"flex justify-between"}>
-          <Link href={`/product/${product.product.groupId}`}>
+          <Link href={`/product/${cartItem.product.groupId}`}>
             <p>
-              {product.product.name}
+              {cartItem.product.name}
             </p>
           </Link>
-          <DeleteButton index={index} />
+          <DeleteButton productId={cartItem.productId} />
         </div>
         <div className={"flex justify-between"}>
           <CountChangeButtons
-            index={index}
-            count={product.amount}
+            productId={cartItem.product.id}
+            count={cartItem.quantity}
           />
           <p>
-            {new Decimal(product.product.price).mul(product.amount).toString()} €
+            {new Decimal(cartItem.product.price)
+              .mul(cartItem.quantity).toString()} €
           </p>
         </div>
       </div>
@@ -44,17 +44,13 @@ export default function ItemCard({ product, index }: {
   );
 }
 
-function DeleteButton({ index }: {
-  index: number
+function DeleteButton({ productId }: {
+  productId: string
 }) {
-  const { setCartItems } = useCart();
+  const { removeFromCart } = useCart();
 
-  const deleteHandler = () => {
-    setCartItems((prevState) => {
-      return [
-        ...prevState.filter((_, i) => i !== index)
-      ];
-    });
+  const deleteHandler = async () => {
+    await removeFromCart(productId);
   };
 
   return (

@@ -11,5 +11,5 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
       <CartButton />
       <Footer />
     </>
-  )
+  );
 }

@@ -19,15 +19,15 @@ const ProductContext = createContext<{
 
 export default function ProductsByGroupProvider({
                                                   children,
-                                                  productsJSON,
-                                                  defaultProductJSON
+                                                  superProducts,
+                                                  superDefaultProduct
                                                 }: {
   children: ReactNode,
-  productsJSON: string,
-  defaultProductJSON: string
+  superProducts: string,
+  superDefaultProduct: string
 }) {
-  const products = deserialize<Product[]>(productsJSON);
-  const defaultProduct = deserialize<Product>(defaultProductJSON);
+  const products = deserialize<Product[]>(superProducts);
+  const defaultProduct = deserialize<Product>(superDefaultProduct);
 
   const [curr, setCurr] = useState<Product>(defaultProduct);
 

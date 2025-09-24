@@ -1,58 +1,35 @@
-import { ChangeEvent } from "react";
+"use client";
+
+import { ChangeEvent, useState } from "react";
 import MinusIcon from "@/public/img/minus-button.svg";
 import PlusIcon from "@/public/img/plus-button.svg";
 import { useCart } from "@/providers/cart-provider";
 
-export default function CountChangeButtons({ index, count }: {
-  index: number,
+export default function CountChangeButtons({ productId, count }: {
+  productId: string,
   count: number
 }) {
-  const { setCartItems } = useCart();
+  const [quantity, setQuantity] = useState<number>(count);
+  const { addToCartOrUpdate } = useCart();
 
-  const increaseAmount = () => {
-    setCartItems(prevState =>
-      [...prevState.map((cartItem, i) => {
-        if (index === i) {
-          return {
-            ...cartItem,
-            amount: cartItem.amount + 1
-          };
-        }
-        return cartItem;
-      })]
-    );
+  const increaseAmount = async () => {
+    await addToCartOrUpdate(productId, quantity + 1);
+    setQuantity(prevState => prevState + 1);
   };
 
-  const decreaseAmount = () => {
-    if (count === 1) return;
+  const decreaseAmount = async () => {
+    if (quantity === 1) return;
 
-    setCartItems(prevState =>
-      [...prevState.map((cartItem, i) => {
-        if (index === i) {
-          return {
-            ...cartItem,
-            amount: cartItem.amount - 1
-          };
-        }
-        return cartItem;
-      })]
-    );
+    await addToCartOrUpdate(productId, quantity - 1);
+    setQuantity(prevState => prevState - 1);
   };
 
-  const setAmount = (e: ChangeEvent<HTMLInputElement>) => {
+  const setAmount = async (e: ChangeEvent<HTMLInputElement>) => {
     const newAmount = Number(e.target.value);
+
     if (newAmount > 0) {
-      setCartItems(prevState =>
-        [...prevState.map((cartItem, i) => {
-          if (index === i) {
-            return {
-              ...cartItem,
-              amount: newAmount
-            };
-          }
-          return cartItem;
-        })]
-      );
+      await addToCartOrUpdate(productId, newAmount);
+      setQuantity(newAmount);
     }
   };
 
@@ -64,7 +41,7 @@ export default function CountChangeButtons({ index, count }: {
       </button>
       <input className={"input-no-spinner w-6 text-center"}
              type={"number"}
-             value={count}
+             value={quantity}
              onChange={(e) =>
                setAmount(e)}
       />

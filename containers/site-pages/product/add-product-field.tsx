@@ -9,7 +9,7 @@ import AddToFavoritesButton from "@/containers/site-pages/product/add-to-favorit
 
 export default function AddProductField() {
   const { curr } = useProductGroup();
-  const [amount, setAmount] = useState<number>(1);
+  const [quantity, setQuantity] = useState<number>(1);
 
   return (
     <div className={"w-1/2"}>
@@ -20,12 +20,12 @@ export default function AddProductField() {
         <ProductProperties color={curr.color} />
       </div>
 
-      <AmountAndPrice amount={amount}
+      <AmountAndPrice amount={quantity}
                       price={curr.price}
-                      changeAmount={setAmount}
+                      changeAmount={setQuantity}
       />
 
-      <AddToCartButton amount={amount}/>
+      <AddToCartButton quantity={quantity}/>
 
       <AddToFavoritesButton />
     </div>

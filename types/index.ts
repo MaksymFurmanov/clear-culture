@@ -1,31 +1,29 @@
-import { Prisma, Product } from "@prisma/client";
+import { Prisma } from "@prisma/client";
+import { ImgHTMLAttributes } from "react";
 
-export type ImgListItem = {
+export type ImgWithCaption = {
   src: string,
-  alt: string,
-  width: number,
-  height: number,
-  rotate?: string
+  caption: string
+} & ImgHTMLAttributes<HTMLElement>;
+
+type Link = {
+  href: string
 }
 
 export type TextLink = {
   label: string,
-  href: string
-}
+} & Link;
 
-export type IconLink = {
-  iconHref: string,
-} & TextLink;
+export type IconLinkWithCaption =
+  ImgWithCaption & Link;
 
-export type ImgLink = {
-  href: string
-} & ImgListItem;
-
-export type CartItem = {
-  product: Product,
-  amount: number,
-  discountInPercentage?: number
-}
+export type ImgLinkWithMetrics = {
+  src: string,
+  rotate?: string,
+  alt: string,
+  width: number,
+  height: number
+} & Link & ImgHTMLAttributes<HTMLElement>;
 
 export type CartItemWithProduct = Prisma.CartItemGetPayload<{
   include: {

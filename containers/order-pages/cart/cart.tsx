@@ -25,8 +25,7 @@ export default function Cart() {
     <div className={"text-base md:text-lg"}>
       {cartItems.map((cartItem, index) => (
         <ItemCard key={index}
-                  product={cartItem}
-                  index={index}
+                  cartItem={cartItem}
         />
       ))}
       <div className={"flex justify-between rounded-xl bg-green px-6 py-3 mx-6 mb-8"}>

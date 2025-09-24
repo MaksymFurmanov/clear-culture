@@ -1,16 +1,16 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { deleteFavoriteProductFromUser } from "@/lib/actions/favorite-product";
+import { deleteFavoriteProduct } from "@/lib/actions/favorite-product";
 import TrashIcon from "@/public/img/trash.svg";
 
 export default function RemoveButton({productId}: {productId: string}) {
-  const {data} = useSession();
-  const userId = data?.user?.id;
 
   const handleRemove = async () => {
-    if(!userId) throw new Error("Authorization error");
-    await deleteFavoriteProductFromUser(userId, productId);
+    try {
+      await deleteFavoriteProduct(productId);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (

@@ -41,7 +41,6 @@ export default function CardForm() {
 }
 
 const Card = () => {
-
   return (
     <form className={"bg-[linear-gradient(270deg,_rgba(42,44,53,0.95)_0%,_#7B819B_100%)] " +
       "max-w-100 rounded-xl p-6 mx-4"}

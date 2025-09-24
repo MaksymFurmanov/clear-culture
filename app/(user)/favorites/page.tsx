@@ -1,13 +1,9 @@
 import { Product } from "@prisma/client";
 import ListOfFavorites from "@/containers/user-pages/favorites/list-of-favorites";
-import { getFavoriteProductsByUserId } from "@/lib/actions/favorite-product";
-import { getUserSession } from "@/lib/session";
+import { getFavoriteProducts } from "@/lib/actions/favorite-product";
 
 export default async function FavoritesPage() {
-  const user = await getUserSession();
-  if(!user) throw new Error("Internal server error");
-
-  const products: Product[] = await getFavoriteProductsByUserId(user.id);
+  const products: Product[] = await getFavoriteProducts();
 
   return (
     <main className={"max-w-150 mx-auto"}>

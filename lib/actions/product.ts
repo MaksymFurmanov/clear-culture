@@ -2,10 +2,7 @@
 
 import { prisma } from '@/lib/prisma';
 import { Product } from "@prisma/client";
-
-export async function getProducts(): Promise<Product[]> {
-  return prisma.product.findMany();
-}
+import { serialize } from "@/lib/utils/superjson";
 
 export async function getProductById(id: string): Promise<Product | null> {
   return prisma.product.findFirst({
@@ -28,4 +25,16 @@ export async function getDefaultProduct(groupId: string): Promise<Product | null
   });
 
   return group?.defaultProduct || null;
+}
+
+export async function superGetProductById(id: string): Promise<string> {
+  return serialize<Product | null>(await getProductById(id));
+}
+
+export async function superGetProductsByGroupId(groupId: string): Promise<string> {
+  return serialize<Product[] | null>(await getProductsByGroupId(groupId));
+}
+
+export async function superGetDefaultProduct(groupId: string): Promise<string> {
+  return serialize<Product | null>(await getDefaultProduct(groupId));
 }

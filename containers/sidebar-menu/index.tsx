@@ -35,13 +35,13 @@ export default function SidebarMenu({ toggleSidebar }: {
                       className={"flex justify-start items-center gap-4 rounded px-4 py-2 my-3 hover:bg-gray-200"}
                       href={link.href}
                 >
-                  <Image src={link.iconHref}
+                  <Image src={link.src}
                          alt={""}
                          width={30}
                          height={30}
                   />
                   <p className={"text-lg"}>
-                    {link.label}
+                    {link.caption}
                   </p>
                 </Link>
               ))}

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Heart from "@/public/img/heart.svg";
 import {
   addFavoriteProductToUser,
-  deleteFavoriteProductFromUser,
+  deleteFavoriteProduct,
   isFavoriteProduct
 } from "@/lib/actions/favorite-product";
 import { useSession } from "next-auth/react";
@@ -23,7 +23,7 @@ export default function AddToFavoritesButton() {
 
   useEffect(() => {
     if (!userId) return;
-    isFavoriteProduct(userId, curr.id)
+    isFavoriteProduct(curr.id)
       .then(setFav)
       .catch((e) => {
         console.error(e);
@@ -41,10 +41,10 @@ export default function AddToFavoritesButton() {
 
       try {
         if (nextFav) {
-          await addFavoriteProductToUser(userId, curr.id);
+          await addFavoriteProductToUser(curr.id);
           setFav(nextFav);
         } else {
-          await deleteFavoriteProductFromUser(userId, curr.id);
+          await deleteFavoriteProduct(curr.id);
           setFav(nextFav);
         }
       } catch (e) {

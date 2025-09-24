@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import useGallery from "@/hooks/useGallery";
@@ -27,11 +27,11 @@ export default function AchievementsGallery() {
           className={"flex h-full transition-transform duration-500 ease-in-out"}
           style={{ transform: `translateX(-${currImg * 100}%)` }}
         >
-          {achievements.map((ach, index) => (
+          {achievements.map((achievement, index) => (
             <div key={index} className={"w-full flex-shrink-0 relative"}>
               <Image
-                src={ach.src}
-                alt={ach.alt}
+                src={achievement.src}
+                alt={""}
                 fill
                 className={"object-cover"}
               />
@@ -58,10 +58,10 @@ export default function AchievementsGallery() {
           className={"flex transition-transform duration-500 ease-in-out"}
           style={{ transform: `translateX(-${currImg * 100}%)` }}
         >
-          {achievements.map((ach, index) => (
+          {achievements.map((achievement, index) => (
             <div key={index} className={"w-full flex-shrink-0 px-4 md:px-0"}>
               <p className={"text-center md:w-3/5 mx-auto"}>
-                {ach.text}
+                {achievement.caption}
               </p>
             </div>
           ))}

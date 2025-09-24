@@ -19,14 +19,14 @@ model User {
 }
 
 model ProductGroup {
-  id             String  @id @default(cuid())
-  name           String
-  descriptionUrl String?
-  pageUrl        String?
-  defaultProductId String?  @unique
+  id               String  @id @default(cuid())
+  name             String
+  descriptionUrl   String?
+  pageUrl          String?
+  defaultProductId String? @unique
 
-  defaultProduct   Product? @relation(fields: [defaultProductId], references: [id])
-  products Product[] @relation("ProductGroup")
+  defaultProduct Product?  @relation(fields: [defaultProductId], references: [id])
+  products       Product[] @relation("ProductGroup")
 }
 
 model Product {
@@ -39,9 +39,9 @@ model Product {
   size           String?
   volume         String?
   quantityForOne Int?
-  groupId String
+  groupId        String
 
-  group   ProductGroup @relation("ProductGroup", fields: [groupId], references: [id])
+  group        ProductGroup      @relation("ProductGroup", fields: [groupId], references: [id])
   CardItem     FavoriteProduct[]
   productGroup ProductGroup?
   OrderItem    OrderItem[]
@@ -55,6 +55,8 @@ model FavoriteProduct {
 
   Product Product @relation(fields: [productId], references: [id])
   User    User    @relation(fields: [userId], references: [id])
+
+  @@unique([userId, productId])
 }
 
 model Order {
@@ -66,28 +68,30 @@ model Order {
   price         Decimal
   delivery      Decimal
   status        String    @default("Pending")
+  userId        String
 
-  userId    String
   user      User        @relation(fields: [userId], references: [id])
   OrderItem OrderItem[]
 }
 
 model OrderItem {
-  id       String @id @default(cuid())
-  quantity Int
-
+  id        String @id @default(cuid())
+  quantity  Int
   orderId   String
-  order     Order   @relation(fields: [orderId], references: [id])
   productId String
-  product   Product @relation(fields: [productId], references: [id])
+
+  order   Order   @relation(fields: [orderId], references: [id])
+  cartItem Product @relation(fields: [productId], references: [id])
 }
 
 model CartItem {
-  id       String @id @default(cuid())
-  quantity Int
-
-  userId    String  @unique
-  user      User    @relation(fields: [userId], references: [id])
+  id        String @id @default(cuid())
+  quantity  Int
+  userId    String
   productId String
-  product   Product @relation(fields: [productId], references: [id])
+
+  user    User    @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
+
+  @@unique([userId, productId])
 }

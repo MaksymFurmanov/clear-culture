@@ -1,25 +1,25 @@
-import { IconLink } from "@/types";
+import { IconLinkWithCaption } from "@/types";
 
-const links: IconLink[] = [
+const links: IconLinkWithCaption[] = [
   {
-    label: "Cart",
+    caption: "Cart",
     href: "/cart",
-    iconHref: "/img/sidebar/cart.svg"
+    src: "/img/sidebar/cart.svg"
   },
   {
-    label: "Product catalog",
+    caption: "Product catalog",
     href: "/catalog/1",
-    iconHref: "/img/sidebar/product-catalog.svg"
+    src: "/img/sidebar/product-catalog.svg"
   },
   {
-    label: "Favorites",
+    caption: "Favorites",
     href: "/favorites",
-    iconHref: "/img/sidebar/favorites.svg"
+    src: "/img/sidebar/favorites.svg"
   },
   {
-    label: "Orders",
+    caption: "Orders",
     href: "/orders",
-    iconHref: "/img/sidebar/orders.svg"
+    src: "/img/sidebar/orders.svg"
   }
 ];
 

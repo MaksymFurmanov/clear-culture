@@ -47,6 +47,7 @@ export default function CartButton() {
       <Image className={"inline-block w-10 fill"}
              src={"/img/sidebar/cart.svg"} alt={""} width={20} height={20}
       />
+
       <div className={"absolute bottom-0 -right-2 bg-light-green " +
         "rounded-full min-w-7 md:min-w-8 p-1"}>
         <p>
