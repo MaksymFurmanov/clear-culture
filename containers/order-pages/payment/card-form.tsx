@@ -2,16 +2,15 @@
 
 import Receipt from "@/components/receipt";
 import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { FormEvent,  } from "react";
 import { useCart } from "@/app/providers/cart-provider";
-import Decimal from "decimal.js";
 
 export default function CardForm() {
   const router = useRouter();
 
-  const { totalPrice } = useCart();
+  const { totalPrice, loadingTotal } = useCart();
 
-  const delivery = new Decimal(3.5);
+  const delivery = "3.5";
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,9 +27,13 @@ export default function CardForm() {
         <Card />
       </div>
 
-      <Receipt price={totalPrice}
-               delivery={delivery}
-      />
+      {loadingTotal
+        ? <p>Loading</p>
+        : <Receipt price={totalPrice}
+                   delivery={delivery}
+                   total={totalPrice}
+        />
+      }
 
       <button type={"submit"}
               className={"block bg-dark-blue text-white text-lg rounded-full cursor-pointer px-10 py-1 mr-6 ml-auto mb-6"}>

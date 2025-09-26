@@ -10,25 +10,25 @@ export default function CountChangeButtons({ productId, count }: {
   count: number
 }) {
   const [quantity, setQuantity] = useState<number>(count);
-  const { addToCartOrUpdate } = useCart();
+  const { updateInCart } = useCart();
 
-  const increaseAmount = async () => {
-    await addToCartOrUpdate(productId, quantity + 1);
+  const increaseAmount = () => {
+    updateInCart(productId, quantity + 1);
     setQuantity(prevState => prevState + 1);
   };
 
-  const decreaseAmount = async () => {
+  const decreaseAmount = () => {
     if (quantity === 1) return;
 
-    await addToCartOrUpdate(productId, quantity - 1);
+    updateInCart(productId, quantity - 1);
     setQuantity(prevState => prevState - 1);
   };
 
-  const setAmount = async (e: ChangeEvent<HTMLInputElement>) => {
+  const setAmount = (e: ChangeEvent<HTMLInputElement>) => {
     const newAmount = Number(e.target.value);
 
     if (newAmount > 0) {
-      await addToCartOrUpdate(productId, newAmount);
+      updateInCart(productId, newAmount);
       setQuantity(newAmount);
     }
   };
@@ -42,8 +42,7 @@ export default function CountChangeButtons({ productId, count }: {
       <input className={"input-no-spinner w-6 text-center"}
              type={"number"}
              value={quantity}
-             onChange={(e) =>
-               setAmount(e)}
+             onChange={(e) => setAmount(e)}
       />
       <button className={"cursor-pointer"}
               onClick={increaseAmount}>

@@ -7,10 +7,10 @@ export default function AddToCartButton({ quantity }: {
   quantity: number
 }) {
   const { curr } = useProductGroup();
-  const { addToCartOrUpdate } = useCart();
+  const { addToCart } = useCart();
 
   const buttonHandler = async () => {
-    await addToCartOrUpdate(curr.id, quantity, true);
+    await addToCart(curr.id, quantity);
   }
 
   return (

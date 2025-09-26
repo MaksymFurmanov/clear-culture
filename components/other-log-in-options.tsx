@@ -11,11 +11,11 @@ export default function OtherLogInOptions({ type }: { type: "signIn" | "signUp" 
   const buttonString = type === "signIn" ? "Log In" : "Sign In";
 
   const logInWithGitHub = async () => {
-    await signIn("github", { callbackUrl: "/" });
-  }
+    const res = await signIn("github", { callbackUrl: "/" });
+  };
 
   const logInWithGoogle = async () => {
-    await signIn("google", { callbackUrl: "/" });
+    const res = await signIn("google", { callbackUrl: "/" });
   };
 
   return (

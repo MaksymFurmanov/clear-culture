@@ -27,8 +27,9 @@ export default async function Order({ params }: { params: Promise<{ id: string }
                createdDate={order.createdDate}
       />
       <ItemsList orderId={order.id} />
-      <Receipt price={order.price}
-               delivery={order.delivery}
+      <Receipt price={order.price.toString()}
+               delivery={order.delivery.toString()}
+               total={order.price.add(order.delivery).toString()}
       />
       <CancelButton />
     </main>

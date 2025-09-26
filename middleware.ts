@@ -22,7 +22,7 @@ export const config = {
     "/order/:path*",
     "/orders/:path*",
     "/favorites/:path*",
-    "/new-adress/:path*",
+    "/new-address/:path*",
     "/payment/:path*",
     "/payment-success/:path*"
   ]

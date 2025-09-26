@@ -1,13 +1,12 @@
-import { Decimal } from "@prisma/client/runtime/library";
-
 export default function Receipt({
                                   price,
-                                  delivery
+                                  delivery,
+                                  total
                                 }: {
-  price: Decimal,
-  delivery: Decimal
+  price: string,
+  delivery: string,
+  total: string
 }) {
-  const total = price.add(delivery);
 
   return (
     <div className={"bg-light-green rounded-lg px-6 py-4 mx-4 mb-8"}>
@@ -36,7 +35,7 @@ export default function Receipt({
           Total
         </p>
         <p className={"text-base"}>
-          {total.toString()} €
+          {total} €
         </p>
       </div>
     </div>

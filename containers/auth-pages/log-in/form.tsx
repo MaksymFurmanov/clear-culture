@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormError from "@/components/form-error";
 
 export default function Form() {
-  const router = useRouter();
+  const { push } = useRouter();
 
   const {
     register,
@@ -33,7 +33,7 @@ export default function Form() {
       return;
     }
 
-    router.push("/");
+    push("/");
   };
 
   return (

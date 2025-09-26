@@ -5,10 +5,11 @@ import { CartItemWithProduct } from "@/types";
 import { serialize } from "@/lib/utils/superjson";
 import { getProductById } from "@/lib/actions/product";
 import { getUserId } from "@/lib/actions/user";
+import Decimal from "decimal.js";
 
 export async function getCartItems(): Promise<CartItemWithProduct[]> {
   const userId = await getUserId();
-  if(!userId) throw new Error("Authorization error");
+  if (!userId) throw new Error("Authorization error");
 
   return prisma.cartItem.findMany({
     where: {
@@ -20,13 +21,12 @@ export async function getCartItems(): Promise<CartItemWithProduct[]> {
   });
 }
 
-export async function createOrUpdateCartItem(
+export async function createCartItem(
   productId: string,
   quantity: number,
-  increment?: boolean
 ): Promise<void> {
   const userId = await getUserId();
-  if(!userId) throw new Error("Authorization error");
+  if (!userId) throw new Error("Authorization error");
 
   const product = await getProductById(productId);
   if (!product) throw new Error("Invalid product");
@@ -42,7 +42,7 @@ export async function createOrUpdateCartItem(
       product: true
     },
     update: {
-      quantity: increment ? {increment: quantity} : quantity
+      quantity: { increment: quantity }
     },
     create: {
       userId,
@@ -52,15 +52,37 @@ export async function createOrUpdateCartItem(
   });
 }
 
+export async function updateCartItem(
+  productId: string,
+  quantity: number,
+) {
+  const userId = await getUserId();
+  if (!userId) throw new Error("Authorization error");
+
+  await prisma.cartItem.update({
+    where: {
+      userId_productId: {userId, productId}
+    },
+    include: {
+      product: true
+    },
+    data: {
+      quantity: quantity
+    }
+  })
+}
+
 export async function createOrUpdateCartItems(
-  items: CartItemWithProduct[]
+  items: CartItemWithProduct[],
+  increment: boolean
 ): Promise<void> {
   const userId = await getUserId();
   if (!userId) throw new Error("Authorization error");
 
   await Promise.all(
     items.map(async (item) => {
-      const product = await getProductById(item.productId);
+      const product =
+        await getProductById(item.productId);
       if (!product) throw new Error(`Invalid product: ${item.productId}`);
 
       await prisma.cartItem.upsert({
@@ -74,7 +96,7 @@ export async function createOrUpdateCartItems(
           product: true
         },
         update: {
-          quantity: item.quantity
+          quantity: increment ? { increment: item.quantity } : item.quantity
         },
         create: {
           userId,
@@ -89,11 +111,22 @@ export async function createOrUpdateCartItems(
 export async function deleteCartItems(productId: string):
   Promise<void> {
   const userId = await getUserId();
-  if(!userId) throw new Error("Authorization error");
+  if (!userId) throw new Error("Authorization error");
 
   await prisma.cartItem.delete({
     where: { userId_productId: { userId, productId } }
   });
+}
+
+export async function getCartTotalPrice():
+  Promise<string> {
+  const items = await getCartItems();
+
+  return items.reduce(
+    (sum, item) =>
+      sum.add(item.product.price.mul(item.quantity)),
+    new Decimal(0)
+  ).toString();
 }
 
 export async function superGetCartItems(): Promise<string> {
