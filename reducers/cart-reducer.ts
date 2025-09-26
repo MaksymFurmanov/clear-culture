@@ -20,8 +20,8 @@ type CartAction =
 
 export const initialCartState: CartState = {
   items: [],
-  loadingCart: false,
-  loadingTotal: false,
+  loadingCart: true,
+  loadingTotal: true,
   totalPrice: "0",
   lastItemAddedAt: 0,
 };
