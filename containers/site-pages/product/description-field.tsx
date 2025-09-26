@@ -4,7 +4,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import { getProductGroupById } from "@/lib/actions/product-group";
 import Description from "./description";
 
-export default async function Details({ groupId }: {
+export default async function DescriptionField({ groupId }: {
   groupId: string,
 }) {
   const productGroup = await getProductGroupById(groupId);

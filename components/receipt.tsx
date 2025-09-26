@@ -7,7 +7,6 @@ export default function Receipt({
   delivery: string,
   total: string
 }) {
-
   return (
     <div className={"bg-light-green rounded-lg px-6 py-4 mx-4 mb-8"}>
       <div className={"mb-6"}>

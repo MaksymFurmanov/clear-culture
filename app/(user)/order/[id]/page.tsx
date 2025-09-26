@@ -6,6 +6,7 @@ import CancelButton from "@/containers/user-pages/order/cancel-button";
 import { PageNotFoundError } from "next/dist/shared/lib/utils";
 import BackButton from "@/containers/user-pages/order/back-button";
 import { getOrderById } from "@/lib/actions/order";
+import {Suspense} from "react";
 
 export default async function Order({ params }: { params: Promise<{ id: string }> }) {
   const pageParams = await params;
@@ -26,7 +27,9 @@ export default async function Order({ params }: { params: Promise<{ id: string }
       <Details orderId={order.id}
                createdDate={order.createdDate}
       />
-      <ItemsList orderId={order.id} />
+      <Suspense fallback={<p>Loading</p>}>
+        <ItemsList orderId={order.id} />
+      </Suspense>
       <Receipt price={order.price.toString()}
                delivery={order.delivery.toString()}
                total={order.price.add(order.delivery).toString()}

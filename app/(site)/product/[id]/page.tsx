@@ -1,6 +1,7 @@
 import { PageNotFoundError } from "next/dist/shared/lib/utils";
 import Configurator from "@/containers/site-pages/product/configurator";
-import Details from "@/containers/site-pages/product/details";
+import DescriptionField from "@/containers/site-pages/product/description-field";
+import { Suspense } from "react";
 
 export default async function ProductPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -9,8 +10,13 @@ export default async function ProductPage(props: { params: Promise<{ id: string 
 
   return (
     <main className={"mx-auto max-w-200"}>
-      <Configurator groupId={groupId} />
-      <Details groupId={groupId}  />
+      <Suspense fallback={<p>Loading</p>}>
+        <Configurator groupId={groupId} />
+      </Suspense>
+
+      <Suspense fallback={<p>Loading</p>}>
+        <DescriptionField groupId={groupId} />
+      </Suspense>
     </main>
   );
 }

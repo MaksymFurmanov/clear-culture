@@ -2,21 +2,21 @@
 
 import PlusIcon from "@/public/img/plus-button.svg";
 import MinusIcon from "@/public/img/minus-button.svg";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent } from "react";
 import Decimal from "decimal.js";
 
 export default function AmountAndPrice({ amount, price, changeAmount }: {
   amount: number,
   price: Decimal,
-  changeAmount: Dispatch<SetStateAction<number>>
+  changeAmount: (quantity: number) => void
 }) {
   const increaseAmount = () => {
-    changeAmount(prevState => prevState + 1);
+    changeAmount(amount + 1);
   };
 
   const decreaseAmount = () => {
     if (amount === 1) return;
-    changeAmount(prevState => prevState - 1);
+    changeAmount(amount - 1);
   };
 
   const setAmount = (e: ChangeEvent<HTMLInputElement>) => {

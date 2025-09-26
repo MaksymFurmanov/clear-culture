@@ -1,4 +1,4 @@
-import AddProductField from "./add-product-field";
+import Info from "./info";
 import Variants from "./variants";
 import ProductsByGroupProvider from "@/app/providers/products-by-group-provider";
 import { superGetDefaultProduct, superGetProductsByGroupId } from "@/lib/actions/product";
@@ -17,7 +17,7 @@ export default async function Configurator({ groupId }: {
       <ProductsByGroupProvider superProducts={superProducts}
                                superDefaultProduct={superDefaultProduct}>
         <Variants />
-        <AddProductField />
+        <Info />
       </ProductsByGroupProvider>
     </section>
   );
