@@ -1,13 +1,14 @@
 import ScalingUnderlineLink from "@/components/buttons/scaling-underline-link";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import { getProductGroupById } from "@/lib/actions/product-group";
+import { getProductGroupByProductId } from "@/lib/actions/product-group";
 import Description from "./description";
 
-export default async function DescriptionField({ groupId }: {
-  groupId: string,
+export default async function DescriptionField({ productId }: {
+  productId: string,
 }) {
-  const productGroup = await getProductGroupById(groupId);
+  const productGroup =
+    await getProductGroupByProductId(productId);
   if (!productGroup) throw new Error("Product group does not exist");
 
   let descriptionMDX: MDXRemoteSerializeResult | undefined = undefined;

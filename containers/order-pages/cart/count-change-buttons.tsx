@@ -18,7 +18,7 @@ export default function CountChangeButtons({ productId, count }: {
   };
 
   const decreaseAmount = () => {
-    if (quantity === 1) return;
+    if (quantity < 2) return;
 
     updateInCart(productId, quantity - 1);
     setQuantity(prevState => prevState - 1);

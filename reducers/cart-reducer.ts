@@ -1,22 +1,22 @@
 import { CartItemWithProduct } from "@/types";
 
 export type CartState = {
-  items: CartItemWithProduct[];
-  loadingCart: boolean;
-  loadingTotal: boolean;
-  totalPrice: string;
-  lastItemAddedAt: number;
+  items: CartItemWithProduct[],
+  loadingCart: boolean,
+  loadingTotal: boolean,
+  totalPrice: string,
+  lastItemAddedAt: number
 };
 
 type CartAction =
-  | { type: "SET_ITEMS"; payload: CartItemWithProduct[] }
-  | { type: "UPDATE_ITEM"; productId: string; quantity: number }
-  | { type: "ADD_ITEM"; item: CartItemWithProduct }
-  | { type: "REMOVE_ITEM"; productId: string }
-  | { type: "SET_LOADING_CART"; payload: boolean }
-  | { type: "SET_LOADING_TOTAL"; payload: boolean }
-  | { type: "SET_TOTAL_PRICE"; payload: string }
-  | { type: "SET_LAST_ADDED"; payload: number };
+  | { type: "SET_ITEMS", payload: CartItemWithProduct[] }
+  | { type: "UPDATE_ITEM", productId: string; quantity: number }
+  | { type: "ADD_ITEM", item: CartItemWithProduct }
+  | { type: "REMOVE_ITEM", productId: string }
+  | { type: "SET_LOADING_CART", payload: boolean }
+  | { type: "SET_LOADING_TOTAL", payload: boolean }
+  | { type: "SET_TOTAL_PRICE", payload: string }
+  | { type: "SET_LAST_ADDED", payload: number };
 
 export const initialCartState: CartState = {
   items: [],

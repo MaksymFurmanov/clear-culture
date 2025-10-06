@@ -5,17 +5,17 @@ import { Suspense } from "react";
 
 export default async function ProductPage(props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
-  const groupId = params.id;
-  if (!groupId) throw new PageNotFoundError("");
+  const productId = params.id;
+  if (!productId) throw new PageNotFoundError("");
 
   return (
     <main className={"mx-auto max-w-200"}>
       <Suspense fallback={<p>Loading</p>}>
-        <Configurator groupId={groupId} />
+        <Configurator productId={productId} />
       </Suspense>
 
       <Suspense fallback={<p>Loading</p>}>
-        <DescriptionField groupId={groupId} />
+        <DescriptionField productId={productId} />
       </Suspense>
     </main>
   );

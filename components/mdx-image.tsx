@@ -2,7 +2,7 @@ import Image, { ImageProps } from "next/image";
 import React from "react";
 import clsx from "clsx";
 
-export default function MDXImage({
+export default function MdxImage({
                                    src,
                                    alt,
                                    width,

@@ -11,7 +11,7 @@ export default async function ProductCard({ groupId, defaultProductId }: {
 
   return (
     <div className={"grid grid-rows-[auto_1fr_0.5fr] justify-items-center items-center h-full max-w-45"}>
-      <Link href={`/product/${groupId.toString()}`}>
+      <Link href={`/product/${defaultProductId}`}>
         <div
           className={"bg-light-green cursor-pointer flex justify-center items-center rounded aspect-square w-30 md:w-35 lg:w-40 p-4 mb-3"}
         >
@@ -30,7 +30,7 @@ export default async function ProductCard({ groupId, defaultProductId }: {
       </p>
       </Link>
 
-      <Link href={`/product/${groupId.toString()}`}
+      <Link href={`/product/${defaultProductId}`}
         className={"bg-dark-blue text-white cursor-pointer rounded-md py-1 px-8 mt-3"}
       >
         Buy now

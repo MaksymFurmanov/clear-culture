@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { ProductGroup } from "@prisma/client";
+import { getProductById } from "@/lib/actions/product";
 
 export async function getProductGroupsCount(): Promise<number> {
   return prisma.productGroup.count();
@@ -26,5 +27,15 @@ export async function getProductGroups(
 export async function getProductGroupById(id: string): Promise<ProductGroup | null> {
   return prisma.productGroup.findUnique({
     where: {id: id}
+  });
+}
+
+export async function getProductGroupByProductId(productId: string):
+  Promise<ProductGroup | null> {
+  const product = await getProductById(productId);
+  if(!product) throw new Error("Product not found");
+
+  return prisma.productGroup.findUnique({
+    where: {id: product.groupId}
   });
 }

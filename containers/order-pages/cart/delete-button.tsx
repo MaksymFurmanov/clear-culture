@@ -8,8 +8,8 @@ export default function DeleteButton({ productId }: {
 }) {
   const { removeFromCart } = useCart();
 
-  const deleteHandler = async () => {
-    await removeFromCart(productId);
+  const deleteHandler = () => {
+     removeFromCart(productId);
   };
 
   return (

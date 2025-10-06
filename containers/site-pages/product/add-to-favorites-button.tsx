@@ -15,11 +15,13 @@ import { useProductGroup } from "@/app/providers/products-by-group-provider";
 export default function AddToFavoritesButton() {
   const { data: session } = useSession();
   const userId = session?.user?.id;
+
   const { curr } = useProductGroup();
   const { push } = useRouter();
+  const controls = useAnimation();
 
   const [fav, setFav] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (!userId) return;
@@ -64,8 +66,6 @@ export default function AddToFavoritesButton() {
       }
     })();
   };
-
-  const controls = useAnimation();
 
   return (
     loading

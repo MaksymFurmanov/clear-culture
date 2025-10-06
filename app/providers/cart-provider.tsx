@@ -32,7 +32,7 @@ const CartContext = createContext<
       productId: string,
       quantity: number,
     ) => void,
-    removeFromCart: (productId: string) => Promise<void>
+    removeFromCart: (productId: string) => void
   }
   | undefined
 >(undefined);
@@ -117,7 +117,10 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     try {
       if (!!user?.user?.id) await createCartItem(productId, quantity);
 
-      const existing = state.items.find((item) => item.productId === productId);
+      const existing = state.items.find((item) =>
+        item.productId === productId);
+
+      console.log(existing)
       if (existing) {
         dispatch({ type: "UPDATE_ITEM", productId, quantity });
       } else {
@@ -140,7 +143,6 @@ export default function CartProvider({ children }: { children: ReactNode }) {
     productId: string,
     quantity: number,
   ) => {
-    dispatch({ type: "SET_LOADING_TOTAL", payload: true });
     dispatch({ type: "UPDATE_ITEM", productId, quantity });
 
     try {
@@ -149,18 +151,19 @@ export default function CartProvider({ children }: { children: ReactNode }) {
           await updateCartItem(productId, quantity);
         })();
       }
-    } finally {
-      dispatch({ type: "SET_LOADING_TOTAL", payload: false });
+    } catch (e) {
+      console.error(e);
     }
   }
 
-  const removeFromCart = async (productId: string) => {
-    dispatch({ type: "SET_LOADING_CART", payload: true });
+  const removeFromCart = (productId: string) => {
     try {
-      if (!!user?.user?.id) await deleteCartItems(productId);
       dispatch({ type: "REMOVE_ITEM", productId });
-    } finally {
-      dispatch({ type: "SET_LOADING_CART", payload: false });
+      if (!!user?.user?.id) (async () => {
+        await deleteCartItems(productId);
+      })();
+    } catch (e) {
+      console.error(e);
     }
   };
 

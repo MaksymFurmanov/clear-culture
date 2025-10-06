@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
 import type { MDXComponents } from 'mdx/types'
 import { ReactNode } from "react";
-import MDXImage from "@/components/MDXImage";
+import MdxImage from "@/components/mdx-image";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -32,7 +32,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </h3>
     ),
     MDXImage: ({...props}): ReactNode => (
-      <MDXImage {...props}/>
+      <MdxImage {...props}/>
     ),
 
     ...components,
