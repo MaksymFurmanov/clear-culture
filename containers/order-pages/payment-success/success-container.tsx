@@ -1,19 +1,7 @@
-"use client";
-
 import CheckIcon from "@/public/img/check.svg";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SuccessContainer() {
-  const router = useRouter();
-
-  const toOrders = () => {
-    router.replace("/orders");
-  };
-
-  const toCatalog = () => {
-    router.replace("/catalog");
-  };
-
   return (
     <div className={"w-full h-[85dvh] md:text-base flex justify-center items-center"}>
       <div
@@ -22,16 +10,16 @@ export default function SuccessContainer() {
         <h1 className={"text-xl md:text-2xl text-center mb-12"}>
           Payment successful
         </h1>
-        <button className={"bg-dark-blue rounded-full cursor-pointer text-white py-1 mb-5 mx-auto w-40"}
-                onClick={toOrders}
-        >
-          My orders
-        </button>
-        <button className={"bg-dark-blue rounded-full cursor-pointer text-white py-1 mb-3 mx-auto w-40"}
-                onClick={toCatalog}
-        >
-          Back to catalog
-        </button>
+        <Link href={"/orders"} className={"mx-auto"}>
+          <button className={"bg-dark-blue rounded-full cursor-pointer text-white w-40 py-1 mb-5"}>
+            My orders
+          </button>
+        </Link>
+        <Link href={"/catalog/1"} className={"mx-auto"}>
+          <button className={"bg-dark-blue rounded-full cursor-pointer text-white w-40 py-1 mb-3"}>
+            Back to catalog
+          </button>
+        </Link>
       </div>
     </div>
   );

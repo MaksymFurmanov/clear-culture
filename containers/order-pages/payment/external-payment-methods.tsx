@@ -1,5 +1,3 @@
-"use client";
-
 import GooglePayIcon from "@/public/img/payment/google-pay.svg";
 import ApplePayIcon from "@/public/img/payment/apple-pay.svg";
 

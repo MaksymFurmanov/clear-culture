@@ -7,7 +7,6 @@ export default async function Item({ productId, amount }: {
   amount: number
 }) {
   const product = await getProductById(productId);
-
   if (!product) return <Fragment />;
 
   return (

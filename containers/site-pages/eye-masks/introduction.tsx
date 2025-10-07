@@ -1,5 +1,3 @@
-'use client';
-
 import ShoppingLink from "@/containers/site-pages/eye-masks/shopping-link";
 import MasksTypes from "@/containers/site-pages/eye-masks/masks-types";
 import Colors from "@/containers/site-pages/eye-masks/colors";

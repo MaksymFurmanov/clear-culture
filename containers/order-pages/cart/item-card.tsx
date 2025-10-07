@@ -19,6 +19,7 @@ export default function ItemCard({ cartItem }: {
                height={100}
         />
       </Link>
+
       <div className={"flex flex-col justify-between gap-4 w-full"}>
         <div className={"flex justify-between"}>
           <Link href={`/product/${cartItem.product.id}`}>
@@ -28,6 +29,7 @@ export default function ItemCard({ cartItem }: {
           </Link>
           <DeleteButton productId={cartItem.productId} />
         </div>
+
         <div className={"flex justify-between"}>
           <CountChangeButtons
             productId={cartItem.product.id}

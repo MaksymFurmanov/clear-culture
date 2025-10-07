@@ -1,5 +1,3 @@
-'use client';
-
 import Link from "next/link";
 import InstaIcon from "@/public/img/footer/insta-icon.svg";
 import FacebookIcon from "@/public/img/footer/facebook-icon.svg";

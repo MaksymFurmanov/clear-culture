@@ -1,3 +1,5 @@
+"use client";
+
 import ItemCard from "@/containers/order-pages/cart/item-card";
 import Link from "next/link";
 import { useCart } from "@/app/providers/cart-provider";

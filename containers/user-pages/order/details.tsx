@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import CopyIcon from "@/public/img/copy.svg";
 
