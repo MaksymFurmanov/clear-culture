@@ -1,4 +1,4 @@
-import OtherLogInOptions from "@/components/other-log-in-options";
+import OtherAuthOptions from "@/components/other-auth-options";
 import LogInForm from "@/containers/auth-pages/log-in/form";
 
 export default function LoginPage() {
@@ -10,7 +10,7 @@ export default function LoginPage() {
 
       <LogInForm />
 
-      <OtherLogInOptions type={"signIn"}/>
+      <OtherAuthOptions registered={true}/>
     </main>
   );
 }
