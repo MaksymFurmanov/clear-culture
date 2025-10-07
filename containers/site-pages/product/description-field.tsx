@@ -1,31 +1,25 @@
+"use client";
+
 import ScalingUnderlineLink from "@/components/buttons/scaling-underline-link";
+import { ProductGroup } from "@prisma/client";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
-import { serialize } from "next-mdx-remote/serialize";
-import { getProductGroupByProductId } from "@/lib/actions/product-group";
-import Description from "./description";
+import dynamic from "next/dynamic";
 
-export default async function DescriptionField({ productId }: {
-  productId: string,
+const MDXClient = dynamic(() =>
+  import("@/components/mdx-client"), {
+  ssr: false
+});
+
+export default function DescriptionField({ productGroup, descriptionMDX }: {
+  productGroup: ProductGroup,
+  descriptionMDX: MDXRemoteSerializeResult | undefined
 }) {
-  const productGroup =
-    await getProductGroupByProductId(productId);
-  if (!productGroup) throw new Error("Product group does not exist");
-
-  let descriptionMDX: MDXRemoteSerializeResult | undefined = undefined;
-  if (productGroup.descriptionUrl) {
-    try {
-      const res = await fetch(productGroup.descriptionUrl);
-      const mdxSource = await res.text();
-      descriptionMDX = await serialize(mdxSource);
-    } catch (error) {
-      throw new Error(`Failed to fetch MDX file: ${error}`);
-    }
-  }
-
   return (
     <section className={"flex flex-col items-center"}>
-      {productGroup?.descriptionUrl && (
-        <Description descriptionMDX={descriptionMDX} />
+      {descriptionMDX && (
+        <div className={"products-description"}>
+          <MDXClient source={descriptionMDX} />
+        </div>
       )}
 
       {productGroup?.pageUrl && (

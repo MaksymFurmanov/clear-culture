@@ -2,10 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import RemoveButton from "@/containers/user-pages/favorites/remove-button";
 
-export default function CardItem({ photoUrl, name, productId }: {
+export default function CardItem({ photoUrl, name, productId, groupId }: {
   photoUrl: string,
   name: string,
-  productId: string
+  productId: string,
+  groupId: string
 }) {
   return (
     <div
@@ -25,7 +26,7 @@ export default function CardItem({ photoUrl, name, productId }: {
           {name}
         </p>
         <Link className={"bg-dark-blue text-white md:text-base cursor-pointer rounded-md py-1 px-5"}
-              href={`/product/${productId.toString()}`}
+              href={`/product/${groupId}/${productId.toString()}`}
               target={"_blank"}
         >
           Shop now

@@ -5,8 +5,8 @@ import ProductCardsList from "@/containers/site-pages/catalog/product-cards-list
 export default async function CatalogPage({ params }: {
   params: Promise<{ page: string }>
 }) {
-  const pageParams = await params;
-  const page = Number(pageParams.page);
+  const {page} = await params;
+  const pageNumber = Number(page);
 
   return (
     <main className={"mx-auto max-w-200"}>
@@ -14,10 +14,10 @@ export default async function CatalogPage({ params }: {
         Product catalog
       </h1>
       <Suspense fallback={<p>Loading</p>}>
-        <Pagination page={page} />
+        <Pagination page={pageNumber} />
       </Suspense>
       <Suspense fallback={<p>Loading</p>}>
-        <ProductCardsList page={page} />
+        <ProductCardsList page={pageNumber} />
       </Suspense>
     </main>
   );

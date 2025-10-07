@@ -13,6 +13,7 @@ export default async function ListOfFavorites() {
                     photoUrl={product.photoUrl}
                     name={product.name}
                     productId={product.id}
+                    groupId={product.groupId}
           />
         );
       })}

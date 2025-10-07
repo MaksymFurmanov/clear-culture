@@ -1,14 +1,16 @@
+import { PageNotFoundError } from "next/dist/shared/lib/utils";
+import { getOrderById } from "@/lib/actions/order";
+import BackButton from "@/containers/user-pages/order/back-button";
 import StatusBreadcrumbs from "@/containers/user-pages/order/status-breadcrumbs";
 import Details from "@/containers/user-pages/order/details";
+import { Suspense } from "react";
 import ItemsList from "@/containers/user-pages/order/items-list";
 import Receipt from "@/components/receipt";
 import CancelButton from "@/containers/user-pages/order/cancel-button";
-import { PageNotFoundError } from "next/dist/shared/lib/utils";
-import BackButton from "@/containers/user-pages/order/back-button";
-import { getOrderById } from "@/lib/actions/order";
-import {Suspense} from "react";
 
-export default async function Order({ params }: { params: Promise<{ id: string }> }) {
+export default async function Order({ params }: {
+  params: Promise<{ id: string }>
+}) {
   const pageParams = await params;
   const orderId = pageParams.id;
   if (!orderId) throw new PageNotFoundError("");

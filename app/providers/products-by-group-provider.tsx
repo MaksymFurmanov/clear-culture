@@ -36,8 +36,8 @@ export default function ProductsByGroupProvider({
   const [curr, setCurr] = useState<Product>(selectedProduct);
 
   useEffect(() => {
-    if (curr?.id && pathname !== `/product/${curr.id}`) {
-      replace(`/product/${curr.id}`);
+    if (curr?.id && pathname !== `/product/${curr.groupId}/${curr.id}`) {
+      replace(`/product/${curr.groupId}/${curr.id}`);
     }
   }, [curr, replace, pathname]);
 
