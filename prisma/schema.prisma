@@ -80,7 +80,7 @@ model OrderItem {
   orderId   String
   productId String
 
-  order   Order   @relation(fields: [orderId], references: [id])
+  order    Order   @relation(fields: [orderId], references: [id])
   cartItem Product @relation(fields: [productId], references: [id])
 }
 
@@ -94,4 +94,16 @@ model CartItem {
   product Product @relation(fields: [productId], references: [id])
 
   @@unique([userId, productId])
+}
+
+model Address {
+  id            String @id @default(cuid())
+  firstName     String
+  lastName      String
+  email         String
+  phoneNumber   String
+  country       String
+  city          String
+  streetAddress String
+  zipCode       String
 }

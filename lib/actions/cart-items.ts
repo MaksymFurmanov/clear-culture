@@ -21,7 +21,7 @@ export async function getCartItems(): Promise<CartItemWithProduct[]> {
   });
 }
 
-export async function createCartItem(
+export async function createOrUpdateCartItem(
   productId: string,
   quantity: number,
 ): Promise<void> {
@@ -50,26 +50,6 @@ export async function createCartItem(
       quantity
     }
   });
-}
-
-export async function updateCartItem(
-  productId: string,
-  quantity: number,
-) {
-  const userId = await getUserId();
-  if (!userId) throw new Error("Authorization error");
-
-  await prisma.cartItem.update({
-    where: {
-      userId_productId: {userId, productId}
-    },
-    include: {
-      product: true
-    },
-    data: {
-      quantity: quantity
-    }
-  })
 }
 
 export async function createOrUpdateCartItems(
@@ -106,6 +86,26 @@ export async function createOrUpdateCartItems(
       });
     })
   );
+}
+
+export async function updateCartItem(
+  productId: string,
+  quantity: number,
+) {
+  const userId = await getUserId();
+  if (!userId) throw new Error("Authorization error");
+
+  await prisma.cartItem.update({
+    where: {
+      userId_productId: {userId, productId}
+    },
+    include: {
+      product: true
+    },
+    data: {
+      quantity: quantity
+    }
+  })
 }
 
 export async function deleteCartItems(productId: string):

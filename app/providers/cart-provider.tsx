@@ -8,7 +8,7 @@ import { CartItemWithProduct } from "@/types";
 import { useSession } from "next-auth/react";
 import { superGetProductById } from "@/lib/actions/product";
 import {
-  createCartItem, createOrUpdateCartItems,
+  createOrUpdateCartItem, createOrUpdateCartItems,
   deleteCartItems, getCartTotalPrice, superGetCartItems, updateCartItem
 } from "@/lib/actions/cart-items";
 import { Product } from "@prisma/client";
@@ -115,7 +115,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   ) => {
     dispatch({ type: "SET_LOADING_CART", payload: true });
     try {
-      if (!!user?.user?.id) await createCartItem(productId, quantity);
+      if (!!user?.user?.id) await createOrUpdateCartItem(productId, quantity);
 
       const existing = state.items.find((item) =>
         item.productId === productId);
