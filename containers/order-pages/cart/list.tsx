@@ -4,7 +4,7 @@ import ItemCard from "@/containers/order-pages/cart/item-card";
 import Link from "next/link";
 import { useCart } from "@/app/providers/cart-provider";
 
-export default function CartList() {
+export default function List() {
   const { cartItems, totalPrice, loadingTotal } = useCart();
 
   return (
