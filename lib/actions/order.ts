@@ -38,7 +38,6 @@ export async function getOrderById(orderId: string): Promise<Order | null> {
 
 export async function createOrder(): Promise<void> {
   const userId = await getUserId();
-  if (!userId) throw new Error("Authorization error");
 
   const cartItems = await getCartItems();
   if (cartItems.length < 1) throw new Error("The cart is empty");

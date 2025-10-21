@@ -11,7 +11,7 @@ export default function ItemCard({ cartItem }: {
   return (
     <div className={"flex justify-between gap-4 bg-green rounded-xl p-4 mb-8 mx-6"}>
       <Link className={"bg-light-green rounded aspect-square min-w-17 max-h-fit w-2/5 md:w-1/3 p-3"}
-            href={`/product/${cartItem.product.id}`}>
+            href={`/product/${cartItem.product.groupId}/${cartItem.product.id}`}>
         <Image className={"w-full h-full object-contain"}
                src={cartItem.product.photoUrl}
                alt={cartItem.product.name}
@@ -22,7 +22,7 @@ export default function ItemCard({ cartItem }: {
 
       <div className={"flex flex-col justify-between gap-4 w-full"}>
         <div className={"flex justify-between"}>
-          <Link href={`/product/${cartItem.product.id}`}>
+          <Link href={`/product/${cartItem.product.groupId}/${cartItem.product.id}`}>
             <p>
               {cartItem.product.name}
             </p>

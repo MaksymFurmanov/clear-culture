@@ -7,7 +7,6 @@ import { getUserId } from "@/lib/actions/user";
 
 export async function getFavoriteProducts(): Promise<Product[]> {
   const userId = await getUserId();
-  if(!userId) throw new Error("Authorization error");
 
   const favorites = await prisma.favoriteProduct.findMany({
     where: {
@@ -23,7 +22,6 @@ export async function getFavoriteProducts(): Promise<Product[]> {
 
 export async function getFavoriteProductId(productId: string): Promise<string | undefined> {
   const userId = await getUserId();
-  if(!userId) throw new Error("Authorization error");
 
   const favorite = await prisma.favoriteProduct.findUnique({
     where: {
@@ -40,7 +38,6 @@ export async function isFavoriteProduct(productId: string): Promise<boolean> {
 
 export async function addFavoriteProductToUser(productId: string): Promise<void> {
   const userId = await getUserId();
-  if(!userId) throw new Error("Authorization error");
 
   const isFavorite = await isFavoriteProduct(productId);
   if(isFavorite) return;

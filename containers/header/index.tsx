@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import BurgerMenu from "@/containers/header/burger-menu";
-import { getUserId } from "@/lib/actions/user";
+import { isAuthenticated } from "@/lib/actions/user";
 
 export default async function Header() {
-  const user = await getUserId();
+  const isAuth = await isAuthenticated();
 
   return (
     <header
@@ -20,7 +20,7 @@ export default async function Header() {
         </Link>
       </div>
 
-      <BurgerMenu isAuth={!!user}/>
+      <BurgerMenu isAuth={isAuth}/>
     </header>
   );
 }

@@ -6,9 +6,15 @@ import { RegisterInput, registerSchema } from "@/lib/validators/auth";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export async function getUserId(): Promise<string | null> {
+export async function isAuthenticated(): Promise<boolean> {
   const authUserSession = await getServerSession(authOptions);
-  if (!authUserSession?.user?.id) return null;
+  return !!authUserSession?.user?.id;
+
+}
+
+export async function getUserId(): Promise<string> {
+  const authUserSession = await getServerSession(authOptions);
+  if (!authUserSession?.user?.id) throw new Error("Authorization error");
   return authUserSession.user.id;
 }
 
