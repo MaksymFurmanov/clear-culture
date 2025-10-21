@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import useGallery from "@/hooks/useGallery";
+import useGallery from "@/hooks/use-gallery";
 import Circle from "@/public/img/circle.svg";
 import clsx from "clsx";
 import { useEffect } from "react";

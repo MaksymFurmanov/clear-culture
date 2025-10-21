@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import ItemsList from "@/containers/user-pages/order/items-list";
 import Receipt from "@/components/receipt";
 import CancelButton from "@/containers/user-pages/order/cancel-button";
+import DeleteButton from "@/containers/user-pages/order/delete-button";
 
 export default async function Order({ params }: {
   params: Promise<{ id: string }>
@@ -16,16 +17,22 @@ export default async function Order({ params }: {
   if (!orderId) throw new PageNotFoundError("");
 
   const order = await getOrderById(orderId);
-  if(!order) throw new PageNotFoundError("Page not found");
+  if (!order) throw new PageNotFoundError("Page not found");
 
   return (
     <main className={"mx-auto max-w-170"}>
-      <BackButton/>
-      <StatusBreadcrumbs status={order.status}
-                         processedDate={order.processedDate}
-                         shippedDate={order.shippedDate}
-                         arrivingDate={order.arrivingDate}
-      />
+      <BackButton />
+      {order.status !== "Canceled" ? (
+        <StatusBreadcrumbs status={order.status}
+                           processedDate={order.processedDate}
+                           shippedDate={order.shippedDate}
+                           arrivingDate={order.arrivingDate}
+        />
+      ) : (
+        <h2 className={"text-3xl text-red-700 my-8"}>
+          Canceled
+        </h2>
+      )}
       <Details orderId={order.id}
                createdDate={order.createdDate}
       />
@@ -36,7 +43,11 @@ export default async function Order({ params }: {
                delivery={order.delivery.toString()}
                total={order.price.add(order.delivery).toString()}
       />
-      <CancelButton />
+      {order.status === "Canceled" ? (
+        <DeleteButton orderId={orderId} />
+      ) : (
+        ["Arrived", "Delivered"].includes(order.status)
+      ) || <CancelButton orderId={orderId} />}
     </main>
   );
 }

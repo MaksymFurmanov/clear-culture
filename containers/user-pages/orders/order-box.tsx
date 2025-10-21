@@ -66,7 +66,7 @@ export default async function OrderBox({ order }: {
         </div>
       </div>
 
-      <Link href={`/containers/user-pages/order/${order.id}`}>
+      <Link href={`/order/${order.id}`}>
         <button
           className={"block bg-dark-blue text-base text-white cursor-pointer rounded-full py-1 px-12 mb-3 mx-auto"}
         >

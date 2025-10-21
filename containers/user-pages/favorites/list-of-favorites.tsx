@@ -1,9 +1,8 @@
-import { Product } from "@prisma/client";
 import CardItem from "@/containers/user-pages/favorites/card-item";
 import { getFavoriteProducts } from "@/lib/actions/favorite-product";
 
 export default async function ListOfFavorites() {
-  const products: Product[] = await getFavoriteProducts();
+  const products = await getFavoriteProducts();
 
   return (
     <div>

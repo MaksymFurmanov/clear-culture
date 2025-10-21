@@ -61,7 +61,7 @@ model FavoriteProduct {
 
 model Order {
   id            String    @id @default(cuid())
-  createdDate   DateTime
+  createdDate   DateTime  @default(now())
   processedDate DateTime?
   shippedDate   DateTime?
   arrivingDate  DateTime?

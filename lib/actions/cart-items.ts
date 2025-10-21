@@ -118,6 +118,17 @@ export async function deleteCartItems(productId: string):
   });
 }
 
+export async function clearCart() {
+  const userId = await getUserId();
+  if (!userId) throw new Error("Authorization error");
+
+  await prisma.cartItem.deleteMany({
+    where: {
+      userId: userId
+    }
+  })
+}
+
 export async function getCartTotalPrice():
   Promise<string> {
   const items = await getCartItems();

@@ -2,20 +2,19 @@
 
 import {
   createContext, ReactNode,
-  useContext, useEffect, useReducer
+  useContext, useReducer
 } from "react";
 import { CartItemWithProduct } from "@/types";
 import { useSession } from "next-auth/react";
-import { superGetProductById } from "@/lib/actions/product";
-import {
-  createOrUpdateCartItem, createOrUpdateCartItems,
-  deleteCartItems, getCartTotalPrice, superGetCartItems, updateCartItem
-} from "@/lib/actions/cart-items";
 import { Product } from "@prisma/client";
-import { loadCart, saveCart } from "@/lib/localStorage/cart";
-import { deserialize, serialize } from "@/lib/utils/superjson";
 import cartReducer, { initialCartState } from "@/reducers/cart-reducer";
-import Decimal from "decimal.js";
+import { useSyncGuestCartToServer } from "@/hooks/cart/use-sync-guest-cart-to-server";
+import { useLoadCartItems } from "@/hooks/cart/use-load-cart-items";
+import { useSaveGuestCart } from "@/hooks/cart/use-save-guest-cart";
+import { useCartTotal } from "@/hooks/cart/use-cart-total";
+import { superGetProductById } from "@/lib/actions/product";
+import { createOrUpdateCartItem, deleteCartItems, updateCartItem } from "@/lib/actions/cart-items";
+import { deserialize } from "@/lib/utils/superjson";
 
 const CartContext = createContext<
   {
@@ -26,11 +25,11 @@ const CartContext = createContext<
     loadingTotal: boolean,
     addToCart: (
       productId: string,
-      quantity: number,
+      quantity: number
     ) => Promise<void>,
     updateInCart: (
       productId: string,
-      quantity: number,
+      quantity: number
     ) => void,
     removeFromCart: (productId: string) => void
   }
@@ -41,73 +40,12 @@ export default function CartProvider({ children }: { children: ReactNode }) {
   const { data: user } = useSession();
   const [state, dispatch] = useReducer(cartReducer, initialCartState);
 
-  // Sync guest cart to server on login
-  useEffect(() => {
-    if (!!user?.user?.id) {
-      (async () => {
-        dispatch({ type: "SET_LOADING_CART", payload: true });
-        try {
-          const cart = loadCart();
-          if (cart.length > 0) {
-            await createOrUpdateCartItems(cart, true);
-          }
-          localStorage.setItem("cart", serialize<CartItemWithProduct[]>([]));
-        } finally {
-          dispatch({ type: "SET_LOADING_CART", payload: false });
-        }
-      })();
-    }
-  }, [user?.user?.id]);
+  const userId = user?.user?.id;
 
-  // Load items (guest from localStorage, logged in from DB)
-  useEffect(() => {
-    if (!user?.user?.id) {
-      dispatch({ type: "SET_ITEMS", payload: loadCart() });
-      return;
-    }
-
-    (async () => {
-      dispatch({ type: "SET_LOADING_CART", payload: true });
-      try {
-        const dbCartItems = await superGetCartItems();
-        dispatch({
-          type: "SET_ITEMS",
-          payload: deserialize<CartItemWithProduct[]>(dbCartItems)
-        });
-      } finally {
-        dispatch({ type: "SET_LOADING_CART", payload: false });
-      }
-    })();
-  }, [user?.user?.id]);
-
-  // Save guest cart to localStorage
-  useEffect(() => {
-    if (!user?.user?.id) saveCart(state.items);
-  }, [state.items, user?.user?.id]);
-
-  // Fetch total price from server whenever items change
-  useEffect(() => {
-    if (!user?.user?.id) {
-      const total = state.items.reduce(
-        (sum, item) =>
-          sum.add(new Decimal(item.product.price).mul(item.quantity)),
-        new Decimal(0)
-      ).toString();
-
-      dispatch({ type: "SET_TOTAL_PRICE", payload: total });
-      return;
-    }
-
-    (async () => {
-      dispatch({ type: "SET_LOADING_TOTAL", payload: true });
-      try {
-        const total = await getCartTotalPrice();
-        dispatch({ type: "SET_TOTAL_PRICE", payload: total });
-      } finally {
-        dispatch({ type: "SET_LOADING_TOTAL", payload: false });
-      }
-    })();
-  }, [state.items]);
+  useSyncGuestCartToServer(userId, dispatch);
+  useLoadCartItems(userId, dispatch);
+  useSaveGuestCart(userId, state.items);
+  useCartTotal(userId, state.items, dispatch);
 
   const addToCart = async (
     productId: string,
@@ -120,13 +58,13 @@ export default function CartProvider({ children }: { children: ReactNode }) {
       const existing = state.items.find((item) =>
         item.productId === productId);
 
-      console.log(existing)
       if (existing) {
         dispatch({ type: "UPDATE_ITEM", productId, quantity });
       } else {
         const product = deserialize<Product | null>(
           await superGetProductById(productId)
         );
+
         dispatch({
           type: "ADD_ITEM",
           item: { id: "", product, productId, quantity } as CartItemWithProduct
@@ -177,7 +115,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
         loadingTotal: state.loadingTotal,
         addToCart,
         updateInCart,
-        removeFromCart,
+        removeFromCart
       }}
     >
       {children}

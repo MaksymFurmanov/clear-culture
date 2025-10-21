@@ -1,9 +1,7 @@
 'use server'
 
 import { prisma } from '@/lib/prisma';
-import { Prisma } from ".prisma/client";
-import BatchPayload = Prisma.BatchPayload;
-import { OrderItem } from "@prisma/client";
+import { CartItem, OrderItem } from "@prisma/client";
 
 export async function getOrderItems(orderId: string): Promise<OrderItem[]> {
   return prisma.orderItem.findMany({
@@ -13,8 +11,22 @@ export async function getOrderItems(orderId: string): Promise<OrderItem[]> {
   });
 }
 
-export async function createOrderItems(orders: OrderItem[]): Promise<BatchPayload> {
-  return prisma.orderItem.createMany({
-    data: orders
-  })
+export async function createOrderItems(data: CartItem[], orderId: string): Promise<void> {
+  await prisma.orderItem.createMany({
+    data: data.map((item) => {
+      return {
+        quantity: item.quantity,
+        orderId: orderId,
+        productId: item.productId
+      };
+    })
+  });
+}
+
+export async function deleteOrderItems(orderId: string): Promise<void> {
+  await prisma.orderItem.deleteMany({
+    where: {
+      orderId: orderId
+    }
+  });
 }

@@ -16,7 +16,7 @@ export default async function OrderItemCard({ productId, quantity }: {
 
   return (
     <div className={"grid grid-cols-[1fr_3fr_auto] gap-4 py-3 px-4"}>
-      <Link href={`/product/${productId}`}>
+      <Link href={`/product/${product.groupId}/${productId}`}>
         <div className={"flex justify-center bg-light-green h-20 w-20 p-2 rounded cursor-pointer"}>
           <Image className={"w-fit cursor-pointer"}
                  src={product.photoUrl}
@@ -26,7 +26,7 @@ export default async function OrderItemCard({ productId, quantity }: {
           />
         </div>
       </Link>
-      <Link href={`/product/${productId}`}>
+      <Link href={`/product/${product.groupId}/${productId}`}>
         <p className={"cursor-pointer"}>
           {product.name}
         </p>

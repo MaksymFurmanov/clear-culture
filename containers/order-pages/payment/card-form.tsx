@@ -4,6 +4,7 @@ import Receipt from "@/components/receipt";
 import { useRouter } from "next/navigation";
 import { FormEvent,  } from "react";
 import { useCart } from "@/app/providers/cart-provider";
+import { createOrder } from "@/lib/actions/order";
 
 export default function CardForm() {
   const router = useRouter();
@@ -14,7 +15,13 @@ export default function CardForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    /*await createOrder();*/
+
+    try {
+      await createOrder();
+    } catch (e) {
+      console.error(e);
+    }
+
     router.replace("/payment-success");
   };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import Arrow from "@/public/img/arrow.svg";
-import useGallery from "@/hooks/useGallery";
+import useGallery from "@/hooks/use-gallery";
 import certificatesList from "@/containers/site-pages/home/certificates-gallery/certificates";
 import NavCircles from "@/containers/site-pages/home/certificates-gallery/nav-circles";
 import CertificatesImages from "@/containers/site-pages/home/certificates-gallery/certificates-images";
