@@ -20,10 +20,10 @@ export async function getAddresses(): Promise<Address[]> {
   });
 }
 
-export async function createAddress(data: AddressInput) {
+export async function createAddress(data: AddressInput): Promise<void> {
   const userId = await getUserId();
 
-  return prisma.address.create({
+  prisma.address.create({
     data: {
       userId,
       firstName: data.firstName,
