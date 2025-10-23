@@ -1,11 +1,11 @@
 import ExternalPaymentMethods from "@/containers/order-pages/payment/external-payment-methods";
-import CardForm from "@/containers/order-pages/payment/card-form";
+import PaymentForm from "@/containers/order-pages/payment/form";
 
 export default function PaymentPage() {
   return (
     <main className={"max-w-150 mx-auto"}>
       <ExternalPaymentMethods />
-      <CardForm />
+      <PaymentForm />
     </main>
   );
 }

@@ -1,8 +1,8 @@
 "use client";
 
 import { useCart } from "@/app/providers/cart-provider";
-import List from "@/containers/order-pages/cart/list";
 import ListPlaceholder from "@/components/list-placeholder";
+import CartList from "@/containers/order-pages/cart/list";
 
 export default function Cart() {
   const { cartItems, loadingCart } = useCart();
@@ -17,7 +17,7 @@ export default function Cart() {
                          href={"/catalog/1"}
         />
       ) : (
-        <List/>
+        <CartList/>
       )
     )
   );

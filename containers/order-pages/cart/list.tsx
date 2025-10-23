@@ -4,7 +4,7 @@ import ItemCard from "@/containers/order-pages/cart/item-card";
 import Link from "next/link";
 import { useCart } from "@/app/providers/cart-provider";
 
-export default function List() {
+export default function CartList() {
   const { cartItems, totalPrice, loadingTotal } = useCart();
 
   return (
@@ -22,7 +22,7 @@ export default function List() {
         {loadingTotal ? <p>Loading</p> : <p> {totalPrice} €</p>}
       </div>
 
-      <Link href={"/new-address"}>
+      <Link href={"/choose-address"}>
         <button
           className={"block bg-dark-blue text-white cursor-pointer rounded-full py-1 px-12 mt-3 mx-auto mb-8"}>
           Confirm

@@ -1,9 +1,9 @@
 import { FieldErrors, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form";
 import { ChangeEvent } from "react";
 import FormError from "@/components/form-error";
-import { CardFormData } from "@/containers/order-pages/payment/card-form";
+import { CardFormData } from "@/containers/order-pages/payment/form";
 
-export const CardBox = ({ register, errors, watch, setValue }: {
+export const CardInputs = ({ register, errors, watch, setValue }: {
   register: UseFormRegister<CardFormData>;
   errors: FieldErrors<CardFormData>;
   watch: UseFormWatch<CardFormData>;

@@ -8,11 +8,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cardSchema } from "@/lib/validators/card";
 import { z } from "zod";
-import { CardBox } from "@/containers/order-pages/payment/card-box";
+import { CardInputs } from "@/containers/order-pages/payment/card-inputs";
 
 export type CardFormData = z.infer<typeof cardSchema>;
 
-export default function CardForm() {
+export default function PaymentForm() {
   const router = useRouter();
   const { totalPrice, loadingTotal } = useCart();
   const delivery = "3.5";
@@ -40,7 +40,7 @@ export default function CardForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={"mb-8"}>
         <h2 className={"text-2xl ml-4 mb-5"}>Card details</h2>
-        <CardBox
+        <CardInputs
           register={register}
           errors={errors}
           watch={watch}

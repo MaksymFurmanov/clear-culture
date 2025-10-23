@@ -2,10 +2,30 @@
 
 import { prisma } from "@/lib/prisma";
 import { AddressInput } from "@/lib/validators/address";
+import { Address } from "@prisma/client";
+import { revalidatePath } from "next/cache";
+import { getUserId } from "@/lib/actions/user";
+
+export async function isSavedAddresses() {
+  const userId = await getUserId();
+
+  return prisma.address.findFirst({where: {userId}})
+}
+
+export async function getAddresses(): Promise<Address[]> {
+  const userId = await getUserId();
+
+  return prisma.address.findMany({
+    where: { userId },
+  });
+}
 
 export async function createAddress(data: AddressInput) {
+  const userId = await getUserId();
+
   return prisma.address.create({
     data: {
+      userId,
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,
@@ -16,4 +36,7 @@ export async function createAddress(data: AddressInput) {
       zipCode: data.zipCode
     }
   });
+
+  revalidatePath("/address-book");
+  revalidatePath("/choose-address");
 }
