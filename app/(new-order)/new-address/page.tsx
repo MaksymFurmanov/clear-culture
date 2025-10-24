@@ -1,4 +1,4 @@
-import Form from "@/containers/order-pages/new-address/form";
+import AddressForm from "@/containers/addresses/form";
 
 export default function NewAdressPage() {
   return (
@@ -6,7 +6,7 @@ export default function NewAdressPage() {
       <h1 className={"text-3xl m-8"}>
         Add adress
       </h1>
-      <Form />
+      <AddressForm />
     </main>
   );
 }

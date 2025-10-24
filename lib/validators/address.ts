@@ -1,6 +1,6 @@
 import z from "zod";
 import validator, { PostalCodeLocale } from "validator";
-import countryLocaleMap, { countries } from "@/containers/order-pages/new-address/countryLocaleMap";
+import countryLocaleMap, { countries } from "@/containers/addresses/countryLocaleMap";
 
 export const addressSchema = z
   .object({

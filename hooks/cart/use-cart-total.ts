@@ -30,7 +30,6 @@ export function useCartTotal(
         const cart = deserialize<Cart | null>(
           await getCartForClient()
         );
-        console.log({ cart });
 
         const total = cart ? cart.price.toString() : "0";
 

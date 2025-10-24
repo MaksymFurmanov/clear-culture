@@ -26,8 +26,8 @@ export const CardInputs = ({ register, errors, watch, setValue }: {
   };
 
   return (
-    <div className={"bg-[linear-gradient(270deg,_rgba(42,44,53,0.95)_0%,_#7B819B_100%)] max-w-100 rounded-xl p-6 mx-4"}>
-      <div className={"mb-3"}>
+    <div className={"bg-[linear-gradient(270deg,_rgba(42,44,53,0.95)_0%,_#7B819B_100%)] max-w-80 rounded-xl p-6"}>
+      <div className={"mb-5"}>
         <input
           {...register("number")}
           value={watch("number") || ""}
@@ -41,13 +41,13 @@ export const CardInputs = ({ register, errors, watch, setValue }: {
         )}
       </div>
 
-      <div className={"mb-3 flex items-center gap-3"}>
+      <div className={"mb-5 flex items-center gap-3"}>
         <div>
           <input
             {...register("valid")}
             value={watch("valid") || ""}
             onChange={handleValidChange}
-            className={"block bg-white text-center rounded-md px-2 py-1 w-24"}
+            className={"block bg-white text-center rounded-md px-2 py-1 w-20"}
             placeholder={"MM/YY"}
             inputMode={"numeric"}
           />
@@ -59,7 +59,7 @@ export const CardInputs = ({ register, errors, watch, setValue }: {
         <div className={"ml-auto"}>
           <input
             {...register("SVV")}
-            className={"block bg-white text-center rounded-md px-2 py-1 w-16"}
+            className={"block bg-white text-center rounded-md px-2 py-1 w-12"}
             placeholder={"CVV"}
             inputMode={"numeric"}
             maxLength={4}
@@ -70,7 +70,7 @@ export const CardInputs = ({ register, errors, watch, setValue }: {
         </div>
       </div>
 
-      <div className={"mb-3"}>
+      <div>
         <input
           {...register("name")}
           className={"block bg-white text-center rounded-md px-2 py-1 w-4/5"}

@@ -9,15 +9,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { cardSchema } from "@/lib/validators/card";
 import { z } from "zod";
 import { CardInputs } from "@/containers/order-pages/payment/card-inputs";
-import AddressCard from "@/containers/order-pages/choose-address/address-card";
+import AddressCard from "@/containers/addresses/address-card";
 import { Address } from "@prisma/client";
 
 export type CardFormData = z.infer<typeof cardSchema>;
 
-export default function PaymentForm({address}: {
+export default function PaymentForm({ address }: {
   address: Address
 }) {
-  const {replace} = useRouter();
+  const { replace, push } = useRouter();
   const { totalPrice, loadingTotal } = useCart();
   const delivery = "3.5";
 
@@ -41,9 +41,10 @@ export default function PaymentForm({address}: {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form className={"mx-6"}
+          onSubmit={handleSubmit(onSubmit)}>
       <div className={"mb-8"}>
-        <h2 className={"text-2xl ml-4 mb-5"}>Card details</h2>
+        <h2 className={"text-2xl mb-5"}>Card details</h2>
         <CardInputs
           register={register}
           errors={errors}
@@ -52,11 +53,23 @@ export default function PaymentForm({address}: {
         />
       </div>
 
-      <AddressCard address={address}>
-        <button onClick={() => replace("/choose-address")}>
-          Change
-        </button>
-      </AddressCard>
+      <div className={"mb-6"}>
+        <AddressCard address={address}>
+          <div className={"flex flex-wrap gap-5"}>
+            <button type={"button"}
+                    className={"bg-light-green py-1 px-3 cursor-pointer rounded hover:bg-gray-600 hover:text-white transition-all duration-100"}
+                    onClick={() => push(`/address/${address.id}`)}>
+              Edit
+            </button>
+
+            <button type={"button"}
+                    className={"bg-dark-blue text-white py-1 px-3 cursor-pointer rounded hover:bg-gray-600 transition-all duration-100"}
+                    onClick={() => push("/choose-address")}>
+              Change
+            </button>
+          </div>
+        </AddressCard>
+      </div>
 
       {loadingTotal ? (
         <p>Loading...</p>

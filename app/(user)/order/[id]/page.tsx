@@ -20,7 +20,7 @@ export default async function Order({ params }: {
   if (!order) throw new PageNotFoundError("Page not found");
 
   return (
-    <main className={"mx-auto max-w-170"}>
+    <main className={"mx-4 md:mx-auto max-w-170"}>
       <BackButton />
       {order.status !== "Canceled" ? (
         <StatusBreadcrumbs status={order.status}
@@ -36,9 +36,11 @@ export default async function Order({ params }: {
       <Details orderId={order.id}
                createdDate={order.createdDate}
       />
+
       <Suspense fallback={<p>Loading</p>}>
         <ItemsList orderId={order.id} />
       </Suspense>
+
       <Receipt price={order.price.toString()}
                delivery={order.delivery.toString()}
                total={order.price.add(order.delivery).toString()}

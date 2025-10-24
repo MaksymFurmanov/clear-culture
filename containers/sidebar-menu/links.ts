@@ -20,6 +20,11 @@ const links: IconLinkWithCaption[] = [
     caption: "Orders",
     href: "/orders",
     src: "/img/sidebar/orders.svg"
+  },
+  {
+    caption: "Addresses",
+    href: "/address-book",
+    src: "/img/sidebar/address.svg"
   }
 ];
 
