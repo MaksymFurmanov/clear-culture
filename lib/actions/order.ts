@@ -2,11 +2,11 @@
 
 import { prisma } from "@/lib/prisma";
 import { Order } from "@prisma/client";
-import { Decimal } from "@prisma/client/runtime/library";
 import { getUserId } from "@/lib/actions/user";
 import { revalidatePath } from "next/cache";
 import { createOrderItems, deleteOrderItems } from "@/lib/actions/order-item";
-import { clearCart, getCartItems, getCartTotalPrice } from "@/lib/actions/cart-items";
+import { clearCart, getCartItems } from "@/lib/actions/cart-items";
+import { getCartOrThrow } from "@/lib/actions/cart";
 
 export async function getOrdersCount() {
   return prisma.order.count();
@@ -38,20 +38,20 @@ export async function getOrderById(orderId: string): Promise<Order | null> {
 
 export async function createOrder(): Promise<void> {
   const userId = await getUserId();
+  const cart = await getCartOrThrow();
+  if(!cart.addressId) throw new Error("Delivery address is not defined");
 
   const cartItems = await getCartItems();
   if (cartItems.length < 1) throw new Error("The cart is empty");
 
   //check if there are enough items in the store stock to order
 
-  const price = await getCartTotalPrice();
-  const delivery = new Decimal("3.5");
-
   const order = await prisma.order.create({
     data: {
-      price,
-      delivery,
-      userId
+      price: cart.price,
+      delivery: cart.delivery,
+      userId,
+      addressId: cart.addressId
     }
   });
 

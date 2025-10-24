@@ -9,11 +9,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { cardSchema } from "@/lib/validators/card";
 import { z } from "zod";
 import { CardInputs } from "@/containers/order-pages/payment/card-inputs";
+import AddressCard from "@/containers/order-pages/choose-address/address-card";
+import { Address } from "@prisma/client";
 
 export type CardFormData = z.infer<typeof cardSchema>;
 
-export default function PaymentForm() {
-  const router = useRouter();
+export default function PaymentForm({address}: {
+  address: Address
+}) {
+  const {replace} = useRouter();
   const { totalPrice, loadingTotal } = useCart();
   const delivery = "3.5";
 
@@ -30,7 +34,7 @@ export default function PaymentForm() {
   const onSubmit = async () => {
     try {
       await createOrder();
-      router.replace("/payment-success");
+      replace("/payment-success");
     } catch (err) {
       console.error(err);
     }
@@ -47,6 +51,12 @@ export default function PaymentForm() {
           setValue={setValue}
         />
       </div>
+
+      <AddressCard address={address}>
+        <button onClick={() => replace("/choose-address")}>
+          Change
+        </button>
+      </AddressCard>
 
       {loadingTotal ? (
         <p>Loading...</p>

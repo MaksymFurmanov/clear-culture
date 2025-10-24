@@ -15,7 +15,8 @@ model User {
 
   Order           Order[]
   FavoriteProduct FavoriteProduct[]
-  CartItem        CartItem[]
+  Cart            Cart?
+  Address         Address[]
 }
 
 model ProductGroup {
@@ -25,8 +26,8 @@ model ProductGroup {
   pageUrl          String?
   defaultProductId String? @unique
 
-  defaultProduct Product?  @relation(fields: [defaultProductId], references: [id])
   products       Product[] @relation("ProductGroup")
+  defaultProduct Product?  @relation(fields: [defaultProductId], references: [id])
 }
 
 model Product {
@@ -42,8 +43,8 @@ model Product {
   groupId        String
 
   group        ProductGroup      @relation("ProductGroup", fields: [groupId], references: [id])
-  CardItem     FavoriteProduct[]
   productGroup ProductGroup?
+  CardItem     FavoriteProduct[]
   OrderItem    OrderItem[]
   CartItem     CartItem[]
 }
@@ -69,8 +70,10 @@ model Order {
   delivery      Decimal
   status        String    @default("Pending")
   userId        String
+  addressId     String
 
   user      User        @relation(fields: [userId], references: [id])
+  address   Address     @relation(fields: [addressId], references: [id])
   OrderItem OrderItem[]
 }
 
@@ -84,16 +87,28 @@ model OrderItem {
   cartItem Product @relation(fields: [productId], references: [id])
 }
 
+model Cart {
+  id        String  @id @default(cuid())
+  price     Decimal @default(0)
+  delivery  Decimal @default(0)
+  userId    String  @unique
+  addressId String?
+
+  user     User       @relation(fields: [userId], references: [id])
+  address  Address?   @relation(fields: [addressId], references: [id])
+  CartItem CartItem[]
+}
+
 model CartItem {
   id        String @id @default(cuid())
   quantity  Int
-  userId    String
+  cartId    String
   productId String
 
-  user    User    @relation(fields: [userId], references: [id])
+  cart    Cart    @relation(fields: [cartId], references: [id])
   product Product @relation(fields: [productId], references: [id])
 
-  @@unique([userId, productId])
+  @@unique([cartId, productId])
 }
 
 model Address {
@@ -106,4 +121,9 @@ model Address {
   city          String
   streetAddress String
   zipCode       String
+  userId        String
+
+  user  User    @relation(fields: [userId], references: [id])
+  Cart  Cart[]
+  Order Order[]
 }

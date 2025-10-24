@@ -5,18 +5,22 @@ import { AddressInput } from "@/lib/validators/address";
 import { Address } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { getUserId } from "@/lib/actions/user";
+import { getCartOrThrow } from "@/lib/actions/cart";
 
-export async function isSavedAddresses() {
-  const userId = await getUserId();
+export async function getSelectedAddress(): Promise<Address | null> {
+  const cart = await getCartOrThrow();
+  if(!cart.addressId) throw new Error("Delivery address is not specified");
 
-  return prisma.address.findFirst({where: {userId}})
+  return prisma.address.findFirst({
+    where: { id: cart.addressId }
+  });
 }
 
 export async function getAddresses(): Promise<Address[]> {
   const userId = await getUserId();
 
   return prisma.address.findMany({
-    where: { userId },
+    where: { userId }
   });
 }
 

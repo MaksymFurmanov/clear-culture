@@ -4,17 +4,14 @@ import { prisma } from "@/lib/prisma";
 import { CartItemWithProduct } from "@/types";
 import { serialize } from "@/lib/utils/superjson";
 import { getProductById } from "@/lib/actions/product";
-import { getUserId } from "@/lib/actions/user";
-import Decimal from "decimal.js";
 import { revalidatePath } from "next/cache";
+import { getCartOrThrow, getCartIdOrCreate, updateCartPrice } from "@/lib/actions/cart";
 
 export async function getCartItems(): Promise<CartItemWithProduct[]> {
-  const userId = await getUserId();
+  const cartId = await getCartIdOrCreate();
 
   return prisma.cartItem.findMany({
-    where: {
-      userId
-    },
+    where: { cartId },
     include: {
       product: true
     }
@@ -25,30 +22,19 @@ export async function superGetCartItems(): Promise<string> {
   return serialize<CartItemWithProduct[]>(await getCartItems());
 }
 
-export async function getCartTotalPrice():
-  Promise<string> {
-  const items = await getCartItems();
-
-  return items.reduce(
-    (sum, item) =>
-      sum.add(item.product.price.mul(item.quantity)),
-    new Decimal(0)
-  ).toString();
-}
-
 export async function createOrUpdateCartItem(
   productId: string,
   quantity: number,
 ): Promise<void> {
-  const userId = await getUserId();
+  const cartId = await getCartIdOrCreate();
 
   const product = await getProductById(productId);
   if (!product) throw new Error("Invalid product");
 
   await prisma.cartItem.upsert({
     where: {
-      userId_productId: {
-        userId,
+      cartId_productId: {
+        cartId,
         productId
       }
     },
@@ -59,12 +45,13 @@ export async function createOrUpdateCartItem(
       quantity: { increment: quantity }
     },
     create: {
-      userId,
+      cartId,
       productId,
       quantity
     }
   });
 
+  await updateCartPrice();
   revalidatePath("/", "layout");
 }
 
@@ -72,7 +59,7 @@ export async function createOrUpdateCartItems(
   items: CartItemWithProduct[],
   increment: boolean
 ): Promise<void> {
-  const userId = await getUserId();
+  const cartId = await getCartIdOrCreate();
 
   await Promise.all(
     items.map(async (item) => {
@@ -82,8 +69,8 @@ export async function createOrUpdateCartItems(
 
       await prisma.cartItem.upsert({
         where: {
-          userId_productId: {
-            userId,
+          cartId_productId: {
+            cartId,
             productId: item.productId
           }
         },
@@ -94,7 +81,7 @@ export async function createOrUpdateCartItems(
           quantity: increment ? { increment: item.quantity } : item.quantity
         },
         create: {
-          userId,
+          cartId,
           productId: item.productId,
           quantity: item.quantity
         }
@@ -102,6 +89,7 @@ export async function createOrUpdateCartItems(
     })
   );
 
+  await updateCartPrice();
   revalidatePath("/", "layout");
 }
 
@@ -109,11 +97,11 @@ export async function updateCartItem(
   productId: string,
   quantity: number,
 ) {
-  const userId = await getUserId();
+  const cartId = (await getCartOrThrow()).id;
 
   await prisma.cartItem.update({
     where: {
-      userId_productId: {userId, productId}
+      cartId_productId: {cartId, productId}
     },
     include: {
       product: true
@@ -123,28 +111,29 @@ export async function updateCartItem(
     }
   });
 
+  await updateCartPrice();
   revalidatePath("/cart");
 }
 
 export async function deleteCartItems(productId: string):
   Promise<void> {
-  const userId = await getUserId();
+  const cartId = (await getCartOrThrow()).id;
 
   await prisma.cartItem.delete({
-    where: { userId_productId: { userId, productId } }
+    where: { cartId_productId: { cartId, productId } }
   });
 
+  await updateCartPrice();
   revalidatePath("/", "layout");
 }
 
 export async function clearCart() {
-  const userId = await getUserId();
+  const cartId = (await getCartOrThrow()).id;
 
   await prisma.cartItem.deleteMany({
-    where: {
-      userId: userId
-    }
+    where: { cartId }
   });
 
+  await updateCartPrice();
   revalidatePath("/", "layout");
 }

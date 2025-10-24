@@ -3,7 +3,9 @@
 import { useEffect } from "react";
 import Decimal from "decimal.js";
 import { CartItemWithProduct } from "@/types";
-import { getCartTotalPrice } from "@/lib/actions/cart-items";
+import { superGetCart } from "@/lib/actions/cart";
+import { deserialize } from "@/lib/utils/superjson";
+import { Cart } from "@prisma/client";
 
 export function useCartTotal(
   userId: string | undefined,
@@ -25,7 +27,13 @@ export function useCartTotal(
     (async () => {
       dispatch({ type: "SET_LOADING_TOTAL", payload: true });
       try {
-        const total = await getCartTotalPrice();
+        const cart = deserialize<Cart | null>(
+          await superGetCart()
+        );
+        console.log({ cart });
+
+        const total = cart ? cart.price.toString() : "0";
+
         dispatch({ type: "SET_TOTAL_PRICE", payload: total });
       } finally {
         dispatch({ type: "SET_LOADING_TOTAL", payload: false });
