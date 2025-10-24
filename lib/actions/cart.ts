@@ -33,7 +33,7 @@ export async function getCart(): Promise<Cart | null> {
   });
 }
 
-export async function superGetCart(): Promise<string> {
+export async function getCartForClient(): Promise<string> {
   return serialize<Cart | null>(await getCart());
 }
 

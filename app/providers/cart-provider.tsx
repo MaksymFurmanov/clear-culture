@@ -12,7 +12,7 @@ import { useSyncGuestCartToServer } from "@/hooks/cart/use-sync-guest-cart-to-se
 import { useLoadCartItems } from "@/hooks/cart/use-load-cart-items";
 import { useSaveGuestCart } from "@/hooks/cart/use-save-guest-cart";
 import { useCartTotal } from "@/hooks/cart/use-cart-total";
-import { superGetProductById } from "@/lib/actions/product";
+import { getProductByIdForClient } from "@/lib/actions/product";
 import { createOrUpdateCartItem, deleteCartItems, updateCartItem } from "@/lib/actions/cart-items";
 import { deserialize } from "@/lib/utils/superjson";
 
@@ -62,7 +62,7 @@ export default function CartProvider({ children }: { children: ReactNode }) {
         dispatch({ type: "UPDATE_ITEM", productId, quantity });
       } else {
         const product = deserialize<Product | null>(
-          await superGetProductById(productId)
+          await getProductByIdForClient(productId)
         );
 
         dispatch({

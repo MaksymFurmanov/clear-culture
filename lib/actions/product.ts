@@ -10,6 +10,10 @@ export async function getProductById(id: string): Promise<Product | null> {
   });
 }
 
+export async function getProductByIdForClient(id: string): Promise<string> {
+  return serialize<Product | null>(await getProductById(id));
+}
+
 export async function getProductsByGroupId(groupId: string): Promise<Product[] | null> {
   return prisma.product.findMany({
     where: {
@@ -18,23 +22,6 @@ export async function getProductsByGroupId(groupId: string): Promise<Product[] |
   });
 }
 
-export async function getDefaultProduct(groupId: string): Promise<Product | null> {
-  const group = await prisma.productGroup.findUnique({
-    where: { id: groupId },
-    include: { defaultProduct: true },
-  });
-
-  return group?.defaultProduct || null;
-}
-
-export async function superGetProductById(id: string): Promise<string> {
-  return serialize<Product | null>(await getProductById(id));
-}
-
-export async function superGetProductsByGroupId(groupId: string): Promise<string> {
+export async function getProductsByGroupIdForClient(groupId: string): Promise<string> {
   return serialize<Product[] | null>(await getProductsByGroupId(groupId));
-}
-
-export async function superGetDefaultProduct(groupId: string): Promise<string> {
-  return serialize<Product | null>(await getDefaultProduct(groupId));
 }

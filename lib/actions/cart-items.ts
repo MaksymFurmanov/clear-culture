@@ -18,7 +18,7 @@ export async function getCartItems(): Promise<CartItemWithProduct[]> {
   });
 }
 
-export async function superGetCartItems(): Promise<string> {
+export async function getCartItemsForClient(): Promise<string> {
   return serialize<CartItemWithProduct[]>(await getCartItems());
 }
 
