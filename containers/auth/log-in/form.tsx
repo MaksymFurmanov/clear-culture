@@ -44,7 +44,7 @@ export default function Form() {
       <label className="block">
         Email:
       </label>
-      <input className={"mt-2 py-3 px-4 bg-gray-200 rounded-xl"}
+      <input className={"my-2 py-3 px-4 bg-gray-200 rounded-xl"}
              type={"email"}
              placeholder={"Email"}
              {...register("email")}
@@ -61,7 +61,7 @@ export default function Form() {
         Forgot password?
       </Link>
 
-      <button className={"block mt-4 py-3 px-16 bg-black rounded-full text-white cursor-pointer disabled:bg-gray-500"}
+      <button className={"block mt-4 py-2 px-16 bg-black rounded-full text-white cursor-pointer disabled:bg-gray-500"}
               type={"submit"}
               disabled={isSubmitting}
       >

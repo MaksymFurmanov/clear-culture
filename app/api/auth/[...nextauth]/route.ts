@@ -12,15 +12,20 @@ const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
 
 declare module "next-auth" {
   interface Session {
-    user?: DefaultUser & { id: string; };
+    user?: DefaultUser & {
+      id: string,
+      provider?: string
+    };
   }
 }
 
 declare module "next-auth/jwt/types" {
   interface JWT {
-    uid: string;
+    uid: string,
+    provider?: string
   }
 }
+
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -79,6 +84,7 @@ export const authOptions: NextAuthOptions = {
         });
 
         token.uid = dbUser.id;
+        token.provider = account.provider;
       }
 
       return token;
@@ -87,6 +93,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.uid;
+        (session.user as any).provider = token.provider;
       }
       return session;
     }

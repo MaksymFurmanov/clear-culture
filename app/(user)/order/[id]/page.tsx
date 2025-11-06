@@ -1,6 +1,6 @@
 import { PageNotFoundError } from "next/dist/shared/lib/utils";
 import { getOrderById } from "@/lib/actions/order";
-import BackButton from "@/containers/user-pages/order/back-button";
+import BackButton from "@/components/buttons/back-button";
 import StatusBreadcrumbs from "@/containers/user-pages/order/status-breadcrumbs";
 import Details from "@/containers/user-pages/order/details";
 import { Suspense } from "react";
@@ -21,7 +21,9 @@ export default async function Order({ params }: {
 
   return (
     <main className={"mx-4 md:mx-auto max-w-170"}>
-      <BackButton />
+      <BackButton href={"/orders"}>
+        All orders
+      </BackButton>
       {order.status !== "Canceled" ? (
         <StatusBreadcrumbs status={order.status}
                            processedDate={order.processedDate}

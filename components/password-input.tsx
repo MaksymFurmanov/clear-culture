@@ -10,31 +10,33 @@ export default function PasswordInput({ label, ...props }: {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
-    <>
-      <label className="mt-3 block">
+    <div>
+      <label className="block mb-2">
         {label}:
       </label>
 
-      <input className={"mt-2 py-2 px-4 bg-gray-200 rounded-xl"}
-             type={showPassword ? "text" : "password"}
-             placeholder={label}
-             {...props}
-      />
+      <div className={"flex flex-col"}>
+        <input className={"py-2 px-4 bg-gray-200 rounded-xl"}
+               type={showPassword ? "text" : "password"}
+               placeholder={label}
+               {...props}
+        />
 
-      <button className={"h-0 relative self-end -translate-y-7 -translate-x-4 cursor-pointer"}
-              onClick={(e) => {
-                e.preventDefault();
-                setShowPassword(!showPassword);
-              }}
-      >
-        {showPassword ? (
-          <Eye className={"relative"}
-               style={{ transform: "translateY(0.075em)" }}
-          />
-        ) : (
-          <ClosedEye />
-        )}
-      </button>
-    </>
+        <button className={"h-0 relative self-end -translate-y-7 -translate-x-4 cursor-pointer"}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowPassword(!showPassword);
+                }}
+        >
+          {showPassword ? (
+            <Eye className={"relative"}
+                 style={{ transform: "translateY(0.075em)" }}
+            />
+          ) : (
+            <ClosedEye />
+          )}
+        </button>
+      </div>
+    </div>
   );
 }

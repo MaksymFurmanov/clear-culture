@@ -12,6 +12,11 @@ const links: IconLinkWithCaption[] = [
     src: "/img/sidebar/product-catalog.svg"
   },
   {
+    caption: "Account",
+    href: "/account",
+    src: "/img/sidebar/account.svg"
+  },
+  {
     caption: "Favorites",
     href: "/favorites",
     src: "/img/sidebar/favorites.svg"
@@ -25,7 +30,7 @@ const links: IconLinkWithCaption[] = [
     caption: "Addresses",
     href: "/address-book",
     src: "/img/sidebar/address.svg"
-  }
+  },
 ];
 
 export default links;

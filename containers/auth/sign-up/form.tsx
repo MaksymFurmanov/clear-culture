@@ -34,16 +34,16 @@ export default function Form() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}
-          className={"flex flex-col w-2/3 mt-4 mx-auto"}>
+          className={"flex flex-col gap-2 w-2/3 mt-4 mx-auto"}>
       <label>Name:</label>
-      <input className={"my-2 py-2 px-4 bg-gray-200 rounded-xl"}
+      <input className={"bg-gray-200 rounded-xl py-2 px-4 mt-2"}
              {...register("name")}
              placeholder={"Name"}
       />
       {errors.name && <FormError>{errors.name.message}</FormError>}
 
       <label>Email:</label>
-      <input className={"mt-2 py-2 px-4 bg-gray-200 rounded-xl"}
+      <input className={"bg-gray-200 rounded-xl py-2 px-4"}
              {...register("email")}
              placeholder={"Email"}
       />
@@ -55,7 +55,7 @@ export default function Form() {
       <PasswordInput label={"Confirm Password"} {...register("confirmPassword")} />
       {errors.confirmPassword && <FormError>{errors.confirmPassword.message}</FormError>}
 
-      <button className={"mt-4 py-3 px-16 bg-black rounded-full text-white cursor-pointer disabled:bg-gray-500"}
+      <button className={"py-2 px-16 bg-black rounded-full text-white cursor-pointer disabled:bg-gray-500 mt-4"}
               type={"submit"}
               disabled={isSubmitting}
       >
