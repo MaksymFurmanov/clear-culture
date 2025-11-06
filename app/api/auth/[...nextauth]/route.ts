@@ -73,18 +73,33 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user, account }) {
       if (account && user) {
-        const dbUser = await prisma.user.upsert({
+        const existingUser = await prisma.user.findUnique({
           where: { email: user.email! },
-          update: {},
-          create: {
-            email: user.email!,
-            name: user.name ?? "",
-            password: null
-          }
         });
+
+        let dbUser;
+        if (existingUser) {
+          dbUser = existingUser;
+        } else {
+          dbUser = await prisma.user.create({
+            data: {
+              email: user.email!,
+              name: user.name ?? "",
+              password: null,
+            },
+          });
+        }
 
         token.uid = dbUser.id;
         token.provider = account.provider;
+        token.name = dbUser.name;
+      } else if (token.uid) {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.uid },
+          select: { name: true },
+        });
+
+        if (dbUser) token.name = dbUser.name;
       }
 
       return token;
@@ -93,6 +108,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.uid;
+        session.user.name = token.name;
         (session.user as any).provider = token.provider;
       }
       return session;
