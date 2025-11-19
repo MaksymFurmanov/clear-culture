@@ -25,6 +25,7 @@ export const registerSchema = z
     password: z
       .string()
       .trim()
+      .nonempty("Enter your new password")
       .min(8, "Password too short")
       .max(50, "Password is too long")
       .regex(/[A-Z]/, "Password must contain at least one capital letter")

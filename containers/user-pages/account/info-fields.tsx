@@ -27,7 +27,7 @@ export default async function InfoFields({ authWith }: {
   }
 
   return (
-    <div className={"flex flex-col gap-3 mx-4"}>
+    <div className={"flex flex-col gap-3 mt-6 mb-12"}>
       <div
         className={"flex gap-5 items-center flex-wrap text-lg md:text-xl mb-4"}>
         <div className={"p-4 rounded-full bg-green"}>

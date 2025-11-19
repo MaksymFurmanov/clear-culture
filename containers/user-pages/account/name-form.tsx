@@ -2,11 +2,8 @@
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { userSchema } from "@/lib/validators/user";
+import { UserFormData, userSchema } from "@/lib/validators/user";
 import { changeUserInfo } from "@/lib/actions/user";
-import { z } from "zod";
-
-export type UserFormData = z.infer<typeof userSchema>;
 
 export default function NameForm({ defaultValue }: {
   defaultValue: string
@@ -28,7 +25,6 @@ export default function NameForm({ defaultValue }: {
   const onSubmit = async (data: UserFormData) => {
     try {
       await changeUserInfo(data);
-      console.log("Name changed I guess...");
     } catch (e: any) {
       setError("name", e.message);
       console.error(e);
@@ -42,7 +38,6 @@ export default function NameForm({ defaultValue }: {
           Name:
         </label>
         <input className={"w-36 mr-3"}
-               type={"text"}
                defaultValue={defaultValue}
                size={30}
                {...register("name")}
