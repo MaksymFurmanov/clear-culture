@@ -57,7 +57,7 @@ export default function Form() {
       {errors.password && <FormError>{errors.password.message}</FormError>}
 
       <Link className={"mt-2 text-right text-sm text-gray-400 cursor-pointer"}
-            href={"/containers/auth/reset-password"}>
+            href={"/reset-password"}>
         Forgot password?
       </Link>
 

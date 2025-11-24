@@ -1,0 +1,10 @@
+export default function PasswordChangeEmailTemplate({ link }: {
+  link: string
+}) {
+  return (
+    <div>
+      <h1>Your change password link:</h1>
+      <a href={link}>{link}</a>
+    </div>
+  );
+}

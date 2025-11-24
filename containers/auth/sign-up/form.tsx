@@ -34,19 +34,23 @@ export default function Form() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}
-          className={"flex flex-col gap-2 w-2/3 mt-4 mx-auto"}>
-      <label>Name:</label>
-      <input className={"bg-gray-200 rounded-xl py-2 px-4 mt-2"}
-             {...register("name")}
-             placeholder={"Name"}
-      />
+          className={"flex flex-col gap-3 w-2/3 mt-4 mx-auto"}>
+      <div>
+        <label className={"block mb-2"}>Name:</label>
+        <input className={"w-full bg-gray-200 rounded-xl py-2 px-4"}
+               {...register("name")}
+               placeholder={"Name"}
+        />
+      </div>
       {errors.name && <FormError>{errors.name.message}</FormError>}
 
-      <label>Email:</label>
-      <input className={"bg-gray-200 rounded-xl py-2 px-4"}
-             {...register("email")}
-             placeholder={"Email"}
-      />
+      <div>
+        <label className={"block mb-2"}>Email:</label>
+        <input className={"w-full bg-gray-200 rounded-xl py-2 px-4"}
+               {...register("email")}
+               placeholder={"Email"}
+        />
+      </div>
       {errors.email && <FormError>{errors.email.message}</FormError>}
 
       <PasswordInput label={"Password"} {...register("password")} />

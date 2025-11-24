@@ -34,7 +34,7 @@ export default function PaymentForm({ address }: {
   const onSubmit = async () => {
     try {
       await createOrder();
-      replace("/payment-success");
+      replace("/payment/success");
     } catch (err) {
       console.error(err);
     }
@@ -84,7 +84,8 @@ export default function PaymentForm({ address }: {
       <button
         type={"submit"}
         disabled={isSubmitting}
-        className={"block bg-dark-blue text-white text-lg rounded-full cursor-pointer px-10 py-1 mr-6 ml-auto mb-6"}
+        className={"block bg-dark-blue text-white text-lg rounded-full " +
+          "cursor-pointer px-10 py-1 mr-6 ml-auto mb-6"}
       >
         {isSubmitting ? "Processing..." : "Pay"}
       </button>

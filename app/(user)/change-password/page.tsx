@@ -2,8 +2,8 @@ import PreviousPasswordForm from "@/containers/user-pages/change-password/previo
 
 export default function ChangePasswordPage() {
   return (
-    <div className={"w-2/3 mt-12 mx-auto"}>
-      <PreviousPasswordForm/>
-    </div>
+    <main className={"w-2/3 mt-12 mx-auto"}>
+      <PreviousPasswordForm />
+    </main>
   );
 }

@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { LoginInput } from "@/lib/validators/auth";
-import { getChangePasswordToken } from "@/lib/actions/user";
+import { getChangePasswordTokenWithPrevPassword } from "@/lib/actions/user";
 import { useRouter } from "next/navigation";
 import FormError from "@/components/form-error";
 import PasswordInput from "@/components/password-input";
+import WithoutPrevPasswordBtn from "@/containers/user-pages/change-password/without-prev-password-btn";
 
 export default function PreviousPasswordForm() {
   const { push } = useRouter();
@@ -21,7 +21,7 @@ export default function PreviousPasswordForm() {
   const submitHandler = async (data: { password: string }) => {
     try {
       const changePasswordToken =
-        await getChangePasswordToken(data.password);
+        await getChangePasswordTokenWithPrevPassword(data.password);
 
       if (!changePasswordToken) {
         setError("password", { message: "Incorrect password" });
@@ -47,14 +47,13 @@ export default function PreviousPasswordForm() {
         <FormError>{errors.password?.message}</FormError>
       )}
 
-      <Link className={"mt-2 text-gray-500"} href={""}>
-        Don't remember the password
-      </Link>
+      <WithoutPrevPasswordBtn />
 
       <button className={"text-lg mt-4 py-1 px-12 w-fit bg-black text-white " +
         "rounded-full cursor-pointer disabled:bg-gray-500 hover:bg-gray-800"}
               disabled={isSubmitting}
-              type={"submit"}>
+              type={"submit"}
+      >
         Next
       </button>
     </form>
