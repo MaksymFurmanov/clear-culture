@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { EmailFormInput, emailSchema } from "@/lib/validators/email";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormError from "@/components/form-error";
-import { getChangePasswordWithEmail, isEmailExists } from "@/lib/actions/user";
+import { changePasswordWithEmail, isEmailExists } from "@/lib/actions/user";
 import { useRouter } from "next/navigation";
 
 export default function ResetPasswordForm() {
@@ -27,8 +27,12 @@ export default function ResetPasswordForm() {
       return;
     }
 
-    await getChangePasswordWithEmail(data.email);
-    push("/reset-password/email");
+    try {
+      await changePasswordWithEmail(data.email);
+      push(`/reset-password/email?email=${data.email}`);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (

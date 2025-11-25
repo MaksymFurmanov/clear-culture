@@ -10,7 +10,10 @@ export default async function NewPasswordPage({ searchParams }: {
   if (!token) throw new PageNotFoundError("");
 
   return (
-    <div className={"w-2/3 mt-1/2 mx-auto"}>
+    <div className={"w-1/3 mt-[20dvh] mx-auto"}>
+      <h1 className={"text-4xl my-10"}>
+        New password
+      </h1>
       <NewPasswordForm token={token} />
     </div>
   );

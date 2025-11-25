@@ -31,7 +31,8 @@ export default function NewPasswordForm({ token }: {
   };
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)}>
+    <form className={"flex flex-col gap-2"}
+          onSubmit={handleSubmit(submitHandler)}>
       <PasswordInput label={"New password"}
                      {...register("password")}
       />
@@ -42,7 +43,7 @@ export default function NewPasswordForm({ token }: {
       />
       <FormError>{errors.repeatPassword?.message}</FormError>
 
-      <button className={"text-lg mt-4 py-1 px-12 w-fit bg-black text-white " +
+      <button className={"text-lg py-1 px-12 w-fit bg-black text-white " +
         "rounded-full cursor-pointer disabled:bg-gray-500 hover:bg-gray-800"}
               type={"submit"}
               disabled={isSubmitting}>

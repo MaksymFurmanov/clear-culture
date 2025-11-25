@@ -28,6 +28,14 @@ export async function getUserEmail(): Promise<string> {
   return authUserSession.user.email;
 }
 
+export async function getUserIdByEmail(email: string): Promise<string | undefined> {
+  const user = await prisma.user.findUnique({
+    where: { email }
+  });
+
+  return user?.id;
+}
+
 export async function getAuthProvider(): Promise<string> {
   const authUserSession = await getServerSession(authOptions);
   if (!authUserSession?.user?.provider) throw new Error("Authorization error");
@@ -96,8 +104,11 @@ export async function getChangePasswordTokenWithPrevPassword(currentPassword: st
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function getChangePasswordWithEmail(email: string): Promise<void> {
-  const userId = await getUserId();
+export async function changePasswordWithEmail(email: string): Promise<void> {
+  const userId = await getUserIdByEmail(email);
+  console.log(email)
+
+  if(!userId) throw new Error("No user with this email found");
 
   const token = await generateToken(userId);
 
@@ -116,7 +127,6 @@ export async function getChangePasswordWithEmail(email: string): Promise<void> {
 }
 
 export async function changePassword(token: string, newPassword: string): Promise<void> {
-  const userId = await getUserId();
   const tokenEntries = await prisma.passwordChangeToken.findMany();
 
   const tokenEntry = tokenEntries.find(async t =>
@@ -127,7 +137,7 @@ export async function changePassword(token: string, newPassword: string): Promis
 
   const hashed = await bcrypt.hash(newPassword, 10);
   await prisma.user.update({
-    where: { id: userId },
+    where: { id: tokenEntry.userId },
     data: { password: hashed }
   });
 

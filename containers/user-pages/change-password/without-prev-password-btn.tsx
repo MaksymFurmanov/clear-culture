@@ -1,6 +1,6 @@
 "use client";
 
-import { getChangePasswordWithEmail } from "@/lib/actions/user";
+import { changePasswordWithEmail } from "@/lib/actions/user";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -12,8 +12,12 @@ export default function WithoutPrevPasswordBtn() {
   const { push } = useRouter();
 
   const emailHandler = async () => {
-    await getChangePasswordWithEmail(email);
-    push("/change-password/email");
+    try {
+      await changePasswordWithEmail(email);
+      push("/change-password/email");
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
