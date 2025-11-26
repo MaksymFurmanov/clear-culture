@@ -3,7 +3,7 @@
 import ModalPortal from "@/components/modal-portal";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import LogOutButton from "@/containers/sidebar-menu/log-out-button";
 import links from "@/containers/sidebar-menu/links";
 
@@ -18,6 +18,21 @@ export default function SidebarMenu({ toggleSidebar }: {
       toggleSidebar();
     }, 300);
   };
+
+  useLayoutEffect(() => {
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.classList.add("noScroll");
+
+    if (scrollBarWidth > 0) {
+      document.body.style.paddingRight = `${scrollBarWidth}px`;
+    }
+
+    return () => {
+      document.body.classList.remove("noScroll");
+      document.body.style.paddingRight = "";
+    };
+  }, []);
 
   return (
     <ModalPortal wrapperId={"sidebar-menu"}>

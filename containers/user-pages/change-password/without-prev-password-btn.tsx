@@ -14,7 +14,7 @@ export default function WithoutPrevPasswordBtn() {
   const emailHandler = async () => {
     try {
       await changePasswordWithEmail(email);
-      push("/change-password/email");
+      push("/account/change-password/email");
     } catch (e) {
       console.error(e);
     }

@@ -8,7 +8,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { UserFormData, userSchema } from "@/lib/validators/user";
 import { revalidatePath } from "next/cache";
 import crypto from "crypto";
-import PasswordChangeEmailTemplate from "@/components/password-change-email-template";
+import PasswordChangeEmailTemplate from "@/components/emails/password-change-email-template";
 import { Resend } from "resend";
 
 export async function isAuthenticated(): Promise<boolean> {
@@ -74,12 +74,13 @@ export async function registerUser(data: RegisterInput) {
 async function generateToken(userId: string): Promise<string> {
   const token = crypto.randomBytes(32).toString("hex");
   const hashedToken = await bcrypt.hash(token, 10);
+  const expiresAtMs = Date.now() + (5 * 60000);
 
   await prisma.passwordChangeToken.create({
     data: {
       token: hashedToken,
       userId: userId,
-      expiresAt: new Date(Date.now() + 5 * 60 * 1000)
+      expiresAt: new Date(expiresAtMs)
     }
   });
 
@@ -106,9 +107,8 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function changePasswordWithEmail(email: string): Promise<void> {
   const userId = await getUserIdByEmail(email);
-  console.log(email)
 
-  if(!userId) throw new Error("No user with this email found");
+  if (!userId) throw new Error("No user with this email found");
 
   const token = await generateToken(userId);
 
@@ -129,11 +129,17 @@ export async function changePasswordWithEmail(email: string): Promise<void> {
 export async function changePassword(token: string, newPassword: string): Promise<void> {
   const tokenEntries = await prisma.passwordChangeToken.findMany();
 
-  const tokenEntry = tokenEntries.find(async t =>
-    await bcrypt.compare(token, t.token));
+  const compRes = await Promise.all(
+    tokenEntries.map(t => bcrypt.compare(token, t.token))
+  );
 
-  if (!tokenEntry) throw new Error("Invalid token");
-  if (tokenEntry.expiresAt < new Date()) throw new Error("Token expired");
+  const tokenEntry = tokenEntries[
+    compRes.findIndex(res => res === true)
+    ];
+
+  if (!tokenEntry || tokenEntry.expiresAt.getTime() < Date.now()) {
+    throw new Error("The link is invalid or expired");
+  }
 
   const hashed = await bcrypt.hash(newPassword, 10);
   await prisma.user.update({

@@ -1,4 +1,4 @@
-import NextAuth, { DefaultUser, NextAuthOptions } from "next-auth";
+import NextAuth, { DefaultSession, NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHub from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -12,9 +12,9 @@ const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET!;
 
 declare module "next-auth" {
   interface Session {
-    user?: DefaultUser & {
-      id: string,
-      provider?: string
+    user?: DefaultSession["user"] & {
+      id: string;
+      provider?: string;
     };
   }
 }
@@ -109,7 +109,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = token.uid;
         session.user.name = token.name;
-        (session.user as any).provider = token.provider;
+        session.user.provider = token.provider;
       }
       return session;
     }

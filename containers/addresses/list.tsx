@@ -18,7 +18,7 @@ export default function AddressList({ ordering, addresses }: {
         {addresses.map((address, index) => (
           <AddressCard key={index} address={address}>
             <div className={"flex flex-wrap gap-5"}>
-              <button onClick={() => push(`/address/${address.id}?ordering=${ordering}`)}
+              <button onClick={() => push(`/address-book/${address.id}?ordering=${ordering}`)}
                       className={"bg-light-green py-1 px-3 cursor-pointer rounded hover:bg-gray-600 hover:text-white transition-all duration-100"}
               >
                 Edit

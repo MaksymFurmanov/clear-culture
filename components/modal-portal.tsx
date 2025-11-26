@@ -36,20 +36,6 @@ export default function ModalPortal({
     };
   }, [wrapperId]);
 
-  useLayoutEffect(() => {
-    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-
-    document.body.classList.add("noScroll");
-
-    if (scrollBarWidth > 0) {
-      document.body.style.paddingRight = `${scrollBarWidth}px`;
-    }
-
-    return () => {
-      document.body.classList.remove("noScroll");
-      document.body.style.paddingRight = "";
-    };
-  }, []);
 
   if (!wrapper) return null;
 

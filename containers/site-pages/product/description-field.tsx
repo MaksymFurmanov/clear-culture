@@ -6,7 +6,7 @@ import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import dynamic from "next/dynamic";
 
 const MDXClient = dynamic(() =>
-  import("@/components/mdx-client"), {
+  import("@/components/mdx/mdx-client"), {
   ssr: false
 });
 

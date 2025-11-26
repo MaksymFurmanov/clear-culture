@@ -7,15 +7,20 @@ import { NewPasswordInput, newPasswordSchema } from "@/lib/validators/new-passwo
 import FormError from "@/components/form-error";
 import { changePassword } from "@/lib/actions/user";
 import { useRouter } from "next/navigation";
+import { Alert } from "@/components/alert";
+import { FaCheck } from "react-icons/fa";
+import { useState } from "react";
 
 export default function NewPasswordForm({ token }: {
   token: string
 }) {
   const { push } = useRouter();
+  const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
 
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isSubmitting }
   } = useForm<NewPasswordInput>({
     resolver: zodResolver(newPasswordSchema)
@@ -24,9 +29,18 @@ export default function NewPasswordForm({ token }: {
   const submitHandler = async (data: NewPasswordInput) => {
     try {
       await changePassword(token, data.password);
-      push("/");
+
+      setShowSuccessAlert(true);
+      setTimeout(() => {
+        push("/");
+      }, 200);
+
     } catch (e) {
-      console.error(e);
+      if (e instanceof Error) {
+        setError("repeatPassword", { message: e.message });
+      } else {
+        setError("repeatPassword", { message: "Unexpected error occurred" });
+      }
     }
   };
 
@@ -49,6 +63,12 @@ export default function NewPasswordForm({ token }: {
               disabled={isSubmitting}>
         Save
       </button>
+      {showSuccessAlert && (
+        <Alert icon={<FaCheck />}
+               label={"Password changed successfully"}
+               closeCallback={() => setShowSuccessAlert(false)}
+        />
+      )}
     </form>
   );
 }

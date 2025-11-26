@@ -2,7 +2,7 @@
 
 import type { MDXComponents } from 'mdx/types'
 import { ReactNode } from "react";
-import MdxImage from "@/components/mdx-image";
+import MdxImage from "@/components/mdx/mdx-image";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

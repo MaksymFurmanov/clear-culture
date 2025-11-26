@@ -34,9 +34,10 @@ export default function RootLayout({
   return (
     <html lang="en">
     <body className={`${abel.className} text-sm antialiased md:text-base`}>
-      <Providers>
-        {children}
-      </Providers>
+    <Providers>
+      {children}
+      <div id="global-alert"></div>
+    </Providers>
     </body>
     </html>
   );

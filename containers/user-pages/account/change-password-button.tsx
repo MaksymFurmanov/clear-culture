@@ -5,7 +5,7 @@ export default function ChangePasswordButton() {
     <Link
       className={"bg-light-green cursor-pointer rounded-lg w-fit " +
         "py-1 px-4 transition-all duration-100 hover:bg-gray-600 hover:text-white"}
-      href={"/change-password"}
+      href={"/account/change-password"}
     >
       Change password
     </Link>
