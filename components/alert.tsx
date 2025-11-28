@@ -1,58 +1,86 @@
 "use client";
 
 import React, { ReactNode, useEffect, useState } from "react";
-import ModalPortal from "@/components/modal-portal";
+import { FaCheck } from "react-icons/fa";
+import { RxCrossCircled } from "react-icons/rx";
+import { useAlerts } from "@/app/providers/alert-provider";
+import { FaTrash } from "react-icons/fa6";
+import { IoIosWarning } from "react-icons/io";
 
-export function Alert({ label, closeCallback, children, icon }: {
-  label: string,
-  closeCallback: () => void,
+const alertConfig = {
+  success: {
+    color: "#22C55E",
+    icon: FaCheck
+  },
+  removing: {
+    color: "#6B7280",
+    icon: FaTrash
+  },
+  warning: {
+    color: "#EAB308",
+    icon: IoIosWarning
+  },
+  error: {
+    color: "#EF4444",
+    icon: RxCrossCircled
+  }
+} as const;
+
+export type AlertType = keyof typeof alertConfig;
+
+export function Alert({ uid, title, children, type }: {
+  uid: string,
+  title: string,
+  type: AlertType,
   children?: ReactNode,
-  icon?: ReactNode,
 }) {
-  const [alertToggle, setAlertToggle] = useState<boolean>(false);
+  const {removeById} = useAlerts();
+
+  const [alertToggle, setAlertToggle] = useState(false);
+
+  const { color, icon: Icon } = alertConfig[type];
 
   useEffect(() => {
-    setTimeout(() => {
-      setAlertToggle(true);
-    }, 500);
-
-    setTimeout(() => {
-      setAlertToggle(false);
-      closeCallback();
-    }, 7000);
+    const openTimer = setTimeout(() => setAlertToggle(true), 100);
+    const closeTimer = setTimeout(() => setAlertToggle(false), 4500);
 
     return () => {
-      setAlertToggle(false);
+      clearTimeout(openTimer);
+      clearTimeout(closeTimer);
     };
   }, []);
 
   const closeHandler = () => {
     setAlertToggle(false);
-  }
+    setTimeout(() => {
+      removeById(uid);
+    }, 500);
+  };
 
   return (
-    <ModalPortal wrapperId={"global-alert"}>
-      <div className={`
-      flex gap-4 items-center fixed bottom-8 left-8 overflow-hidden cursor-pointer
-      bg-black text-green-500 border rounded-full py-4 px-8
+
+    <div className={`
+      flex gap-2 md:gap-4 items-center overflow-hidden cursor-pointer
+      bg-black border rounded-full py-3 px-8 mb-3
       transition-[max-width,opacity,margin,transform] duration-500 ease-in-out
       ${alertToggle
-        ? "max-w-80 opacity-100 mx-3"
-        : "max-w-0 opacity-0 mx-0"}
+      ? "max-w-80 opacity-100 mx-3"
+      : "max-w-0 opacity-0 mx-0"}
       `}
-           onClick={closeHandler}>
-        {icon && icon}
-        <div>
-          <b className={"whitespace-nowrap"}>
-            {label}
-          </b>
-          {children && (
-            <p>
-              {children}
-            </p>
-          )}
-        </div>
+         onClick={closeHandler}
+         style={{ color }}
+    >
+      <Icon />
+      <div>
+        <b className={"whitespace-nowrap"}>
+          {title}
+        </b>
+        {children && (
+          <p>
+            {children}
+          </p>
+        )}
       </div>
-    </ModalPortal>
+    </div>
   );
 }

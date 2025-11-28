@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ReactNode } from "react";
 import Providers from "@/app/providers";
+import AlertBox from "@/components/alert-box";
 
 /*const railway = localFont({
   src: "/fonts/Raleway-VariableFont_wght.ttf",
@@ -36,7 +37,7 @@ export default function RootLayout({
     <body className={`${abel.className} text-sm antialiased md:text-base`}>
     <Providers>
       {children}
-      <div id="global-alert"></div>
+      <AlertBox/>
     </Providers>
     </body>
     </html>

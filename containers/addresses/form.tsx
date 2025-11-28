@@ -12,6 +12,7 @@ import { updateAddress, createAddress } from "@/lib/actions/address";
 import { useSession } from "next-auth/react";
 import { Address } from "@prisma/client";
 import { selectAddress } from "@/lib/actions/cart";
+import { useAlerts } from "@/app/providers/alert-provider";
 
 export default function AddressForm({ address }: {
   address?: Address
@@ -22,6 +23,8 @@ export default function AddressForm({ address }: {
   const edited = !!address;
   const { replace, back } = useRouter();
   const { data: user } = useSession();
+
+  const {addAlert} = useAlerts();
 
   const {
     register,
@@ -37,8 +40,10 @@ export default function AddressForm({ address }: {
 
       if (edited) {
         await updateAddress(address.id, data);
+        addAlert("success", "The address changed");
       } else {
         const address = await createAddress(data);
+        addAlert("success", "Address created successfully");
         selectedAddressId = address.id;
       }
 
@@ -47,7 +52,11 @@ export default function AddressForm({ address }: {
         replace("/payment");
       } else back();
     } catch (e) {
-      console.error(e);
+      if(e instanceof Error) {
+        addAlert("error", e.message);
+      } else {
+        console.error(e);
+      }
     }
   };
 

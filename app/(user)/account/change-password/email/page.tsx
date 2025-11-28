@@ -1,5 +1,7 @@
 import { MdEmail } from "react-icons/md";
 import { getUserEmail } from "@/lib/actions/user";
+import ScalingUnderlineLink from "@/components/buttons/scaling-underline-link";
+import SendAgainButton from "@/components/emails/send-again-button";
 
 export default async function ChangePasswordEmailPage() {
   const email = await getUserEmail();
@@ -14,9 +16,11 @@ export default async function ChangePasswordEmailPage() {
         <p className={"text-base md:text-lg"}>
           The link for changing your password has been sent to your email: {email}
         </p>
-        <p className={"text-sm md:text-base"}>
-          The email didn't get to you? Click here to send it again
-        </p>
+        <SendAgainButton email={email} />
+
+        <ScalingUnderlineLink href={"/"}>
+          Back to the home page
+        </ScalingUnderlineLink>
       </div>
     </main>
   );

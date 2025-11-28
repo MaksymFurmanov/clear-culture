@@ -7,15 +7,13 @@ import { NewPasswordInput, newPasswordSchema } from "@/lib/validators/new-passwo
 import FormError from "@/components/form-error";
 import { changePassword } from "@/lib/actions/user";
 import { useRouter } from "next/navigation";
-import { Alert } from "@/components/alert";
-import { FaCheck } from "react-icons/fa";
-import { useState } from "react";
+import { useAlerts } from "@/app/providers/alert-provider";
 
 export default function NewPasswordForm({ token }: {
   token: string
 }) {
   const { push } = useRouter();
-  const [showSuccessAlert, setShowSuccessAlert] = useState<boolean>(false);
+  const { addAlert } = useAlerts();
 
   const {
     register,
@@ -30,14 +28,12 @@ export default function NewPasswordForm({ token }: {
     try {
       await changePassword(token, data.password);
 
-      setShowSuccessAlert(true);
-      setTimeout(() => {
-        push("/");
-      }, 200);
+      addAlert("success", "Password changed successfully");
 
+      push("/");
     } catch (e) {
       if (e instanceof Error) {
-        setError("repeatPassword", { message: e.message });
+        addAlert("error", "The link is invalid or expired");
       } else {
         setError("repeatPassword", { message: "Unexpected error occurred" });
       }
@@ -63,12 +59,6 @@ export default function NewPasswordForm({ token }: {
               disabled={isSubmitting}>
         Save
       </button>
-      {showSuccessAlert && (
-        <Alert icon={<FaCheck />}
-               label={"Password changed successfully"}
-               closeCallback={() => setShowSuccessAlert(false)}
-        />
-      )}
     </form>
   );
 }

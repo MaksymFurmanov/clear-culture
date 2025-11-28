@@ -1,5 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { ImgHTMLAttributes } from "react";
+import { AlertType } from "@/components/alert";
 
 export type ImgWithCaption = {
   src: string,
@@ -30,3 +31,10 @@ export type CartItemWithProduct = Prisma.CartItemGetPayload<{
     product: true
   }
 }>;
+
+export type AlertProps = {
+  uid: string,
+  type: AlertType,
+  title: string,
+  message?: string
+}
