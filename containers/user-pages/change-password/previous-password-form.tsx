@@ -2,11 +2,11 @@
 
 import { useForm } from "react-hook-form";
 import { LoginInput } from "@/lib/validators/auth";
-import { getChangePasswordTokenWithPrevPassword } from "@/lib/actions/user";
 import { useRouter } from "next/navigation";
 import FormError from "@/components/form-error";
 import PasswordInput from "@/components/password-input";
 import WithoutPrevPasswordBtn from "@/containers/user-pages/change-password/without-prev-password-btn";
+import { getChangePasswordTokenWithPrevPassword } from "@/lib/actions/change-password";
 
 export default function PreviousPasswordForm() {
   const { push } = useRouter();

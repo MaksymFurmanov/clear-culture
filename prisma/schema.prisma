@@ -8,16 +8,18 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(cuid())
-  name     String
-  email    String  @unique
-  password String?
+  id            String  @id @default(cuid())
+  name          String
+  email         String  @unique
+  password      String?
+  emailVerified Boolean @default(false)
 
-  Order               Order[]
-  FavoriteProduct     FavoriteProduct[]
-  Cart                Cart?
-  Address             Address[]
-  PasswordChangeToken PasswordChangeToken[]
+  Order                  Order[]
+  FavoriteProduct        FavoriteProduct[]
+  Cart                   Cart?
+  Address                Address[]
+  PasswordChangeToken    PasswordChangeToken[]
+  EmailConfirmationToken EmailConfirmationToken[]
 }
 
 model ProductGroup {
@@ -135,5 +137,14 @@ model PasswordChangeToken {
   expiresAt DateTime
   userId    String
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model EmailConfirmationToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  expiresAt DateTime
+  userId    String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

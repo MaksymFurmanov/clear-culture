@@ -1,8 +1,8 @@
 "use client";
 
-import { changePasswordWithEmail } from "@/lib/actions/user";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { changePasswordWithEmail } from "@/lib/actions/change-password";
 
 export default function WithoutPrevPasswordBtn() {
   const { data } = useSession();

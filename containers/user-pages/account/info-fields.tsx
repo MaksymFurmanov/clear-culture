@@ -4,15 +4,14 @@ import { FaGithub } from "react-icons/fa";
 import { IconType } from "react-icons";
 import NameForm from "@/containers/user-pages/account/name-form";
 import ChangePasswordButton from "@/containers/user-pages/account/change-password-button";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { auth } from "@/auth";
 
 export default async function InfoFields({ authWith }: {
   authWith: string
 }) {
-  const session = await getServerSession(authOptions);
-  if (!session || !session.user?.name || !session.user?.email)
-    throw new Error("Session connection issue");
+  const session = await auth();
+  const user = session?.user;
+  if(!user?.name || !user?.email) throw new Error("Authentication issue");
 
   let Icon: IconType;
   switch (authWith) {
@@ -34,11 +33,11 @@ export default async function InfoFields({ authWith }: {
           <Icon className={"w-5 h-5"} />
         </div>
         <p>
-          {session.user.email}
+          {user.email}
         </p>
       </div>
 
-      <NameForm defaultValue={session.user.name} />
+      <NameForm defaultValue={user.name} />
 
       {authWith === "credentials" && <ChangePasswordButton />}
     </div>

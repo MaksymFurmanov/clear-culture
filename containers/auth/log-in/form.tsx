@@ -8,6 +8,7 @@ import { LoginInput, loginSchema } from "@/lib/validators/auth";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormError from "@/components/form-error";
+import { login } from "@/lib/actions/user";
 
 export default function Form() {
   const { push } = useRouter();
@@ -22,18 +23,13 @@ export default function Form() {
   });
 
   const onSubmit = async (data: LoginInput) => {
-    const res = await signIn("credentials", {
-      redirect: false,
-      email: data.email,
-      password: data.password
-    });
-
-    if (res?.error) {
+    try {
+      await login(data.email, data.password);
+      push("/");
+    } catch (e) {
       setError("password", { message: "Wrong email or password" });
       return;
     }
-
-    push("/");
   };
 
   return (

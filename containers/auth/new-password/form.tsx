@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NewPasswordInput, newPasswordSchema } from "@/lib/validators/new-password";
 import FormError from "@/components/form-error";
-import { changePassword } from "@/lib/actions/user";
 import { useRouter } from "next/navigation";
 import { useAlerts } from "@/app/providers/alert-provider";
+import { changePassword } from "@/lib/actions/change-password";
 
 export default function NewPasswordForm({ token }: {
   token: string

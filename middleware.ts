@@ -1,21 +1,15 @@
-import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import { auth } from "@/auth";
 
-export default withAuth(
-  function middleware() {
-    return NextResponse.next();
-  },
-  {
-    callbacks: {
-      authorized: ({ token }) => {
-        return !!token;
-      }
-    },
-    pages: {
-      signIn: "/log-in"
-    }
+export default auth((req) => {
+  if (!req.auth) {
+    const loginUrl = new URL("/log-in", req.nextUrl.origin);
+    loginUrl.searchParams.set("callbackUrl", req.nextUrl.pathname);
+    return NextResponse.redirect(loginUrl);
   }
-);
+
+  return NextResponse.next();
+});
 
 export const config = {
   matcher: [
