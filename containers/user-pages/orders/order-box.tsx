@@ -1,4 +1,4 @@
-import Circle from "@/public/img/circle.svg";
+import Circle from "@/public/svg/circle.svg";
 import Link from "next/link";
 import { Order } from "@prisma/client";
 import OrderItemCard from "@/containers/user-pages/orders/order-item-card";

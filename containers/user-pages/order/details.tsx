@@ -1,6 +1,6 @@
 "use client";
 
-import CopyIcon from "@/public/img/copy.svg";
+import CopyIcon from "@/public/svg/copy.svg";
 
 export default function Details({ orderId, createdDate }: {
   orderId: string,

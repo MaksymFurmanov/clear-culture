@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Circle from "@/public/img/circle.svg";
+import Circle from "@/public/svg/circle.svg";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCart } from "@/app/providers/cart-provider";

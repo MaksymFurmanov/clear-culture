@@ -1,6 +1,6 @@
 "use client";
 
-import Arrow from "@/public/img/arrow.svg";
+import Arrow from "@/public/svg/arrow.svg";
 import useGallery from "@/hooks/use-gallery";
 import reviews from "@/containers/site-pages/home/reviews-gallery/reviews";
 import ReviewsText from "@/containers/site-pages/home/reviews-gallery/reviews-text";

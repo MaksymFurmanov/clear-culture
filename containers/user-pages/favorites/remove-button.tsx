@@ -1,7 +1,7 @@
 "use client";
 
 import { deleteFavoriteProduct } from "@/lib/actions/favorite-product";
-import TrashIcon from "@/public/img/trash.svg";
+import TrashIcon from "@/public/svg/trash.svg";
 
 export default function RemoveButton({productId}: {productId: string}) {
   const handleRemove = async () => {

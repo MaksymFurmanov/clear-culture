@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import Heart from "@/public/img/heart.svg";
+import Heart from "@/public/svg/heart.svg";
 import {
   addFavoriteProductToUser,
   deleteFavoriteProduct,

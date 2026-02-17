@@ -1,5 +1,5 @@
 import certificatesList from "@/containers/site-pages/home/certificates-gallery/certificates";
-import Circle from "@/public/img/circle.svg";
+import Circle from "@/public/svg/circle.svg";
 import clsx from "clsx";
 
 export default function NavCircles({ currImg, setImg }: {

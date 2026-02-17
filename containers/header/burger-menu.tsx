@@ -41,7 +41,7 @@ export default function BurgerMenu({ isAuth }: {
         <button className={"cursor-pointer"}
                 onClick={toggleSidebar}>
           <Image className={"w-6 transition duration-200 hover:scale-y-110"}
-                 src={"/img/menu-button.svg"}
+                 src={"/svg/menu-button.svg"}
                  alt={"Menu"}
                  width={50}
                  height={50}

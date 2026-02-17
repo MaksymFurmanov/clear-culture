@@ -1,7 +1,7 @@
 "use client";
 
 import { useProductGroup } from "@/app/providers/products-by-group-provider";
-import Circle from "@/public/img/circle.svg";
+import Circle from "@/public/svg/circle.svg";
 import clsx from "clsx";
 
 export default function ColorVariants() {

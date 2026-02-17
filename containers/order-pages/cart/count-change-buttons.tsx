@@ -1,8 +1,8 @@
 "use client";
 
 import { ChangeEvent, useState } from "react";
-import MinusIcon from "@/public/img/minus-button.svg";
-import PlusIcon from "@/public/img/plus-button.svg";
+import MinusIcon from "@/public/svg/minus-button.svg";
+import PlusIcon from "@/public/svg/plus-button.svg";
 import { useCart } from "@/app/providers/cart-provider";
 
 export default function CountChangeButtons({ productId, count }: {

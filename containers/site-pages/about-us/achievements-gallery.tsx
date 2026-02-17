@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import useGallery from "@/hooks/use-gallery";
-import Circle from "@/public/img/circle.svg";
+import Circle from "@/public/svg/circle.svg";
 import clsx from "clsx";
 import { useEffect } from "react";
 import achievements from "@/containers/site-pages/about-us/achievements";
