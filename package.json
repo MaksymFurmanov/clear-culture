@@ -13,6 +13,9 @@
     "start:debug": "next start",
     "prod:vercel-like": "cross-env NODE_ENV=production next build && next start"
   },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -64,6 +67,7 @@
     "@types/validator": "^13.15.0",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",
+    "prisma": "^7.4.0",
     "tailwindcss": "^4.1.4",
     "ts-node": "^10.9.2",
     "tsx": "^4.20.3",
