@@ -75,6 +75,15 @@ body {
   height: auto;
 }
 
+.clip-closed {
+  clip-path: inset(0 100% 0 0);
+}
+
+.clip-open {
+  clip-path: inset(0 0 0 0);
+}
+
+
 @media (min-width: 768px) {
   .products-description p {
     font-size: 16px;

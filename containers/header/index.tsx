@@ -12,8 +12,9 @@ export default async function Header() {
       <div className={"col-start-2 flex justify-center"}>
         <Link href="/">
           <Image className={"w-20 lg:w-24"}
-                 src="/img/logo/logo-no-background.svg"
-                 alt="Logo"
+                 src={"/img/logo/logo-no-background.svg"}
+                 alt={"Logo"}
+                 loading={"eager"}
                  width={100}
                  height={100}
           />

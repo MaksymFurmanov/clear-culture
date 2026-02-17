@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserFormData, userSchema } from "@/lib/validators/user";
 import { changeUserInfo } from "@/lib/actions/user";
+import { useAlerts } from "@/app/providers/alert-provider";
 
 export default function NameForm({ defaultValue }: {
   defaultValue: string
@@ -13,11 +14,13 @@ export default function NameForm({ defaultValue }: {
     handleSubmit,
     setError,
     watch,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting }
   } = useForm<UserFormData>({
     resolver: zodResolver(userSchema),
-    defaultValues: { name: defaultValue },
+    defaultValues: { name: defaultValue }
   });
+
+  const { addAlert } = useAlerts();
 
   const nameValue = watch("name");
   const isChanged = nameValue.trim() !== defaultValue;
@@ -25,9 +28,13 @@ export default function NameForm({ defaultValue }: {
   const onSubmit = async (data: UserFormData) => {
     try {
       await changeUserInfo(data);
+      addAlert(
+        "success",
+        "Name changed successfully",
+        `Your new username is ${data.name}`
+      );
     } catch (e: any) {
       setError("name", e.message);
-      console.error(e);
     }
   };
 

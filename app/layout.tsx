@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ReactNode } from "react";
 import Providers from "@/app/providers";
-import AlertBox from "@/components/alert-box";
+import AlertBox from "@/components/alerts/alert-box";
 
 /*const railway = localFont({
   src: "/fonts/Raleway-VariableFont_wght.ttf",

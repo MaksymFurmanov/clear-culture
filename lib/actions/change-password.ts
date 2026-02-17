@@ -1,24 +1,38 @@
+"use server";
+
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 import { Resend } from "resend";
-import PasswordChangeEmailTemplate from "@/components/emails/password-change-email-template";
+import PasswordChangeTemplate from "@/components/emails/password-change-template";
 import { getUserId, getUserIdByEmail } from "@/lib/actions/user";
 
-async function generatePasswordToken(userId: string): Promise<string> {
-  const token = crypto.randomBytes(32).toString("hex");
-  const hashedToken = await bcrypt.hash(token, 10);
-  const expiresAtMs = Date.now() + (5 * 60000);
+const TOKEN_TTL_MINUTES = 5;
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-  await prisma.passwordChangeToken.create({
-    data: {
-      token: hashedToken,
-      userId: userId,
-      expiresAt: new Date(expiresAtMs)
+async function generatePasswordToken(userId: string): Promise<string> {
+  const selector = crypto.randomBytes(12).toString("hex");
+  const validator = crypto.randomBytes(32).toString("hex");
+
+  const hashedValidator = await bcrypt.hash(validator, 10);
+  const expiresAt = new Date(Date.now() + TOKEN_TTL_MINUTES * 60_000);
+
+  await prisma.passwordChangeToken.upsert({
+    where: { userId },
+    update: {
+      selector,
+      token: hashedValidator,
+      expiresAt
+    },
+    create: {
+      selector,
+      token: hashedValidator,
+      userId,
+      expiresAt
     }
   });
 
-  return token;
+  return `${selector}.${validator}`;
 }
 
 export async function getChangePasswordTokenWithPrevPassword(currentPassword: string): Promise<string | null> {
@@ -37,8 +51,6 @@ export async function getChangePasswordTokenWithPrevPassword(currentPassword: st
   return await generatePasswordToken(userId);
 }
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function changePasswordWithEmail(email: string): Promise<void> {
   const userId = await getUserIdByEmail(email);
 
@@ -50,38 +62,48 @@ export async function changePasswordWithEmail(email: string): Promise<void> {
     from: "Acme <onboarding@resend.dev>",
     to: [email],
     subject: "Clear Culture New Password",
-    react: PasswordChangeEmailTemplate({
+    react: PasswordChangeTemplate({
       link: `${process.env.APP_URL}/new-password?token=${token}`
     })
   });
 
-  if (error) {
-    throw new Error(error.message);
-  }
+  if (error) throw new Error(error.message);
 }
 
-export async function changePassword(token: string, newPassword: string): Promise<void> {
-  const tokenEntries = await prisma.passwordChangeToken.findMany();
+export async function changePassword(
+  token: string,
+  newPassword: string
+): Promise<void> {
+  const [selector, validator] = token.split(".");
 
-  const compRes = await Promise.all(
-    tokenEntries.map(t => bcrypt.compare(token, t.token))
-  );
+  if (!selector || !validator) {
+    throw new Error("Invalid token format");
+  }
 
-  const tokenEntry = tokenEntries[
-    compRes.findIndex(res => res === true)
-    ];
+  const dbToken = await prisma
+    .passwordChangeToken.findUnique({
+      where: { selector }
+    });
 
-  if (!tokenEntry || tokenEntry.expiresAt.getTime() < Date.now()) {
+  if (!dbToken || dbToken.expiresAt < new Date()) {
     throw new Error("The link is invalid or expired");
   }
 
-  const hashed = await bcrypt.hash(newPassword, 10);
-  await prisma.user.update({
-    where: { id: tokenEntry.userId },
-    data: { password: hashed }
-  });
+  const isValid = await bcrypt.compare(validator, dbToken.token);
 
-  await prisma.passwordChangeToken.delete({
-    where: { id: tokenEntry.id }
-  });
+  if (!isValid) {
+    throw new Error("The link is invalid or expired");
+  }
+
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+  await prisma.$transaction([
+    prisma.user.update({
+      where: { id: dbToken.userId },
+      data: { password: hashedPassword }
+    }),
+    prisma.passwordChangeToken.delete({
+      where: { userId: dbToken.userId }
+    })
+  ]);
 }

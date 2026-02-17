@@ -10,19 +10,23 @@ import { IoIosWarning } from "react-icons/io";
 const alertConfig = {
   success: {
     color: "#22C55E",
-    icon: FaCheck
+    icon: FaCheck,
+    time: 4000
   },
   removing: {
     color: "#6B7280",
-    icon: FaTrash
+    icon: FaTrash,
+    time: 3500
   },
   warning: {
     color: "#EAB308",
-    icon: IoIosWarning
+    icon: IoIosWarning,
+    time: 8000
   },
   error: {
     color: "#EF4444",
-    icon: RxCrossCircled
+    icon: RxCrossCircled,
+    time: 5000
   }
 } as const;
 
@@ -34,15 +38,17 @@ export function Alert({ uid, title, children, type }: {
   type: AlertType,
   children?: ReactNode,
 }) {
-  const {removeById} = useAlerts();
+  const { removeById } = useAlerts();
 
   const [alertToggle, setAlertToggle] = useState(false);
 
   const { color, icon: Icon } = alertConfig[type];
 
   useEffect(() => {
-    const openTimer = setTimeout(() => setAlertToggle(true), 100);
-    const closeTimer = setTimeout(() => setAlertToggle(false), 4500);
+    const openTimer = setTimeout(() =>
+      setAlertToggle(true), 100);
+    const closeTimer = setTimeout(() =>
+      setAlertToggle(false), alertConfig[type].time);
 
     return () => {
       clearTimeout(openTimer);
@@ -58,15 +64,15 @@ export function Alert({ uid, title, children, type }: {
   };
 
   return (
-
     <div className={`
-      flex gap-2 md:gap-4 items-center overflow-hidden cursor-pointer
-      bg-black border rounded-full py-3 px-8 mb-3
-      transition-[max-width,opacity,margin,transform] duration-500 ease-in-out
-      ${alertToggle
-      ? "max-w-80 opacity-100 mx-3"
-      : "max-w-0 opacity-0 mx-0"}
-      `}
+    flex gap-2 md:gap-4 items-center cursor-pointer
+    bg-black border rounded-full py-3 px-8 mb-3
+    transition-[opacity,clip-path,transform] duration-400 ease-in
+    whitespace-nowrap
+    ${alertToggle
+      ? "opacity-100 clip-open"
+      : "opacity-0 clip-closed"}
+  `}
          onClick={closeHandler}
          style={{ color }}
     >
@@ -76,7 +82,7 @@ export function Alert({ uid, title, children, type }: {
           {title}
         </b>
         {children && (
-          <p>
+          <p className={"text-sm"}>
             {children}
           </p>
         )}

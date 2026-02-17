@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import SidebarMenu from "../sidebar-menu";
 import Link from "next/link";
 
-export default function BurgerMenu({isAuth}: {
+export default function BurgerMenu({ isAuth }: {
   isAuth: boolean
 }) {
   const [sidebarToggle, setSidebarToggle] = useState<boolean>(false);

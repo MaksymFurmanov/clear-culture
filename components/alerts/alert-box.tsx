@@ -1,7 +1,7 @@
 "use client";
 
+import { Alert } from "@/components/alerts/alert";
 import { useAlerts } from "@/app/providers/alert-provider";
-import { Alert } from "@/components/alert";
 
 export default function AlertBox() {
   const { alerts } = useAlerts();

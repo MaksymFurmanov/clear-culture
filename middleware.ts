@@ -22,5 +22,6 @@ export const config = {
     "/new-address/:path*",
     "/payment/:path*",
     "/payment-success/:path*"
-  ]
+  ],
+  runtime: "nodejs",
 };

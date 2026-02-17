@@ -17,6 +17,7 @@ export const {
   signOut
 } = NextAuth({
   session: { strategy: "jwt" },
+  secret: process.env.AUTH_SECRET,
 
   providers: [
     Google({

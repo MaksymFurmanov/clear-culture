@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { ImgHTMLAttributes } from "react";
-import { AlertType } from "@/components/alert";
+import { AlertType } from "@/components/alerts/alert";
 
 export type ImgWithCaption = {
   src: string,
@@ -20,16 +20,16 @@ export type IconLinkWithCaption =
 
 export type ImgLinkWithMetrics = {
   src: string,
-  rotate?: string,
   alt: string,
   width: number,
-  height: number
+  height: number,
+  rotate?: string,
 } & Link & ImgHTMLAttributes<HTMLElement>;
 
 export type CartItemWithProduct = Prisma.CartItemGetPayload<{
   include: {
-    product: true
-  }
+    product: true;
+  };
 }>;
 
 export type AlertProps = {
@@ -37,4 +37,5 @@ export type AlertProps = {
   type: AlertType,
   title: string,
   message?: string
+  callbackAction?: () => void,
 }

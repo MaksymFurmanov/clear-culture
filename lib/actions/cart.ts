@@ -10,7 +10,7 @@ import { serialize } from "@/lib/utils/superjson";
 export async function getCartIdOrCreate(): Promise<string> {
   const userId = await getUserId();
 
-  const cart = await prisma.cart.findUnique({
+  const cart = await prisma.cart.findFirst({
     where: { userId }
   });
 
@@ -28,7 +28,7 @@ export async function getCartIdOrCreate(): Promise<string> {
 export async function getCart(): Promise<Cart | null> {
   const userId = await getUserId();
 
-  return prisma.cart.findUnique({
+  return prisma.cart.findFirst({
     where: { userId }
   });
 }

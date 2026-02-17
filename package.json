@@ -7,13 +7,11 @@
   "directories": {
     "lib": "lib"
   },
-  "prisma": {
-    "seed": "tsx prisma/seed.ts"
-  },
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start:debug": "next start",
+    "prod:vercel-like": "cross-env NODE_ENV=production next build && next start"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +23,7 @@
     "@next/mdx": "^15.3.5",
     "@prisma/client": "^6.12.0",
     "@prisma/extension-accelerate": "^2.0.2",
+    "@react-email/render": "^2.0.4",
     "@svgr/webpack": "^8.1.0",
     "@types/mdx": "^2.0.13",
     "bcryptjs": "^3.0.2",

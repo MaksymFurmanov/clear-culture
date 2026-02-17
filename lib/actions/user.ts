@@ -6,12 +6,13 @@ import { RegisterInput, registerSchema } from "@/lib/validators/auth";
 import { UserFormData, userSchema } from "@/lib/validators/user";
 import { revalidatePath } from "next/cache";
 import { auth, signIn, signOut } from "@/auth";
+import { sendEmailConfirmationToken } from "@/lib/actions/email-confirmaion";
 
 export async function login(email: string, password: string) {
   await signIn("credentials", {
     email,
     password,
-    redirect: false,
+    redirect: false
   });
 }
 
@@ -27,13 +28,15 @@ export async function registerUser(data: RegisterInput) {
 
   const hashedPassword = await hash(parsed.password, 10);
 
-  return prisma.user.create({
+  await prisma.user.create({
     data: {
       name: parsed.name,
       email: parsed.email,
       password: hashedPassword
     }
   });
+
+  await sendEmailConfirmationToken();
 }
 
 export async function isEmailExists(email: string): Promise<boolean> {

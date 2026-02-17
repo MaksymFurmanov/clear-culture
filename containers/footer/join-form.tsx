@@ -1,3 +1,5 @@
+"use client";
+
 export default function JoinForm() {
   return (
     <form className={"flex flex-col items-center w-1/2 max-w-70 translate-y-12"}>

@@ -86,8 +86,8 @@ model OrderItem {
   orderId   String
   productId String
 
-  order    Order   @relation(fields: [orderId], references: [id])
-  cartItem Product @relation(fields: [productId], references: [id])
+  order   Order   @relation(fields: [orderId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
 }
 
 model Cart {
@@ -133,18 +133,21 @@ model Address {
 
 model PasswordChangeToken {
   id        String   @id @default(cuid())
+  selector  String   @unique
   token     String   @unique
+  userId    String   @unique
   expiresAt DateTime
-  userId    String
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model EmailConfirmationToken {
   id        String   @id @default(cuid())
+  selector  String   @unique
   token     String   @unique
+  userId    String   @unique
   expiresAt DateTime
-  userId    String
+  usedAt    DateTime?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

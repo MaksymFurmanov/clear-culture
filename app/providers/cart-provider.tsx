@@ -6,7 +6,6 @@ import {
 } from "react";
 import { CartItemWithProduct } from "@/types";
 import { useSession } from "next-auth/react";
-import { Product } from "@prisma/client";
 import cartReducer, { initialCartState } from "@/reducers/cart-reducer";
 import { useSyncGuestCartToServer } from "@/hooks/cart/use-sync-guest-cart-to-server";
 import { useLoadCartItems } from "@/hooks/cart/use-load-cart-items";
@@ -15,6 +14,7 @@ import { useCartTotal } from "@/hooks/cart/use-cart-total";
 import { getProductByIdForClient } from "@/lib/actions/product";
 import { createOrUpdateCartItem, deleteCartItems, updateCartItem } from "@/lib/actions/cart-items";
 import { deserialize } from "@/lib/utils/superjson";
+import { Product } from "@prisma/client";
 
 const CartContext = createContext<
   {

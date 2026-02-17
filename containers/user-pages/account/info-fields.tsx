@@ -5,6 +5,8 @@ import { IconType } from "react-icons";
 import NameForm from "@/containers/user-pages/account/name-form";
 import ChangePasswordButton from "@/containers/user-pages/account/change-password-button";
 import { auth } from "@/auth";
+import VerifyEmailButton from "@/containers/user-pages/account/verify-email-button";
+import { isVerified } from "@/lib/actions/email-confirmaion";
 
 export default async function InfoFields({ authWith }: {
   authWith: string
@@ -12,6 +14,8 @@ export default async function InfoFields({ authWith }: {
   const session = await auth();
   const user = session?.user;
   if(!user?.name || !user?.email) throw new Error("Authentication issue");
+
+  const verified = await isVerified(user?.id);
 
   let Icon: IconType;
   switch (authWith) {
@@ -35,6 +39,7 @@ export default async function InfoFields({ authWith }: {
         <p>
           {user.email}
         </p>
+        {!verified && <VerifyEmailButton />}
       </div>
 
       <NameForm defaultValue={user.name} />

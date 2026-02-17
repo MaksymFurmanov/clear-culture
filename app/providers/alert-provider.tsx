@@ -3,15 +3,17 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { AlertProps } from "@/types";
 import { v4 as uuid } from "uuid";
-import { AlertType } from "@/components/alert";
+import { AlertType } from "@/components/alerts/alert";
 
 const AlertContext = createContext<
   {
     alerts: AlertProps[],
     removeById: (uid: string) => void,
-    addAlert: (type: AlertType, title: string, message?: string) => void,
-  }
-  | undefined
+    addAlert: (type: AlertType,
+               title: string,
+               message?: string,
+               callbackAction?: () => void) => void,
+  } | undefined
 >(undefined);
 
 export const AlertProvider = ({ children }: {
@@ -23,9 +25,14 @@ export const AlertProvider = ({ children }: {
     setAlerts((prevState) => [...prevState].filter((alert) => alert.uid !== uid));
   };
 
-  const addAlert = (type: AlertType, title: string, message?: string) => {
+  const addAlert = (
+    type: AlertType,
+    title: string,
+    message?: string,
+    callbackAction?: () => void
+  ) => {
     const uid = uuid();
-    const alert: AlertProps =  { uid, type, title, message };
+    const alert: AlertProps = { uid, type, title, message, callbackAction };
 
     setAlerts((prevState) => [...prevState, alert]);
     setTimeout(() => {

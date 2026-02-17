@@ -1,4 +1,4 @@
-export default function PasswordChangeEmailTemplate({ link }: {
+export default function PasswordChangeTemplate({ link }: {
   link: string
 }) {
   return (
