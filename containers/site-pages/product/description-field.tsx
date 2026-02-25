@@ -2,7 +2,6 @@
 
 import ScalingUnderlineLink from "@/components/buttons/scaling-underline-link";
 import { ProductGroup } from "@prisma/client";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import dynamic from "next/dynamic";
 
 const MDXClient = dynamic(() =>
@@ -10,15 +9,14 @@ const MDXClient = dynamic(() =>
   ssr: false
 });
 
-export default function DescriptionField({ productGroup, descriptionMDX }: {
+export default function DescriptionField({ productGroup }: {
   productGroup: ProductGroup,
-  descriptionMDX: MDXRemoteSerializeResult | undefined
 }) {
   return (
     <section className={"flex flex-col items-center"}>
-      {descriptionMDX && (
+      {productGroup.descriptionMdx && (
         <div className={"products-description"}>
-          <MDXClient source={descriptionMDX} />
+          <MDXClient source={productGroup.descriptionMdx} />
         </div>
       )}
 

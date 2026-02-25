@@ -1,5 +1,8 @@
+import NextAuth from "next-auth";
+import { authConfig } from "@/auth.config";
 import { NextResponse } from "next/server";
-import { auth } from "@/auth";
+
+const { auth } = NextAuth(authConfig);
 
 export default auth((req) => {
   if (!req.auth) {
@@ -22,6 +25,5 @@ export const config = {
     "/new-address/:path*",
     "/payment/:path*",
     "/payment-success/:path*"
-  ],
-  runtime: "nodejs",
+  ]
 };

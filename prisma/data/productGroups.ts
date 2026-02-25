@@ -1,24 +1,24 @@
 export const productGroups = [
   {
     name: "Bottles",
-    descriptionUrl: ""
+    slug: "bottle"
   },
   {
     name: "Eye masks",
-    descriptionUrl: "",
-    pageUrl: "/eye-masks"
+    pageUrl: "/eye-masks",
+    slug: "eye-mask"
   },
   {
-    name: "Make up pads",
-    descriptionUrl: ""
+    name: "Make up removers",
+    slug: "makeup-removers"
   },
   {
     name: "Reusable notebook",
-    descriptionUrl: "",
-    pageUrl: "/reusable-notebook"
+    pageUrl: "/notebook",
+    slug: "notebook"
   },
   {
     name: "Reusable razor",
-    descriptionUrl: ""
+    slug: "razor"
   }
 ];

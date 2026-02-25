@@ -5,14 +5,14 @@ export function getProductsSeedData(productGroups: ProductGroup[]){
     {
       name: "Bottle, black",
       price: 20,
-      photoUrl: "https://clear-culture-bucket.s3.us-east-1.amazonaws.com/products/bottle.png",
+      photoSrc: "bottle.webp",
       color: "Black",
       groupId: productGroups[0].id
     },
     {
       name: "Reusable eye masks, transparent",
       price: 40,
-      photoUrl: "https://clear-culture-bucket.s3.us-east-1.amazonaws.com/products/eye-masks.png",
+      photoSrc: "eye-masks.webp",
       color: "Transparent",
       colorHEX: "#F2EFEC",
       groupId: productGroups[1].id
@@ -52,13 +52,13 @@ export function getProductsSeedData(productGroups: ProductGroup[]){
     {
       name: "Reusable Make up pads",
       price: 45,
-      photoUrl: "https://clear-culture-bucket.s3.us-east-1.amazonaws.com/products/eye-masks.png",
+      photoSrc: "makeup-removers.webp",
       groupId: productGroups[2].id
     },
     {
       name: "Reusable Notebook, black",
       price: 60,
-      photoUrl: "https://clear-culture-bucket.s3.us-east-1.amazonaws.com/products/notebook.png",
+      photoSrc: "notebook.webp",
       groupId: productGroups[3].id
     },
 /*    {

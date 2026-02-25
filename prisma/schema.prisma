@@ -25,7 +25,8 @@ model User {
 model ProductGroup {
   id               String  @id @default(cuid())
   name             String
-  descriptionUrl   String?
+  slug             String
+  descriptionMdx   String? @db.Text
   pageUrl          String?
   defaultProductId String? @unique
 
@@ -37,7 +38,7 @@ model Product {
   id             String  @id @default(cuid())
   name           String
   price          Decimal
-  photoUrl       String
+  photoUrl       String?
   color          String?
   colorHEX       String?
   size           String?
@@ -142,10 +143,10 @@ model PasswordChangeToken {
 }
 
 model EmailConfirmationToken {
-  id        String   @id @default(cuid())
-  selector  String   @unique
-  token     String   @unique
-  userId    String   @unique
+  id        String    @id @default(cuid())
+  selector  String    @unique
+  token     String    @unique
+  userId    String    @unique
   expiresAt DateTime
   usedAt    DateTime?
 

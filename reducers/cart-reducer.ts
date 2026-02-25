@@ -23,7 +23,7 @@ export const initialCartState: CartState = {
   loadingCart: true,
   loadingTotal: true,
   totalPrice: "0",
-  lastItemAddedAt: 0,
+  lastItemAddedAt: 0
 };
 
 export default function cartReducer(
@@ -40,14 +40,15 @@ export default function cartReducer(
           item.productId === action.productId
             ? { ...item, quantity: action.quantity }
             : item
-        ),
+        )
       };
     case "ADD_ITEM":
       return { ...state, items: [...state.items, action.item] };
     case "REMOVE_ITEM":
       return {
         ...state,
-        items: state.items.filter((item) => item.productId !== action.productId),
+        items: state.items.filter((item) =>
+          item.productId !== action.productId)
       };
     case "SET_LOADING_CART":
       return { ...state, loadingCart: action.payload };

@@ -9,8 +9,6 @@ export default async function Pagination({ page }: {
   const groupsNum = await getProductGroupsCount();
   const pageAmount = Math.ceil(groupsNum / 6);
 
-  console.table({ page, groupsNum, pageAmount });
-
   if (page > pageAmount || page < 1)
     throw new PageNotFoundError("Page in catalog not found");
 

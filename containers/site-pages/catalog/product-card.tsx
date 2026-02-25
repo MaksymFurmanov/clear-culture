@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getProductById } from "@/lib/actions/product";
+import { LuPackageSearch } from "react-icons/lu";
 
 export default async function ProductCard({ groupId, defaultProductId }: {
   groupId: string,
@@ -10,17 +11,25 @@ export default async function ProductCard({ groupId, defaultProductId }: {
   if (!defaultProduct) throw new Error(`No default product with id ${defaultProductId} found`);
 
   return (
-    <div className={"grid grid-rows-[auto_1fr_0.5fr] justify-items-center items-center h-full max-w-45"}>
+    <div className={"grid grid-rows-[auto_1fr_0.5fr] " +
+      "justify-items-center items-center h-full max-w-45"}>
       <Link href={`/product/${groupId}/${defaultProductId}`}>
         <div
-          className={"bg-light-green cursor-pointer flex justify-center items-center rounded aspect-square w-30 md:w-35 lg:w-40 p-4 mb-3"}
+          className={"bg-light-green cursor-pointer " +
+            "flex justify-center items-center " +
+            "rounded aspect-square w-30 " +
+            "md:w-35 lg:w-40 p-4 mb-3"}
         >
-          <Image className={"w-full h-full object-contain"}
-                 src={defaultProduct.photoUrl}
-                 alt={defaultProduct.name}
-                 width={80}
-                 height={80}
-          />
+          {defaultProduct.photoUrl ? (
+            <Image className={"w-full h-full object-contain"}
+                   src={defaultProduct.photoUrl}
+                   alt={defaultProduct.name}
+                   width={80}
+                   height={80}
+            />
+          ) : (
+            <LuPackageSearch />
+          )}
         </div>
       </Link>
 

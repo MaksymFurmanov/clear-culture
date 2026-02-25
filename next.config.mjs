@@ -7,7 +7,14 @@ const withMDXConfig = withMDX({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['svscxanowouqzblxoyxy.supabase.co'],
+    remotePatterns: [
+          {
+            protocol: "https",
+            hostname:
+              "6d8e065cc75ca9d6bf6516a598b6bcfe.r2.cloudflarestorage.com",
+            pathname: "/**",
+          },
+        ],
   },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) =>
