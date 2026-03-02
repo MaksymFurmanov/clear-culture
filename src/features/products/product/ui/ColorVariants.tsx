@@ -1,0 +1,23 @@
+"use client";
+
+import Circle from "@/src/public/svg/circle.svg";
+import clsx from "clsx";
+import { useProductGroup } from "@/src/app/providers/products-by-group-provider";
+
+export default function ColorVariants() {
+  const { curr, setCurr, products } = useProductGroup();
+  if(products.length < 2) return null;
+
+  return (
+    <div className={"flex justify-start flex-wrap gap-1 lg:gap-2 px-1"}>
+      {products.map((product) => (
+        <Circle key={product.id}
+                style={{ fill: product.colorHEX ? product.colorHEX  : undefined }}
+                className={clsx("stroke cursor-pointer w-5 md:w-6",
+                  curr.id === product.id && "stroke-gray-500",)}
+                onClick={() => setCurr(product)}
+        />
+      ))}
+    </div>
+  );
+}

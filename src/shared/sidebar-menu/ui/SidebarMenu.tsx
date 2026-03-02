@@ -1,0 +1,71 @@
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { useLayoutEffect, useState } from "react";
+import ModalPortal from "@/src/shared/ModalPortal";
+import links from "@/src/shared/sidebar-menu/links";
+import LogOutBtn from "@/src/shared/sidebar-menu/ui/LogOutBtn";
+
+export default function SidebarMenu({ toggleSidebar }: {
+  toggleSidebar: () => void
+}) {
+  const [closing, setClosing] = useState(false);
+
+  const handleClose = () => {
+    setClosing(true);
+    setTimeout(() => {
+      toggleSidebar();
+    }, 300);
+  };
+
+  useLayoutEffect(() => {
+    const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+    document.body.classList.add("noScroll");
+
+    if (scrollBarWidth > 0) {
+      document.body.style.paddingRight = `${scrollBarWidth}px`;
+    }
+
+    return () => {
+      document.body.classList.remove("noScroll");
+      document.body.style.paddingRight = "";
+    };
+  }, []);
+
+  return (
+    <ModalPortal wrapperId={"sidebar-menu"}>
+      <>
+        <div className={"fixed bg-gray-200/50 left-0 top-0 w-full h-full cursor-pointer z-40"}
+             onClick={handleClose} />
+
+        <div className={`fixed bg-white right-0 top-0 w-1/2 h-screen md:max-w-80 z-50 ${
+          closing ? "animate-closeMenu" : "animate-openMenu"
+        }`}>
+          <div className={"h-[100dvh] flex flex-col justify-between py-4 mx-2"}>
+            <div>
+              {links.map((link, index) => (
+                <Link key={index}
+                      className={"flex justify-start items-center gap-4 rounded px-4 py-2 my-3 hover:bg-gray-200"}
+                      href={link.href}
+                >
+                  <Image src={link.src}
+                         alt={""}
+                         width={30}
+                         height={30}
+                  />
+                  <p className={"text-lg"}>
+                    {link.caption}
+                  </p>
+                </Link>
+              ))}
+            </div>
+
+            <LogOutBtn />
+          </div>
+        </div>
+      </>
+    </ModalPortal>
+  );
+}
