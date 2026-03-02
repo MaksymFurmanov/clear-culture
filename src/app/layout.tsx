@@ -18,7 +18,7 @@ const railwayItalic = localFont({
 */
 
 const abel = localFont({
-  src: "./../public/fonts/Abel-Regular.ttf",
+  src: "./fonts/Abel-Regular.ttf",
   weight: "100 900"
 });
 

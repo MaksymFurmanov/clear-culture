@@ -1,4 +1,4 @@
-import { SidebarLink } from "@/shared/sidebar-menu/sidebar-menu.types";
+import { SidebarLink } from "@/src/shared/sidebar-menu/sidebar-menu.types";
 
 const links: SidebarLink[] = [
   {

@@ -17,6 +17,7 @@ export default function RunningNumbers() {
             years on the market
           </p>
         </div>
+
         <div className={"flex flex-col justify-center"}>
           <CountUp className={"text-4xl text-center mb-2"}
                    end={8234}
@@ -28,6 +29,7 @@ export default function RunningNumbers() {
           </p>
         </div>
       </div>
+
       <BrandPageBtn />
     </section>
   );

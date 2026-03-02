@@ -7,9 +7,9 @@ export default async function Header() {
   const isAuth = await isAuthenticated();
 
   return (
-    <header
-      className={"relative bg-light-green grid grid-cols-3 " +
-        "items-center justify-items-stretch z-30 py-2 px-4 lg:py-4 lg:px-6"}>
+    <header className={"relative bg-light-green grid grid-cols-3 " +
+      "items-center justify-items-stretch z-30 " +
+      "max-h-20 py-2 px-4 lg:py-4 lg:px-6"}>
       <div className={"col-start-2 flex justify-center"}>
         <Link href="/">
           <Image className={"w-20 lg:w-24"}
@@ -22,7 +22,7 @@ export default async function Header() {
         </Link>
       </div>
 
-      <BurgerMenu isAuth={isAuth}/>
+      <BurgerMenu isAuth={isAuth} />
     </header>
   );
 }
