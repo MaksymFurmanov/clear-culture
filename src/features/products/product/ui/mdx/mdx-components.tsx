@@ -31,6 +31,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {children}
       </h3>
     ),
+
     MDXImage: ({...props}): ReactNode => (
       <MdxImage {...props}/>
     ),

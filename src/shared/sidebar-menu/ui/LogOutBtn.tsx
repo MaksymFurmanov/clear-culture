@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { logout } from "@/src/lib/actions/user";
+import { logout } from "@/src/lib/actions/user/auth";
 
 export default function LogOutBtn() {
   return (

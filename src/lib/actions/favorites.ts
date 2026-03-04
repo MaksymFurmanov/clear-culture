@@ -1,9 +1,9 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
 import { Product } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { getUserId } from "@/lib/actions/user";
+import { prisma } from "@/src/lib/prisma";
+import { getUserId } from "@/src/lib/actions/user/user";
 
 export async function getFavoriteProducts(): Promise<Product[]> {
   const userId = await getUserId();

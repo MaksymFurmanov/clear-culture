@@ -1,7 +1,7 @@
-'use server'
+"use server"
 
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
-import { randomUUID } from 'crypto'
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { randomUUID } from 'crypto';
 
 const s3 = new S3Client({
   region: 'auto',

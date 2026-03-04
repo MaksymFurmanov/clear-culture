@@ -1,6 +1,6 @@
 "use client";
 
-import Arrow from "@/src/public/svg/arrow.svg";
+import Arrow from "@/public/svg/arrow.svg";
 import useGallery from "@/src/shared/hooks/use-gallery";
 import certificatesList from "@/src/features/marketing/home/certificates-gallery/certificates";
 import CertificatesImages from "@/src/features/marketing/home/certificates-gallery/ui/CertificatesImages";

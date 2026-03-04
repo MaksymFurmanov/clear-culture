@@ -1,7 +1,7 @@
 import Link from "next/link";
-import InstaIcon from "@/src/public/img/footer/insta-icon.svg";
-import FacebookIcon from "@/src/public/img/footer/facebook-icon.svg";
-import TwitterIcon from "@/src/public/img/footer/twitter-icon.svg";
+import InstaIcon from "@/public/img/footer/insta-icon.svg";
+import FacebookIcon from "@/public/img/footer/facebook-icon.svg";
+import TwitterIcon from "@/public/img/footer/twitter-icon.svg";
 
 export default function Contacts() {
   return (

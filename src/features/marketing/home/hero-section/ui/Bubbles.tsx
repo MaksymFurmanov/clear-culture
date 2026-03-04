@@ -1,6 +1,6 @@
 'use client';
 
-import BubblesSvg from "@/src/public/img/home/bubbles-wave.svg";
+import BubblesSvg from "@/public/img/home/bubbles-wave.svg";
 
 export default function Bubbles() {
   return (

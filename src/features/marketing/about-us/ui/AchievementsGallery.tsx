@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Circle from "@/src/public/svg/circle.svg";
+import Circle from "@/public/svg/circle.svg";
 import clsx from "clsx";
 import { useEffect } from "react";
 import achievementsList from "@/src/features/marketing/about-us/achievementsList";

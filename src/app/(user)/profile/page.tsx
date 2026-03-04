@@ -1,5 +1,5 @@
-import InfoFields from "@/containers/user-pages/account/info-fields";
-import { getAuthProvider } from "@/lib/actions/user";
+import { getAuthProvider } from "@/src/lib/actions/user/user";
+import InfoFields from "@/src/features/user/profile/ui/InfoFields";
 
 export default async function AccountPage() {
   const provider = await getAuthProvider();

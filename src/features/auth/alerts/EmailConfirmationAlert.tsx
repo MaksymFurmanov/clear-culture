@@ -31,7 +31,7 @@ export default function EmailVerificationAlert() {
       "items-center justify-between gap-5 hover:bg-gray-700"}
          onClick={sendHandler}>
       <div/>
-      <p className={"text-lg text-white"}>
+      <p className={"text-sm md:text-lg text-white"}>
         Your email is not verified. Click here to get verification email
       </p>
       <button className={"cursor-pointer rounded " +

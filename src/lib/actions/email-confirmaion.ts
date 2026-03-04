@@ -4,7 +4,7 @@ import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { Resend } from "resend";
 import { prisma } from "@/src/lib/prisma";
-import { getUserEmail, getUserId } from "@/src/lib/actions/user";
+import { getUserEmail, getUserId } from "@/src/lib/actions/user/user";
 import EmailConfirmationTemplate from "@/src/features/auth/emails/EmailConfirmationTemplate";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY;

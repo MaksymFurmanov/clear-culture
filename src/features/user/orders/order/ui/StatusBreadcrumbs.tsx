@@ -1,4 +1,4 @@
-import Circle from "@/src/public/svg/circle.svg";
+import Circle from "@/public/svg/circle.svg";
 
 const actualCircleStyles = {fill: "#C3CCC0", stroke: "#2A2C35"};
 

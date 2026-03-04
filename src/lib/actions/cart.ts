@@ -2,7 +2,7 @@
 
 import Decimal from "decimal.js";
 import { Cart } from "@prisma/client";
-import { getUserId } from "@/src/lib/actions/user";
+import { getUserId } from "@/src/lib/actions/user/user";
 import { prisma } from "@/src/lib/prisma";
 import { getCartItems } from "@/src/lib/actions/cart-items";
 import { serialize } from "@/src/lib/utils/superjson";

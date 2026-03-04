@@ -4,7 +4,7 @@ import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { Resend } from "resend";
 import { prisma } from "@/src/lib/prisma";
-import { getUserId, getUserIdByEmail } from "@/src/lib/actions/user";
+import { getUserId, getUserIdByEmail } from "@/src/lib/actions/user/user";
 import PasswordChangeTemplate from "@/src/features/auth/emails/PasswordChangeTemplate";
 
 const TOKEN_TTL_MINUTES = 5;

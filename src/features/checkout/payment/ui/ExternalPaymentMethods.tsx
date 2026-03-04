@@ -1,5 +1,5 @@
-import GooglePayIcon from "@/src/public/img/payment/google-pay.svg";
-import ApplePayIcon from "@/src/public/img/payment/apple-pay.svg";
+import GooglePayIcon from "@/public/img/payment/google-pay.svg";
+import ApplePayIcon from "@/public/img/payment/apple-pay.svg";
 
 export default function ExternalPaymentMethods() {
   return (

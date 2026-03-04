@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { changePasswordWithEmail } from "@/src/lib/actions/change-password";
+import { changePasswordWithEmail } from "@/src/lib/actions/user/change-password";
 
 export default function SendAgainBtn({email}: {email: string}) {
   const [disable, setDisable] = useState<boolean>(false);

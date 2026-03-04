@@ -1,7 +1,7 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
 import { ProductGroup } from "@prisma/client";
+import { prisma } from "@/src/lib/prisma";
 
 export async function getProductGroupsCount(): Promise<number> {
   return prisma.productGroup.count();

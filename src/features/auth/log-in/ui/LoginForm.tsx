@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormError from "@/src/shared/FormError";
 import PasswordInput from "@/src/features/auth/PasswordInput";
 import { LoginInput, loginSchema } from "@/src/features/auth/log-in/login.schema";
-import { login } from "@/src/lib/actions/user";
+import { login } from "@/src/lib/actions/user/auth";
 
 export default function LoginForm() {
   const { push } = useRouter();

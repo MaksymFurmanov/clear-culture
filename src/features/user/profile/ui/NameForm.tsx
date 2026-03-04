@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserFormData, userSchema } from "@/src/features/user/profile/name.schema";
 import { useAlerts } from "@/src/app/providers/alert-provider";
-import { changeUserInfo } from "@/src/lib/actions/user";
+import { changeUserInfo } from "@/src/lib/actions/user/user";
 
 export default function NameForm({ defaultValue }: {
   defaultValue: string

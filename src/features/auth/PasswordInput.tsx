@@ -1,7 +1,7 @@
 "use client";
 
-import Eye from "@/src/public/img/login-module/eye.svg";
-import ClosedEye from "@/src/public/img/login-module/closed-eye.svg";
+import Eye from "@/public/img/login-module/eye.svg";
+import ClosedEye from "@/public/img/login-module/closed-eye.svg";
 import { InputHTMLAttributes, useState } from "react";
 
 export default function PasswordInput({ label, ...props }: {

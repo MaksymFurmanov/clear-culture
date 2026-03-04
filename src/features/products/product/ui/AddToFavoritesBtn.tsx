@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import Heart from "@/src/public/svg/heart.svg";
+import Heart from "@/public/svg/heart.svg";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useProductGroup } from "@/src/app/providers/products-by-group-provider";

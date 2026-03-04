@@ -10,6 +10,8 @@ export default async function GroupLayout({ children, params }: {
   const productGroup = await getProductGroupById(groupId);
   if (!productGroup) throw new Error("Product group does not exist");
 
+  console.log(productGroup);
+
   return (
     <div className="mx-auto max-w-200">
       <main>{children}</main>

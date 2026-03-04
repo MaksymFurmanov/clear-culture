@@ -1,14 +1,14 @@
 import { PrismaClient } from "@prisma/client";
-import { productGroups } from "@/prisma/data/productGroups";
-import { getProductsSeedData } from "@/prisma/data/products";
-import { loadMdx } from "@/lib/utils/load-mdx";
 import fs from "fs/promises";
 import path from "path";
-import { uploadImage } from "@/lib/utils/s3";
 import Decimal from "decimal.js";
+import { productGroups } from "@/src/prisma/data/productGroups";
+import { loadMdx } from "@/src/lib/utils/load-mdx";
+import { getProductsSeedData } from "@/src/prisma/data/products";
+import { uploadImage } from "@/src/lib/utils/s3";
 
 const prisma = new PrismaClient();
-const ENABLE_IMAGE_UPLOAD = true;
+const ENABLE_IMAGE_UPLOAD = false;
 
 async function main() {
   console.log("Starting seed...");

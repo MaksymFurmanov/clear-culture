@@ -4,9 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import FormError from "@/src/shared/FormError";
-import { isEmailExists } from "@/src/lib/actions/user";
 import { EmailFormInput, emailSchema } from "@/src/features/auth/reset-password/reset-password.schema";
-import { changePasswordWithEmail } from "@/src/lib/actions/change-password";
+import { changePasswordWithEmail } from "@/src/lib/actions/user/change-password";
+import { isEmailExists } from "@/src/lib/actions/user/auth";
 
 export default function ResetPasswordForm() {
   const { push } = useRouter();

@@ -1,7 +1,7 @@
 "use client";
 
-import PlusIcon from "@/src/public/svg/plus-button.svg";
-import MinusIcon from "@/src/public/svg/minus-button.svg";
+import PlusIcon from "@/public/svg/plus-button.svg";
+import MinusIcon from "@/public/svg/minus-button.svg";
 import { ChangeEvent } from "react";
 import Decimal from "decimal.js";
 

@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { getChangePasswordTokenWithPrevPassword } from "@/src/lib/actions/change-password";
+import { getChangePasswordTokenWithPrevPassword } from "@/src/lib/actions/user/change-password";
 import { LoginInput } from "@/src/features/auth/log-in/login.schema";
 import PasswordInput from "@/src/features/auth/PasswordInput";
 import FormError from "@/src/shared/FormError";

@@ -8,6 +8,7 @@ export default async function ProductCard({ groupId, defaultProductId }: {
   defaultProductId: string
 }) {
   const defaultProduct = await getProductById(defaultProductId);
+  console.log("defaultProduct.photoUrl: ", defaultProduct?.photoUrl);
   if (!defaultProduct) throw new Error(`No default product with id ${defaultProductId} found`);
 
   return (

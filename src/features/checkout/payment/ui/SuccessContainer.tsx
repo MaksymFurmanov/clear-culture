@@ -1,4 +1,4 @@
-import CheckIcon from "@/src/public/svg/check.svg";
+import CheckIcon from "@/public/svg/check.svg";
 import Link from "next/link";
 
 export default function SuccessContainer() {

@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { changePasswordWithEmail } from "@/src/lib/actions/change-password";
+import { changePasswordWithEmail } from "@/src/lib/actions/user/change-password";
 
 export default function WithoutPrevPasswordBtn() {
   const { data } = useSession();

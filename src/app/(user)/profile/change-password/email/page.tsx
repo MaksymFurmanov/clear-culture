@@ -1,5 +1,5 @@
 import { MdEmail } from "react-icons/md";
-import { getUserEmail } from "@/src/lib/actions/user";
+import { getUserEmail } from "@/src/lib/actions/user/user";
 import SendAgainBtn from "@/src/features/auth/SendAgainBtn";
 import ScalingUnderlineBtn from "@/src/shared/buttons/ScalingUnderlineBtn";
 

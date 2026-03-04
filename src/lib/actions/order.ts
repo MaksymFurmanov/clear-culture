@@ -1,12 +1,12 @@
 "use server";
 
-import { prisma } from "@/lib/prisma";
 import { Order } from "@prisma/client";
-import { getUserId } from "@/lib/actions/user";
 import { revalidatePath } from "next/cache";
-import { createOrderItems, deleteOrderItems } from "@/lib/actions/order-item";
-import { clearCart, getCartItems } from "@/lib/actions/cart-items";
-import { getCartOrThrow } from "@/lib/actions/cart";
+import { prisma } from "@/src/lib/prisma";
+import { getUserId } from "@/src/lib/actions/user/user";
+import { getCartOrThrow } from "@/src/lib/actions/cart";
+import { clearCart, getCartItems } from "@/src/lib/actions/cart-items";
+import { createOrderItems, deleteOrderItems } from "@/src/lib/actions/order-item";
 
 export async function getOrdersCount() {
   return prisma.order.count();

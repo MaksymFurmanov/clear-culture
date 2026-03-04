@@ -1,4 +1,4 @@
-import Circle from "@/src/public/svg/circle.svg";
+import Circle from "@/public/svg/circle.svg";
 import clsx from "clsx";
 import certificatesList from "@/src/features/marketing/home/certificates-gallery/certificates";
 

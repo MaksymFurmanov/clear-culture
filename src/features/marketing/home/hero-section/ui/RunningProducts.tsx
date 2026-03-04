@@ -11,18 +11,18 @@ export default function RunningProducts() {
       <div className="flex gap-4 animate-moveFull">
         {duplicated.map((img, index) => (
           <Link key={index} href={img.href}>
-            <div className="flex items-center justify-center w-32 md:w-40 h-36
-            p-2 overflow-hidden relative">
-              <Image
-                className={clsx(
+            <div className="flex items-center justify-center
+            w-32 md:w-40 h-36 p-2 overflow-hidden relative">
+              <Image className={
+                clsx(
                   img.rotate,
                   "object-contain max-h-full w-auto " +
                   "hover:scale-110 duration-200"
                 )}
-                src={img.src}
-                alt={img.alt}
-                width={img.width}
-                height={img.height}
+                     src={img.src}
+                     alt={img.alt}
+                     width={img.width}
+                     height={img.height}
               />
             </div>
           </Link>

@@ -1,7 +1,7 @@
 "use server"
 
-import { prisma } from '@/lib/prisma';
 import { CartItem, OrderItem } from "@prisma/client";
+import { prisma } from "@/src/lib/prisma";
 
 export async function getOrderItems(orderId: string): Promise<OrderItem[]> {
   return prisma.orderItem.findMany({

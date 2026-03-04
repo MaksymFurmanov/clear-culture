@@ -1,4 +1,4 @@
-import Circle from "@/src/public/svg/circle.svg";
+import Circle from "@/public/svg/circle.svg";
 
 export default function Colors() {
   return (

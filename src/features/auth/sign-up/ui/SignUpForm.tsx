@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import FormError from "@/src/shared/FormError";
 import PasswordInput from "@/src/features/auth/PasswordInput";
 import { RegisterInput, registerSchema } from "@/src/features/auth/sign-up/sign-up.schema";
-import { registerUser } from "@/src/lib/actions/user";
+import { registerUser } from "@/src/lib/actions/user/auth";
 
 export default function SignUpForm() {
   const router = useRouter();

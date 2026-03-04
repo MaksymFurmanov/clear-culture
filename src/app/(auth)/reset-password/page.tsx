@@ -1,4 +1,4 @@
-import ArrowLeft from "@/src/public/img/login-module/arrow-left.svg";
+import ArrowLeft from "@/public/img/login-module/arrow-left.svg";
 import Link from "next/link";
 import ResetPasswordForm from "@/src/features/auth/reset-password/ui/ResetPasswordForm";
 

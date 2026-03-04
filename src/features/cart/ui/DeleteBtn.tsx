@@ -1,6 +1,6 @@
 "use client";
 
-import Trash from "@/src/public/svg/trash.svg";
+import Trash from "@/public/svg/trash.svg";
 import { useCart } from "@/src/app/providers/cart-provider";
 
 export default function DeleteBtn({ productId }: {

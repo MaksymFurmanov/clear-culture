@@ -4,7 +4,7 @@ import { Address } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/src/lib/prisma";
 import { getCartOrThrow } from "@/src/lib/actions/cart";
-import { getUserId } from "@/src/lib/actions/user";
+import { getUserId } from "@/src/lib/actions/user/user";
 import { AddressInput } from "@/src/features/user/address/address.schema";
 
 function revalidateAddresses() {

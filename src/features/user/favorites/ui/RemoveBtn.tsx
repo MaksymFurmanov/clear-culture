@@ -1,6 +1,6 @@
 "use client";
 
-import TrashIcon from "@/src/public/svg/trash.svg";
+import TrashIcon from "@/public/svg/trash.svg";
 import { deleteFavoriteProduct } from "@/src/lib/actions/favorites";
 
 export default function RemoveBtn({productId}: {productId: string}) {

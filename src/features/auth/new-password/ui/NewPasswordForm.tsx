@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useAlerts } from "@/src/app/providers/alert-provider";
 import { NewPasswordInput, newPasswordSchema } from "@/src/features/auth/new-password/new-password.schema";
-import { changePassword } from "@/src/lib/actions/change-password";
+import { changePassword } from "@/src/lib/actions/user/change-password";
 import PasswordInput from "@/src/features/auth/PasswordInput";
 import FormError from "@/src/shared/FormError";
 
