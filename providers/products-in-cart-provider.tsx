@@ -18,20 +18,34 @@ export default function CartProvider({
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [lastItemAddedAt, setLastItemAddedAt] = useState<number>(0);
 
+  const [isInitialized, setIsInitialized] = useState(false);
+
   useEffect(() => {
     const stored = localStorage.getItem("cart");
+
     if (stored) {
       try {
-        setCartItems(JSON.parse(stored));
+        const parsed: unknown = JSON.parse(stored);
+
+        if (Array.isArray(parsed)) {
+          setCartItems(parsed);
+        } else {
+          localStorage.removeItem("cart");
+        }
       } catch (err) {
         console.error("Failed to parse cart from localStorage", err);
+        localStorage.removeItem("cart");
       }
     }
+
+    setIsInitialized(true);
   }, []);
 
   useEffect(() => {
+    if (!isInitialized) return;
+
     localStorage.setItem("cart", JSON.stringify(cartItems));
-  }, [cartItems]);
+  }, [cartItems, isInitialized]);
 
   const signalAdd = () => {
     setLastItemAddedAt(Date.now());
