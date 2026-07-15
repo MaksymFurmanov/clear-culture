@@ -24,7 +24,7 @@
     "jose": "^6.0.10",
     "js-cookie": "^3.0.5",
     "next": "^15.3.8",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
     "randomcolor": "^0.6.2",
     "react": "^19.1.0",
     "react-countup": "^6.5.3",
